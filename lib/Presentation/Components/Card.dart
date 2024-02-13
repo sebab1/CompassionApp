@@ -11,12 +11,11 @@ class CardWidget extends StatefulWidget {
 }
 
 class _CardWidgetState extends State<CardWidget> {
-
   List<Proces> _getSampleData() {
     // Replace this with your actual data or use a generator function
     return List.generate(
       10,
-          (index) => Proces(
+      (index) => Proces(
         proces_id: index,
         date: DateTime.now().toString(),
         // Add other properties as needed
@@ -87,8 +86,10 @@ class _CardWidgetState extends State<CardWidget> {
                 bottomRight: Radius.circular(11.0),
               ),
             ),
-          )
-        ],
+          ),
+          onTap: () {
+            // Handle onTap event
+          },
         ),
       )
     );
