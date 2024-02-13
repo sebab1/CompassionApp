@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '/Presentation/Components/constants.dart';
 import '/Presentation/just_a_class.dart';
@@ -10,14 +11,6 @@ class CardWidget extends StatefulWidget {
 }
 
 class _CardWidgetState extends State<CardWidget> {
-  late List<Proces> processData;
-
-  @override
-  void initState() {
-    super.initState();
-    // Initialize your data (in this case, using sample data)
-    processData = _getSampleData();
-  }
 
   List<Proces> _getSampleData() {
     // Replace this with your actual data or use a generator function
@@ -33,38 +26,39 @@ class _CardWidgetState extends State<CardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: processData.length,
-      itemBuilder: (context, index) {
-        return Card(
-          margin: EdgeInsets.fromLTRB(26, 16, 26, 0),
-          elevation: 10,
-          shape: Border(
-              top: BorderSide(color: Colors.grey.shade300, width: 8)),
-          child: ListTile(
-            contentPadding: EdgeInsets.fromLTRB(16, 16, 16, 10),
-            leading: Icon(Icons.calendar_month_outlined),
-            title: Text(
-              'FAM',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text(
-              _formatDate(processData[index].date),
-            ),
-            trailing: Icon(Icons.arrow_forward_ios),
-            onTap: () {
-              // Handle onTap event
-            },
+    return Container(
+      width: 400, // Set the width of the card
+      height: 150, // Set the height of the card
+      child: Card(
+        margin: EdgeInsets.fromLTRB(26, 16, 26, 0),
+        elevation: 10,
+        child: ListTile(
+          contentPadding: EdgeInsets.fromLTRB(16, 16, 0, 10),
+          leading: Icon(Icons.calendar_month_outlined, size: 72.0),
+          title: Text(
+            'FAM',
+            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
-        );
-      },
-    );
-  }
+          subtitle: Text(
+            "Test",
+          ),
+          trailing: Container(
+            height: 50,
+            width: 50,
+            color: Constants.sduGoldColor,
+            padding: EdgeInsets.zero,
+            child: Icon(
+              CupertinoIcons.arrow_right_to_line,
+              color: Constants.kBlackColor,
+            ),
+          ),
 
-  String _formatDate(String date) {
-    // You can implement your own date formatting logic here
-    // For simplicity, this example just returns the input date
-    return date;
+          onTap: () {
+            // Handle onTap event
+          },
+        ),
+      ),
+    );
   }
 }
 

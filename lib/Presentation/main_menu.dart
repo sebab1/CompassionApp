@@ -22,7 +22,7 @@ class _Main_menuState extends State<Main_menu> {
     Home(),
     Training(),
     Knowledge(),
-    Survey(),
+    JustAClass(),
   ];
 
   final List<Color> colors = [Constants.kBlackColor, Constants.kRedColor, Constants.kGreenColor, Constants.kCyanColor, Constants.kPurpleColor];
@@ -77,7 +77,7 @@ class _Main_menuState extends State<Main_menu> {
                 label: 'Viden'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.library_music),
-                label: 'Viden'),
+                label: 'JustAClass'),
           ],
         ),
       ),
