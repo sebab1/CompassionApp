@@ -26,38 +26,71 @@ class _CardWidgetState extends State<CardWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double totalHeight = 140; // Set the total height of the card
+    double totalWidth = 350; // Set the height of the leading section
+
     return Container(
-      width: 400, // Set the width of the card
-      height: 150, // Set the height of the card
+      height: totalHeight,
+      width: totalWidth,
+
       child: Card(
-        margin: EdgeInsets.fromLTRB(26, 16, 26, 0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(11.0),
+        ),
         elevation: 10,
-        child: ListTile(
-          contentPadding: EdgeInsets.fromLTRB(16, 16, 0, 10),
-          leading: Icon(Icons.calendar_month_outlined, size: 72.0),
-          title: Text(
-            'FAM',
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-          ),
-          subtitle: Text(
-            "Test",
-          ),
-          trailing: Container(
-            height: 50,
+        color: Constants.kWhiteColor,
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+          Container(
             width: 50,
-            color: Constants.sduGoldColor,
-            padding: EdgeInsets.zero,
-            child: Icon(
-              CupertinoIcons.arrow_right_to_line,
-              color: Constants.kBlackColor,
+            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Icon(CupertinoIcons.arrow_up_left_arrow_down_right, size: 60,),
+          ),
+          Container(
+            //padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
+            //margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            //margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            child: Align(
+              //alignment: Alignment.center,
+              child: Container(
+                //padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  //crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                        child: Text("title",
+                          style: TextStyle(fontSize: 35),
+                          textAlign: TextAlign.left,)
+                    ),
+                    Container(
+                      width: 200,
+                      child: Text("Subtitle sdn snoldwjdj wjw fndwn iwn iwni nidni nwi n",
+                        textAlign: TextAlign.left,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
+                      ),
+                    ),
+                  ],
+                ),
+              )
             ),
           ),
-
-          onTap: () {
-            // Handle onTap event
-          },
+          Container(
+            width: 50,
+            child: Icon(CupertinoIcons.arrow_up_left_arrow_down_right),
+            decoration: BoxDecoration(
+              color: Constants.kCyanColor,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(11.0),
+                bottomRight: Radius.circular(11.0),
+              ),
+            ),
+          )
+        ],
         ),
-      ),
+      )
     );
   }
 }
