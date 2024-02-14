@@ -1,5 +1,4 @@
 import 'package:compassion_app/Presentation/Components/Card.dart';
-import 'package:compassion_app/Presentation/Components/bigCard.dart';
 import 'package:compassion_app/Presentation/Components/littleCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,8 +15,11 @@ class JustAClass extends StatelessWidget {
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           )),
       home: Scaffold(
-        body: Center(
-          child: littleCard(),
+        body: Column(
+          children: [
+            littleCard(),
+            CardWidget()
+          ],
         ),
       ),
     );

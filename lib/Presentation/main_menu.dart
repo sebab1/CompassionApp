@@ -41,14 +41,6 @@ class _Main_menuState extends State<Main_menu> {
         ),
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Hello test",
-              style: TextStyle(
-                color: Constants.kBlackColor
-              )),
-          backgroundColor: Constants.kWhiteColor,
-          centerTitle: true,
-        ),
         body: _pages[_currentIndex], // Display the current page
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
@@ -73,7 +65,7 @@ class _Main_menuState extends State<Main_menu> {
                 icon: Icon(CupertinoIcons.briefcase),
                 label: 'Træning'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.library_music),
+                icon: Icon(CupertinoIcons.book),
                 label: 'Viden'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.library_music),

@@ -26,72 +26,78 @@ class _CardWidgetState extends State<CardWidget> {
   @override
   Widget build(BuildContext context) {
     double totalHeight = 140; // Set the total height of the card
-    double totalWidth = 350; // Set the height of the leading section
+    double totalWidth = 376; // Set the height of the leading section
 
-    return Container(
-      height: totalHeight,
-      width: totalWidth,
-
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(11.0),
-        ),
-        elevation: 10,
-        color: Constants.kWhiteColor,
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-          Container(
-            width: 50,
-            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: Icon(CupertinoIcons.arrow_up_left_arrow_down_right, size: 60,),
+    return GestureDetector(
+      onTap: () {
+        debugPrint("Tabbed card"); // Handle onTap event
+      },
+      child: Container(
+        height: totalHeight,
+        width: totalWidth,
+        margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(11.0),
           ),
-          Container(
-            //padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-            //margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            //margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: Align(
-              //alignment: Alignment.center,
-              child: Container(
-                //padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Column(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  //crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                        child: Text("title",
-                          style: TextStyle(fontSize: 35),
-                          textAlign: TextAlign.left,)
-                    ),
-                    Container(
-                      width: 200,
-                      child: Text("Subtitle sdn snoldwjdj wjw fndwn iwn iwni nidni nwi n",
-                        textAlign: TextAlign.left,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 3,
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ),
-          ),
-          Container(
-            width: 50,
-            child: Icon(CupertinoIcons.arrow_up_left_arrow_down_right),
-            decoration: BoxDecoration(
-              color: Constants.kCyanColor,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(11.0),
-                bottomRight: Radius.circular(11.0),
+          elevation: 10,
+          color: Constants.sduGreyColor,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                width: 50,
+                margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: Icon(CupertinoIcons.arrow_up_left_arrow_down_right, size: 60,),
               ),
-            ),
+              Container(
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
+                    children: [
+                      Container(
+                        child: Text(
+                          "title",
+                          style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(0, 0, 12, 0),
+                        width: 200,
+                        child: Text(
+                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(color: Constants.kBlackColor),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 50,
+                child: Icon(
+                  CupertinoIcons.chevron_forward,
+                  size: 48,
+                  color: Constants.sduWhiteColor,
+                ),
+                decoration: BoxDecoration(
+                  color: Constants.sduGoldColor,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(11.0),
+                    bottomRight: Radius.circular(11.0),
+                  ),
+                ),
+              ),
+            ],
           ),
-          onTap: () {
-            // Handle onTap event
-          },
         ),
-      )
+      ),
     );
   }
 }
