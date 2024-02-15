@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'main_menu.dart';
@@ -31,8 +32,24 @@ class Knowledge extends StatelessWidget {
                   Text(longSampleText, style: TextStyle(color: Constants.kBlackColor),
                   ),
                 ),
-                CardWidget(),
-                CardWidget()
+                CardWidget(
+                  title: "Kollegacafé",
+                  titleSize: 30,
+                  subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim lectus leo, vitae.",
+                  iconData: CupertinoIcons.airplane,
+                  onTap: () {
+                    debugPrint("Tabbed: Kollegacafé");
+                  },
+                ),
+                CardWidget(
+                  title: "Om compassion",
+                  titleSize: 24,
+                  subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim lectus leo, vitae.",
+                  iconData: CupertinoIcons.airplane,
+                  onTap: () {
+                    debugPrint("Tabbed: Om compassion");
+                  },
+                )
               ]
           ),
         ),

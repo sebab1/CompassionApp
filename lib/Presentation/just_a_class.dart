@@ -18,7 +18,7 @@ class JustAClass extends StatelessWidget {
         body: Column(
           children: [
             littleCard(),
-            CardWidget()
+            //CardWidget()
           ],
         ),
       ),

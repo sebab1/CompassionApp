@@ -3,35 +3,30 @@ import 'package:flutter/material.dart';
 import '/Presentation/Components/constants.dart';
 import '/Presentation/just_a_class.dart';
 
-class CardWidget extends StatefulWidget {
-  CardWidget({Key? key}) : super(key: key);
+class CardWidget extends StatelessWidget {
+  //CardWidget({Key? key}) : super(key: key);
 
-  @override
-  State<CardWidget> createState() => _CardWidgetState();
-}
+  final String title;
+  final double titleSize;
+  final String subtitle;
+  final IconData iconData;
+  final VoidCallback onTap;
 
-class _CardWidgetState extends State<CardWidget> {
-  List<Proces> _getSampleData() {
-    // Replace this with your actual data or use a generator function
-    return List.generate(
-      10,
-      (index) => Proces(
-        proces_id: index,
-        date: DateTime.now().toString(),
-        // Add other properties as needed
-      ),
-    );
-  }
+  CardWidget({super.key,
+    required this.title,
+    required this.titleSize,
+    required this.subtitle,
+    required this.iconData,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    double totalHeight = 140; // Set the total height of the card
-    double totalWidth = 376; // Set the height of the leading section
+    double totalHeight = 130; // Set the total height of the card
+    double totalWidth = 394; // Set the height of the leading section
 
     return GestureDetector(
-      onTap: () {
-        debugPrint("Tabbed card"); // Handle onTap event
-      },
+      onTap: onTap,
       child: Container(
         height: totalHeight,
         width: totalWidth,
@@ -40,7 +35,7 @@ class _CardWidgetState extends State<CardWidget> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(11.0),
           ),
-          elevation: 10,
+          elevation: 7,
           color: Constants.sduGreyColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,7 +44,10 @@ class _CardWidgetState extends State<CardWidget> {
               Container(
                 width: 50,
                 margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: Icon(CupertinoIcons.arrow_up_left_arrow_down_right, size: 60,),
+                child: Icon(
+                iconData,
+                size: 60,
+                ),
               ),
               Container(
                 child: Container(
@@ -59,16 +57,17 @@ class _CardWidgetState extends State<CardWidget> {
                     children: [
                       Container(
                         child: Text(
-                          "title",
-                          style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                          title,
+                          style: TextStyle(
+                              fontSize: titleSize, fontWeight: FontWeight.bold),
                           textAlign: TextAlign.left,
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.fromLTRB(0, 0, 12, 0),
+                        padding: EdgeInsets.fromLTRB(0, 8, 12, 0),
                         width: 200,
                         child: Text(
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+                          subtitle,
                           textAlign: TextAlign.left,
                           style: TextStyle(color: Constants.kBlackColor),
                           overflow: TextOverflow.ellipsis,
@@ -100,12 +99,4 @@ class _CardWidgetState extends State<CardWidget> {
       ),
     );
   }
-}
-
-// Placeholder for the Proces class
-class Proces {
-  final int proces_id;
-  final String date;
-
-  Proces({required this.proces_id, required this.date});
 }

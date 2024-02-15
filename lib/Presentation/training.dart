@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'main_menu.dart';
@@ -32,8 +33,24 @@ class Training extends StatelessWidget {
                     Text(longSampleText, style: TextStyle(color: Constants.kBlackColor),
                     ),
                 ),
-                CardWidget(),
-                CardWidget()
+                CardWidget(
+                  title: "Øvelser",
+                  titleSize: 30,
+                  subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim lectus leo, vitae.",
+                  iconData: CupertinoIcons.airplane,
+                  onTap: () {
+                    debugPrint("Tabbed: Øvelser");
+                  },
+                ),
+                CardWidget(
+                  title: "Dagbog",
+                  titleSize: 30,
+                  subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim lectus leo, vitae.",
+                  iconData: CupertinoIcons.airplane,
+                  onTap: () {
+                    debugPrint("Tabbed: Dagbog");
+                  },
+                )
               ]
           ),
         ),
