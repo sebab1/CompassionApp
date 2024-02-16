@@ -14,6 +14,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        //primaryColor: Constants.kAmberColor,
+        scaffoldBackgroundColor: Constants.sduWhiteColor,
+        appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            systemNavigationBarColor: Constants.kBlackColor,
+            statusBarColor: Constants.kBlackColor,
+          ),
+        ),
+      ),
       home: Main_menu(),
     );
   }

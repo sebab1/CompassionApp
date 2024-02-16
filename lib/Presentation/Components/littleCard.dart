@@ -3,19 +3,29 @@ import 'package:flutter/material.dart';
 import './constants.dart';
 
 class littleCard extends StatelessWidget {
-  const littleCard({super.key});
+  //const littleCard({super.key});
+
+  final String title;
+  final IconData iconData;
+  final VoidCallback onTap;
+  final double titleSize;
+
+  const littleCard({super.key,
+    required this.title,
+    required this.iconData,
+    required this.onTap,
+    required this.titleSize,
+  });
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return GestureDetector(
-      onTap: () {
-        debugPrint("Little card tab");
-      },
+      onTap: onTap,
       child: Container(
         height: 85,
         width: 394,
-        margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+        //margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
         child: Card(
           color: Constants.sduGreyColor,
           margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -24,16 +34,16 @@ class littleCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(25, 0, 0, 0),
+                margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
                 child: Icon(
-                  Icons.watch_later_outlined,
+                  iconData,
                   size: 60,
                 ),
               ),
               Container(
                 child: Text(
-                  'Description',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  title,
+                  style: TextStyle(fontSize: titleSize, fontWeight: FontWeight.bold),
                 ),
               ),
               Container(

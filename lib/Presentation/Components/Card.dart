@@ -12,7 +12,7 @@ class CardWidget extends StatelessWidget {
   final IconData iconData;
   final VoidCallback onTap;
 
-  CardWidget({super.key,
+  const CardWidget({super.key,
     required this.title,
     required this.titleSize,
     required this.subtitle,
