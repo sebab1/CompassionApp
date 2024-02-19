@@ -1,3 +1,4 @@
+import 'package:compassion_app/Presentation/Components/audio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:compassion_app/Presentation/Components/littleCard.dart';
 import 'package:flutter/material.dart';
@@ -13,19 +14,8 @@ class JustAClass extends StatelessWidget {
           appBarTheme: AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           )),
-      home: Scaffold(
-        body: Column(
-          children: [
-            littleCard(
-              title: "Om compassion",
-              iconData: CupertinoIcons.heart_circle,
-              onTap: () {
-                debugPrint("Tabbed: Dagbog genvej");
-              },
-              titleSize: 18,
-            ),
-          ],
-        ),
+      home: Center(
+        child: Audio(),
       ),
     );
   }
