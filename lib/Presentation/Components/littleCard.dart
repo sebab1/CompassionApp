@@ -10,7 +10,8 @@ class littleCard extends StatelessWidget {
   final VoidCallback onTap;
   final double titleSize;
 
-  const littleCard({super.key,
+  const littleCard({
+    super.key,
     required this.title,
     required this.iconData,
     required this.onTap,
@@ -40,10 +41,18 @@ class littleCard extends StatelessWidget {
                   size: 60,
                 ),
               ),
-              Container(
-                child: Text(
-                  title,
-                  style: TextStyle(fontSize: titleSize, fontWeight: FontWeight.bold),
+              Expanded(
+                child: Center(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      title,
+                      textAlign: TextAlign.center, // Center align the text
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
+                      style: TextStyle(fontSize: titleSize, fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
               ),
               Container(

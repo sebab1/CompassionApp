@@ -1,3 +1,5 @@
+import 'package:compassion_app/Presentation/journal.dart';
+import 'package:compassion_app/Presentation/meditations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -45,7 +47,10 @@ class Training extends StatelessWidget {
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim lectus leo, vitae.",
               iconData: CupertinoIcons.airplane,
               onTap: () {
-                debugPrint("Tabbed: Meditationer");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Meditations()),
+                );
               },
             ),
             CardWidget(
@@ -68,7 +73,10 @@ class Training extends StatelessWidget {
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim lectus leo, vitae.",
               iconData: CupertinoIcons.airplane,
               onTap: () {
-                debugPrint("Tabbed: Dagbog");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Journal()),
+                );
               },
             ),
           ],

@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/Presentation/Components/constants.dart';
 
-class Exercises extends StatelessWidget {
+class Meditations extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Øvelser'),
+        title: Text('Meditationer'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -25,7 +26,7 @@ class Exercises extends StatelessWidget {
               Container(
                 padding: EdgeInsets.fromLTRB(25, 20, 25, 15),
                 child: const Text(
-                  "Styrk dit kendskab til compassion gennem en række øvelser du selv kan udføre.",
+                  "Meditation kan styrke compassion ved at skærpe opmærksomheden på ens egne følelser og andres lidelse, hvilket kan føre til øget empati og medfølelse.",
                   style: TextStyle(
                     color: Constants.kBlackColor,
                     fontSize: 16,
@@ -36,7 +37,7 @@ class Exercises extends StatelessWidget {
               Container(
                 padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
                 child: const Text(
-                  "Disse øvelser retter sig mod sundhedsprofessionelle med inspiration fra Compassion Institute",
+                  "Herunder finder du en række meditationsøvelser der kan hjælpe dig til at styrke compassion.",
                   style: TextStyle(
                     color: Constants.kBlackColor,
                     fontSize: 15,
@@ -49,7 +50,7 @@ class Exercises extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
-                    title: "Angst og svære følelser",
+                    title: "5 minutters meditation",
                     iconData: CupertinoIcons.ant,
                     onTap: () {
                       debugPrint("Card tabbed");
@@ -63,7 +64,7 @@ class Exercises extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
-                    title: "Centrér vejrtrækningen",
+                    title: "Compassion i åndedrættet",
                     iconData: CupertinoIcons.ant,
                     onTap: () {
                       debugPrint("Card tabbed");
@@ -77,7 +78,7 @@ class Exercises extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
-                    title: "Compassion vejrtrækning",
+                    title: "Loving Kindness Meditation for begyndere",
                     iconData: CupertinoIcons.ant,
                     onTap: () {
                       debugPrint("Card tabbed");
@@ -91,7 +92,7 @@ class Exercises extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
-                    title: "Før arbejde",
+                    title: "Opmærksomhedstræning med åndedrættet",
                     iconData: CupertinoIcons.ant,
                     onTap: () {
                       debugPrint("Card tabbed");
@@ -105,7 +106,7 @@ class Exercises extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
-                    title: "Efter arbejde",
+                    title: "Vejrtrækning med maven",
                     iconData: CupertinoIcons.ant,
                     onTap: () {
                       debugPrint("Card tabbed");
@@ -119,7 +120,7 @@ class Exercises extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
-                    title: "Vejrtrækning 1234",
+                    title: "Selvcompassion pause",
                     iconData: CupertinoIcons.ant,
                     onTap: () {
                       debugPrint("Card tabbed");
@@ -133,7 +134,49 @@ class Exercises extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
-                    title: "Ligesom jeg",
+                    title: "Vejrtrækningen som anker og en dejlig dag",
+                    iconData: CupertinoIcons.ant,
+                    onTap: () {
+                      debugPrint("Card tabbed");
+                    },
+                    titleSize: 17,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: littleCard(
+                    title: "Vejrtrækningsøvelse",
+                    iconData: CupertinoIcons.ant,
+                    onTap: () {
+                      debugPrint("Card tabbed");
+                    },
+                    titleSize: 17,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: littleCard(
+                    title: "Ruths trick - Få værktøjer til at tæmme sindet",
+                    iconData: CupertinoIcons.ant,
+                    onTap: () {
+                      debugPrint("Card tabbed");
+                    },
+                    titleSize: 17,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: littleCard(
+                    title: "Ruths trick - Få værktøjer til at åbne dit hjerte",
                     iconData: CupertinoIcons.ant,
                     onTap: () {
                       debugPrint("Card tabbed");
