@@ -25,11 +25,9 @@ class littleCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 85,
-        width: 394,
-        //margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
+        margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
         child: Card(
           color: Constants.sduGreyColor,
-          margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
           elevation: 4,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

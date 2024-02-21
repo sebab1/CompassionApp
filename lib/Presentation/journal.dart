@@ -11,6 +11,7 @@ class Journal extends StatefulWidget {
 }
 
 class _JournalState extends State<Journal> {
+  bool isGemButtonEnabled = false;
   DateTime today = DateTime.now();
   TextEditingController journalController = TextEditingController();
   TextEditingController intentionController1 = TextEditingController();
@@ -52,6 +53,7 @@ class _JournalState extends State<Journal> {
         child: Column(
           children: [
             Container(
+              padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
               child: TableCalendar(
                 startingDayOfWeek: StartingDayOfWeek.monday,
                 locale: 'en_US',
@@ -88,7 +90,7 @@ class _JournalState extends State<Journal> {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(16, 14, 0, 6),
+              margin: EdgeInsets.fromLTRB(20, 14, 0, 6),
               child: const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -98,17 +100,24 @@ class _JournalState extends State<Journal> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: TextField(
                   controller: journalController,
+                  onChanged: (text) {
+                    setState(() {
+                      isGemButtonEnabled = text.isNotEmpty;
+                    });
+                  },
                   enabled: isCurrentDaySelected,
                   maxLines: 3,
                   decoration: InputDecoration(
                     hintText: isCurrentDaySelected
-                        ? 'Skriv dagbog for i dag'
-                        : 'Vis log for den dag fra database her',
+                        ? events.containsKey(today)
+                        ? events[today]!.join('\n') // Display saved event(s) for the selected day
+                        : 'I dag har jeg...'
+                        : 'test', // Set an empty string for the placeholder when not the current day
                     filled: true,
                     fillColor: Constants.sduGreyColor,
                     border: OutlineInputBorder(
@@ -120,14 +129,60 @@ class _JournalState extends State<Journal> {
                 ),
               ),
             ),
-            Text("Get selected day: ${today.toString().split(" ")[0]}"),
             Container(
-              margin: EdgeInsets.fromLTRB(16, 10, 0, 6),
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 132.0),
+              child: ElevatedButton(
+                onPressed: isGemButtonEnabled
+                    ? () {
+                  if (journalController.text.isNotEmpty) {
+                    // Save the entered text as an event
+                    events[today] = [journalController.text];
+                    // Optionally, you can clear the journal input field
+                    journalController.clear();
+                    // Update the UI
+                    setState(() {
+                      isGemButtonEnabled = false;
+                    });
+                    // Close the dialog or perform any other action
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text("Gem"),
+                        content: Text("Vil du gemme?"),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text("Nej"),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text("Ja"),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                } : null,
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  backgroundColor:
+                  isGemButtonEnabled ? Constants.sduGoldColor : Colors.grey,
+                  // Change the color as needed
+                ),
+                child: Text("Gem"), // Add your text here
+              ),
+            ),
+
+            Container(
+              margin: EdgeInsets.fromLTRB(20, 10, 0, 6),
               child: const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Skriv dine intentioner for dagen her",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
                 ),
               ),
             ),
@@ -174,7 +229,7 @@ class _JournalState extends State<Journal> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: TextField(
@@ -194,16 +249,8 @@ class _JournalState extends State<Journal> {
                 ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(16, 10, 0, 6),
-              child: const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Test text",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
+            Text("Get selected day: ${today.toString().split(" ")[0]}"),
+            SizedBox(height: 20), // Add some space
           ],
         ),
       ),

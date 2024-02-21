@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'Components/borderCard.dart';
+import 'journal.dart';
 import 'main_menu.dart';
 import '/Presentation/Components/constants.dart';
 import '/Presentation/Components/littleCard.dart';
@@ -67,7 +68,10 @@ class Home extends StatelessWidget {
                     iconData: CupertinoIcons.calendar,
                     underline: false,
                     onTap: () {
-                      debugPrint("Tabbed: Dagbog genvej");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Journal()),
+                      );
                     },
                     trailingIconData: CupertinoIcons.chevron_forward,
                   ),

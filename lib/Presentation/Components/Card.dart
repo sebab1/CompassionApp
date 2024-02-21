@@ -22,15 +22,12 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double totalHeight = 130; // Set the total height of the card
-    double totalWidth = 394; // Set the height of the leading section
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: totalHeight,
-        width: totalWidth,
-        margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+        height: 130,
+        margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(11.0),
