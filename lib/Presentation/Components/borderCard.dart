@@ -9,13 +9,16 @@ class borderCard extends StatelessWidget {
   final IconData iconData;
   final VoidCallback onTap;
   final IconData? trailingIconData;
+  final bool underline;
 
-  const borderCard({super.key,
-    required this.title,
-    required this.iconData,
-    required this.onTap,
-    this.trailingIconData // Make trailing icon optional
-  });
+  const borderCard(
+      {super.key,
+      required this.underline,
+      required this.title,
+      required this.iconData,
+      required this.onTap,
+      this.trailingIconData // Make trailing icon optional
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -41,21 +44,26 @@ class borderCard extends StatelessWidget {
             title: Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: EdgeInsets.only(left: 16), // Adjust the left padding here
+                padding:
+                    EdgeInsets.only(left: 16), // Adjust the left padding here
                 child: Text(
                   title,
                   style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      decoration: underline ? TextDecoration.underline : null),
                 ),
               ),
             ),
             trailing: trailingIconData != null
                 ? Padding(
-                  padding: EdgeInsets.only(top: 6), // Adjust top padding here
-                  child: Icon(trailingIconData, color: Constants.sduGoldColor, size: 36,),
-                )
+                    padding: EdgeInsets.only(top: 6), // Adjust top padding here
+                    child: Icon(
+                      trailingIconData,
+                      color: Constants.sduGoldColor,
+                      size: 36,
+                    ),
+                  )
                 : null, // Use null instead of Container
           ),
         ),

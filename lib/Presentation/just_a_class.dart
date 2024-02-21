@@ -1,4 +1,5 @@
 import 'package:compassion_app/Presentation/Components/audio.dart';
+import 'package:compassion_app/Presentation/Components/videoPlayer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:compassion_app/Presentation/Components/littleCard.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class JustAClass extends StatelessWidget {
           appBarTheme: AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           )),
-      home: Center(),
+      home: VideoPlayer(),
     );
   }
 }

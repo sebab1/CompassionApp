@@ -65,6 +65,7 @@ class Home extends StatelessWidget {
                   borderCard(
                     title: "Dagbog",
                     iconData: CupertinoIcons.calendar,
+                    underline: false,
                     onTap: () {
                       debugPrint("Tabbed: Dagbog genvej");
                     },
@@ -73,6 +74,7 @@ class Home extends StatelessWidget {
                   borderCard(
                     title: "Om compassion",
                     iconData: CupertinoIcons.heart_circle,
+                    underline: false,
                     onTap: () {
                       debugPrint("Tabbed: Om compassion genvej");
                     },
