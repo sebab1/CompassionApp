@@ -14,9 +14,7 @@ class JustAClass extends StatelessWidget {
           appBarTheme: AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           )),
-      home: Center(
-        child: Audio(),
-      ),
+      home: Center(),
     );
   }
 }

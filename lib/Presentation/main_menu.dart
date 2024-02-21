@@ -1,3 +1,4 @@
+import 'package:compassion_app/Presentation/exercises.dart';
 import 'package:compassion_app/Presentation/knowledge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';

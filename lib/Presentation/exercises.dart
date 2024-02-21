@@ -1,3 +1,4 @@
+import 'package:compassion_app/Presentation/Components/audio.dart';
 import 'package:flutter/cupertino.dart';
 import '/Presentation/Components/littleCard.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,14 @@ class Exercises extends StatelessWidget {
                     iconData: CupertinoIcons.ant,
                     onTap: () {
                       debugPrint("Card tabbed");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Audio(
+                                exercise: 'Angst og svære følelser',
+                                desc:
+                                    'En 9 minutters øvelse til brug når du her angst og kæmper med svære følelser.')),
+                      );
                     },
                     titleSize: 17,
                   ),
