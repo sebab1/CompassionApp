@@ -2,6 +2,8 @@ import 'package:compassion_app/Presentation/Components/borderCard.dart';
 import 'package:compassion_app/Presentation/Components/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'Components/videoPlayer.dart';
+import 'Components/littleCard.dart';
 
 class KollegaCafe extends StatelessWidget {
   const KollegaCafe({super.key});
@@ -10,13 +12,15 @@ class KollegaCafe extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('KollegaCafe'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        title: Text(
+          'Hjem',
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: Constants.kBlackColor,
+          ),
         ),
+        backgroundColor: Constants.sduRedColor,
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -29,19 +33,22 @@ class KollegaCafe extends StatelessWidget {
                   'Velkommen til Kollegacafé, her finder du information og viden fra tidligere Kollegacaféer, samt linket til fremtidige møder.',
                   style: TextStyle(
                     color: Constants.kBlackColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
-              borderCard(
-                title: "Link til KollegaCafe",
-                iconData: Icons.coffee_rounded,
-                underline: true,
-                onTap: () {
-                  debugPrint("Tabbed: Dagbog genvej");
-                },
-                trailingIconData: CupertinoIcons.chevron_forward,
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                child: borderCard(
+                  title: "Link til KollegaCafe",
+                  iconData: Icons.coffee_rounded,
+                  underline: true,
+                  onTap: () {
+                    debugPrint("Tabbed: Dagbog genvej");
+                  },
+                  trailingIconData: CupertinoIcons.chevron_forward,
+                ),
               ),
               Container(
                 padding: EdgeInsets.fromLTRB(25, 20, 25, 15),
@@ -53,7 +60,105 @@ class KollegaCafe extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              )
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: littleCard(
+                    title: "Scraped title?",
+                    iconData: CupertinoIcons.play_rectangle,
+                    onTap: () {
+                      debugPrint("Card tabbed");
+                    },
+                    titleSize: 17,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: littleCard(
+                    title: "Scraped title?",
+                    iconData: CupertinoIcons.play_rectangle,
+                    onTap: () {
+                      debugPrint("Card tabbed");
+                    },
+                    titleSize: 17,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: littleCard(
+                    title: "Scraped title?",
+                    iconData: CupertinoIcons.play_rectangle,
+                    onTap: () {
+                      debugPrint("Card tabbed");
+                    },
+                    titleSize: 17,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: littleCard(
+                    title: "Scraped title?",
+                    iconData: CupertinoIcons.play_rectangle,
+                    onTap: () {
+                      debugPrint("Card tabbed");
+                    },
+                    titleSize: 17,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: littleCard(
+                    title: "Scraped title?",
+                    iconData: CupertinoIcons.play_rectangle,
+                    onTap: () {
+                      debugPrint("Card tabbed");
+                    },
+                    titleSize: 17,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: littleCard(
+                    title: "Scraped title?",
+                    iconData: CupertinoIcons.play_rectangle,
+                    onTap: () {
+                      debugPrint("Card tabbed");
+                    },
+                    titleSize: 17,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: littleCard(
+                    title: "Scraped title?",
+                    iconData: CupertinoIcons.play_rectangle,
+                    onTap: () {
+                      debugPrint("Card tabbed");
+                    },
+                    titleSize: 17,
+                  ),
+                ),
+              ),
             ],
           ),
         ),

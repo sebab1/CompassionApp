@@ -11,6 +11,7 @@ class Journal extends StatefulWidget {
 }
 
 class _JournalState extends State<Journal> {
+
   bool isGemButtonEnabled = false;
   DateTime today = DateTime.now();
   TextEditingController journalController = TextEditingController();
@@ -36,18 +37,29 @@ class _JournalState extends State<Journal> {
   }
 
   @override
+  void dispose() {
+    journalController.dispose();
+    intentionController1.dispose();
+    intentionController2.dispose();
+    intentionController3.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     bool isCurrentDaySelected = isSameDay(today, DateTime.now());
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dagbog'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        title: Text(
+          'Om compassion',
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: Constants.kBlackColor,
+          ),
         ),
+        backgroundColor: Constants.sduRedColor,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -114,9 +126,7 @@ class _JournalState extends State<Journal> {
                   maxLines: 3,
                   decoration: InputDecoration(
                     hintText: isCurrentDaySelected
-                        ? events.containsKey(today)
-                        ? events[today]!.join('\n') // Display saved event(s) for the selected day
-                        : 'I dag har jeg...'
+                        ? 'I dag har jeg...'
                         : 'test', // Set an empty string for the placeholder when not the current day
                     filled: true,
                     fillColor: Constants.sduGreyColor,
@@ -129,53 +139,6 @@ class _JournalState extends State<Journal> {
                 ),
               ),
             ),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 132.0),
-              child: ElevatedButton(
-                onPressed: isGemButtonEnabled
-                    ? () {
-                  if (journalController.text.isNotEmpty) {
-                    // Save the entered text as an event
-                    events[today] = [journalController.text];
-                    // Optionally, you can clear the journal input field
-                    journalController.clear();
-                    // Update the UI
-                    setState(() {
-                      isGemButtonEnabled = false;
-                    });
-                    // Close the dialog or perform any other action
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: Text("Gem"),
-                        content: Text("Vil du gemme?"),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: Text("Nej"),
-                          ),
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: Text("Ja"),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-                } : null,
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  backgroundColor:
-                  isGemButtonEnabled ? Constants.sduGoldColor : Colors.grey,
-                  // Change the color as needed
-                ),
-                child: Text("Gem"), // Add your text here
-              ),
-            ),
-
             Container(
               margin: EdgeInsets.fromLTRB(20, 10, 0, 6),
               child: const Align(
@@ -247,6 +210,53 @@ class _JournalState extends State<Journal> {
                     contentPadding: const EdgeInsets.all(10.0),
                   ),
                 ),
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 132.0),
+              child: ElevatedButton(
+                onPressed: journalController.text.isEmpty
+                    ? null
+                    : () {
+                    // Close the dialog or perform any other action
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        //title: const Text("Gem"), titleTextStyle: TextStyle(color: Constants.kBlackColor),
+                        content: const Text("Er du sikker på at, du vil gemme?"),
+                        actions: [
+                          TextButton( // Nej option
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text("Nej"),
+                          ),
+                          TextButton( // Ja option
+                            onPressed: () {
+                              if (journalController.text.isEmpty) {
+                                Navigator.pop(context);
+                                return;
+                                // Tilføj else og inde i den et if statement:
+                                // Hvis der ikke er nogen event, filføj en
+                                // Hvis der er en event, ikke tilføj en
+                              }
+                              Navigator.pop(context);
+                              journalController.clear();
+                              return;
+                            },
+                            child: const Text("Ja"),
+                          ),
+                        ],
+                      ),
+                    );
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  backgroundColor: journalController.text.isEmpty ? Constants.sduGreyColor : Constants.sduGoldColor,
+                  // Change the color as needed
+                ),
+                child: Text("Gem"), // Add your text here
               ),
             ),
             Text("Get selected day: ${today.toString().split(" ")[0]}"),

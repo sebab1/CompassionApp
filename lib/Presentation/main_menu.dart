@@ -1,8 +1,10 @@
+import 'package:compassion_app/Presentation/Components/videoPlayer.dart';
 import 'package:compassion_app/Presentation/exercises.dart';
 import 'package:compassion_app/Presentation/knowledge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import './Components/constants.dart';
+import './Components/videoPlayer.dart';
 import './home.dart';
 import './just_a_class.dart';
 import './training.dart';
@@ -19,7 +21,7 @@ class _Main_menuState extends State<Main_menu> {
     Home(),
     Training(),
     Knowledge(),
-    JustAClass(),
+    VideoPlayer(),
   ];
 
   @override

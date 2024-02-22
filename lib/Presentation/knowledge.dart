@@ -2,6 +2,7 @@ import 'package:compassion_app/Presentation/kollegaCafe.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'aboutCompassion.dart';
 import 'main_menu.dart';
 import '/Presentation/Components/constants.dart';
 import '/Presentation/Components/Card.dart';
@@ -60,6 +61,10 @@ class Knowledge extends StatelessWidget {
               iconData: CupertinoIcons.airplane,
               onTap: () {
                 debugPrint("Tabbed: Om compassion");
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AboutCompassion()));
               },
             )
           ]),

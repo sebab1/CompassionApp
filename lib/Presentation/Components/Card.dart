@@ -40,7 +40,7 @@ class CardWidget extends StatelessWidget {
             children: [
               Container(
                 width: 50,
-                margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
                 child: Icon(
                 iconData,
                 size: 60,
@@ -48,7 +48,7 @@ class CardWidget extends StatelessWidget {
               ),
               Container(
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
                     children: [
@@ -61,7 +61,7 @@ class CardWidget extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.fromLTRB(0, 8, 12, 0),
+                        padding: EdgeInsets.fromLTRB(0, 0, 12, 0),
                         width: 200,
                         child: Text(
                           subtitle,

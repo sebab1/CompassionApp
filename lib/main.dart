@@ -4,6 +4,9 @@ import './Presentation/main_menu.dart';
 import './Presentation/Components/Constants.dart';
 
 void main() {
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   runApp(const MyApp());
 }
 

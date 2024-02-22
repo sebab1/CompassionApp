@@ -24,7 +24,7 @@ class littleCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 85,
+        height: 86,
         margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
         child: Card(
           color: Constants.sduGreyColor,
