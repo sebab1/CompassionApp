@@ -1,4 +1,5 @@
 import 'package:compassion_app/Presentation/journal.dart';
+import 'package:compassion_app/Presentation/journalNew.dart';
 import 'package:compassion_app/Presentation/meditations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +76,7 @@ class Training extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Journal()),
+                  MaterialPageRoute(builder: (context) => const JournalNew()),
                 );
               },
             ),

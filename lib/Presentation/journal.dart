@@ -19,6 +19,7 @@ class _JournalState extends State<Journal> {
   TextEditingController intentionController2 = TextEditingController();
   TextEditingController intentionController3 = TextEditingController();
 
+  // Tilføjer nogle test events
   Map<DateTime, List<dynamic>> events = {
     DateTime.utc(2024, 2, 15): ['Event 1'],
     DateTime.utc(2024, 2, 17): ['Event 2'],
@@ -36,14 +37,14 @@ class _JournalState extends State<Journal> {
     return events.containsKey(day);
   }
 
-  @override
+  /*@override
   void dispose() {
     journalController.dispose();
     intentionController1.dispose();
     intentionController2.dispose();
     intentionController3.dispose();
     super.dispose();
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class _JournalState extends State<Journal> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Om compassion',
+          'Dagbog',
           style: TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.bold,
@@ -117,17 +118,17 @@ class _JournalState extends State<Journal> {
                 scrollDirection: Axis.vertical,
                 child: TextField(
                   controller: journalController,
-                  onChanged: (text) {
+                  /*onChanged: (text) {
                     setState(() {
                       isGemButtonEnabled = text.isNotEmpty;
                     });
-                  },
+                  },*/
                   enabled: isCurrentDaySelected,
                   maxLines: 3,
                   decoration: InputDecoration(
-                    hintText: isCurrentDaySelected
+                    /*hintText: isCurrentDaySelected
                         ? 'I dag har jeg...'
-                        : 'test', // Set an empty string for the placeholder when not the current day
+                        : 'test', // Set an empty string for the placeholder when not the current day*/
                     filled: true,
                     fillColor: Constants.sduGreyColor,
                     border: OutlineInputBorder(

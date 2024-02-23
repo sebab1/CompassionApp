@@ -13,7 +13,7 @@ class KollegaCafe extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Hjem',
+          'Kollegacaféer',
           style: TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.bold,
@@ -41,7 +41,7 @@ class KollegaCafe extends StatelessWidget {
               Container(
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                 child: borderCard(
-                  title: "Link til KollegaCafe",
+                  title: "Link til Kollegacafé",
                   iconData: Icons.coffee_rounded,
                   underline: true,
                   onTap: () {
@@ -53,7 +53,7 @@ class KollegaCafe extends StatelessWidget {
               Container(
                 padding: EdgeInsets.fromLTRB(25, 20, 25, 15),
                 child: const Text(
-                  'Videoer fra tidligere møder',
+                  'Tidligere møder',
                   style: TextStyle(
                     color: Constants.kBlackColor,
                     fontSize: 20,

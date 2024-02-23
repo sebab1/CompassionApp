@@ -1,7 +1,9 @@
+import 'package:compassion_app/Presentation/journalNew.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'Components/borderCard.dart';
+import 'aboutCompassion.dart';
 import 'journal.dart';
 import 'main_menu.dart';
 import '/Presentation/Components/constants.dart';
@@ -70,7 +72,7 @@ class Home extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const Journal()),
+                        MaterialPageRoute(builder: (context) => const JournalNew()),
                       );
                     },
                     trailingIconData: CupertinoIcons.chevron_forward,
@@ -80,7 +82,10 @@ class Home extends StatelessWidget {
                     iconData: CupertinoIcons.heart_circle,
                     underline: false,
                     onTap: () {
-                      debugPrint("Tabbed: Om compassion genvej");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const AboutCompassion()),
+                      );
                     },
                     trailingIconData: CupertinoIcons.chevron_forward,
                   ),
