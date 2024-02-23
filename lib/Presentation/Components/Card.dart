@@ -12,7 +12,8 @@ class CardWidget extends StatelessWidget {
   final IconData iconData;
   final VoidCallback onTap;
 
-  const CardWidget({super.key,
+  const CardWidget({
+    super.key,
     required this.title,
     required this.titleSize,
     required this.subtitle,
@@ -22,7 +23,6 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -42,15 +42,16 @@ class CardWidget extends StatelessWidget {
                 width: 50,
                 margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
                 child: Icon(
-                iconData,
-                size: 60,
+                  iconData,
+                  size: 60,
                 ),
               ),
               Container(
                 child: Container(
                   padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start, // Align text to the left
                     children: [
                       Container(
                         child: Text(

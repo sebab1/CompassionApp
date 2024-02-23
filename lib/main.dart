@@ -1,3 +1,4 @@
+import 'package:compassion_app/Domain/ScraperController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './Presentation/main_menu.dart';
@@ -7,6 +8,8 @@ void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+  var sc = ScraperController();
+  sc.initScraper();
   runApp(const MyApp());
 }
 
