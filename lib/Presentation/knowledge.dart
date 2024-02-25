@@ -50,7 +50,7 @@ class Knowledge extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const KollegaCafe()));
+                        builder: (context) => KollegaCafe()));
               },
             ),
             CardWidget(

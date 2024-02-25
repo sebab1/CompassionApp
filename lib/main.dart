@@ -8,8 +8,7 @@ void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  var sc = ScraperController();
-  sc.initScraper();
+
   runApp(const MyApp());
 }
 
