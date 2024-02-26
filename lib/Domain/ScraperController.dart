@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:chaleno/chaleno.dart';
+import 'package:compassion_app/Domain/Content.dart';
 import 'package:compassion_app/Domain/Event.dart';
 import 'package:compassion_app/Domain/IScraperController.dart';
 
@@ -16,15 +19,24 @@ class ScraperController {
       List<Result>? para = element.querySelectorAll('p');
       String? src = element.querySelector('iframe')?.src;
 
-      List<String?> content = [];
-
+      List<Content> data = [];
       for (var element in para!) {
-        content.add(element.text);
+        var currentElement = element.innerHTML;
+        List<Result>? anchor = element.querySelectorAll('a');
+        print('p: $currentElement');
+        anchor!.forEach((element) {
+          var anchorElement = element.html;
+          print('a: $anchorElement');
+        });
+
+        Content content = Content(currentElement, element.href);
+        //print(content.toString());
+        data.add(content);
       }
-      Event event = Event(title, content, src);
+      String? trimTitle = title!.trim();
+      Event event = Event(trimTitle, data, src);
 
       events.add(event);
-
     });
 
     return events;

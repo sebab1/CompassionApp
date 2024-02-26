@@ -21,7 +21,6 @@ class _Main_menuState extends State<Main_menu> {
     Home(),
     Training(),
     Knowledge(),
-    VideoPlayer(),
   ];
 
   @override

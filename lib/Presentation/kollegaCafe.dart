@@ -7,8 +7,7 @@ import 'Components/videoPlayer.dart';
 import 'Components/littleCard.dart';
 
 class KollegaCafe extends StatefulWidget {
-   KollegaCafe({super.key});
-
+  KollegaCafe({super.key});
 
   // @override
   // Widget build(BuildContext context) {
@@ -167,25 +166,24 @@ class KollegaCafe extends StatefulWidget {
   //     ),
   //   );
   // }
-  
+
   @override
   _KollegaCafeState createState() => _KollegaCafeState();
-
 }
 
 class _KollegaCafeState extends State<KollegaCafe> {
   late var events;
 
-       @override
+  @override
   void initState() {
     super.initState();
-      var sc = ScraperController();
-      events = sc.initScraper();
+    var sc = ScraperController();
+    events = sc.initScraper();
   }
 
   @override
   Widget build(BuildContext context) {
-         return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text(
           'Kollegacaféer',
@@ -197,7 +195,7 @@ class _KollegaCafeState extends State<KollegaCafe> {
         ),
         backgroundColor: Constants.sduRedColor,
       ),
-      body: Container(
+      body: SingleChildScrollView(
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -237,42 +235,42 @@ class _KollegaCafeState extends State<KollegaCafe> {
                 ),
               ),
               FutureBuilder(
-                future: events,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) {
-                    return Expanded(
-                      child: ListView.builder(
-                        primary: false,
-                        shrinkWrap: true,
-                        itemCount: snapshot.data.length,
-                        itemBuilder: (context, index) {
-                    return Container( 
-                    child: littleCard(
-                      title: snapshot.data[index].title,
-                      iconData: CupertinoIcons.play_rectangle,
-                      onTap: () {
-                        debugPrint("Card tabbed");
-                      },
-                      titleSize: 17,
-                  ),
-              );
-                        },
+                  future: events,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      return Container(
+                        child: ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (context, index) {
+                            return SizedBox(
+                              child: littleCard(
+                                title: snapshot.data[index].title,
+                                iconData: CupertinoIcons.play_rectangle,
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => VideoPlayer(
+                                              event: snapshot.data[index])));
+                                },
+                                titleSize: 15,
+                              ),
+                            );
+                          },
                         ),
-                    );
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-              })
+                      );
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  })
             ],
           ),
         ),
       ),
     );
   }
-    
-
-  
-  
 }

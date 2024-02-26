@@ -15,7 +15,7 @@ class JustAClass extends StatelessWidget {
           appBarTheme: AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           )),
-      home: VideoPlayer(),
+      //home: VideoPlayer(),
     );
   }
 }
