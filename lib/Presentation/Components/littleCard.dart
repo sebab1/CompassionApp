@@ -47,7 +47,7 @@ class littleCard extends StatelessWidget {
                       title,
                       textAlign: TextAlign.center, // Center align the text
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 3,
+                      maxLines: 4,
                       style: TextStyle(fontSize: titleSize, fontWeight: FontWeight.bold),
                     ),
                   ),
