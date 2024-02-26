@@ -11,19 +11,20 @@ class JournalNew extends StatefulWidget {
 }
 
 class _JournalNewState extends State<JournalNew> {
-
+  //bool isCurrentDaySelected = false;
   DateTime today = DateTime.now();
-  DateTime selectedDay = DateTime.now();
-  DateTime focusedDay = DateTime.now();
-  TextEditingController journalController = TextEditingController();
-  TextEditingController intentionController1 = TextEditingController();
-  TextEditingController intentionController2 = TextEditingController();
-  TextEditingController intentionController3 = TextEditingController();
+  DateTime _selectedDay = DateTime.now();
+  DateTime _focusedDay = DateTime.now();
+
+  void _onDaySelected(DateTime day, DateTime focusedDay) {
+    setState(() {
+      today = day;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     bool isCurrentDaySelected = isSameDay(today, DateTime.now());
-
 
     return Scaffold(
       appBar: AppBar(
@@ -51,18 +52,21 @@ class _JournalNewState extends State<JournalNew> {
                   titleCentered: true,
                 ),
                 rowHeight: 38,
-                focusedDay: selectedDay,
+                focusedDay: _focusedDay,
                 firstDay: DateTime.utc(2024, 1, 1),
                 lastDay: DateTime.utc(2028, 12, 1),
-                onDaySelected: (DateTime selectedDay, DateTime focusedDay) {
-                  setState(() {
-                    this.selectedDay = selectedDay;
-                    this.focusedDay = focusedDay;
-                  });
-                  print("Selected day: " + selectedDay.toString());
+                selectedDayPredicate: (day) {
+                  return isSameDay(_selectedDay, day);
                 },
-                selectedDayPredicate: (DateTime date) {
-                  return isSameDay(selectedDay, date);
+                //onDaySelected: _onDaySelected,
+                onDaySelected: (selectedDay, focusedDay) {
+                  if (!isSameDay(_selectedDay, selectedDay)) {
+                    setState(() {
+                      _selectedDay = selectedDay;
+                      _focusedDay = focusedDay;
+                    });
+                    _onDaySelected(selectedDay, focusedDay);
+                  }
                 },
                 //enabledDayPredicate: (day) => true,
                 calendarStyle: const CalendarStyle(
@@ -86,7 +90,17 @@ class _JournalNewState extends State<JournalNew> {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(20, 12, 0, 12),
+              margin: EdgeInsets.fromLTRB(20, 10, 0, 0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Din dagbog for " + _selectedDay.toString(),
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(20, 0, 0, 12),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -115,25 +129,43 @@ class _JournalNewState extends State<JournalNew> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
-                    backgroundColor: Constants.sduGoldColor,
+                      disabledBackgroundColor: Constants.sduGreyColor,
+                      backgroundColor: Constants.sduGoldColor,
                   ),
-                  child: Text("Tilføj journal"),
+                  child: Text(
+                    "Tilføj ny journal",
+                    style: TextStyle(
+                      color: isCurrentDaySelected
+                          ? Constants.kBlackColor // Text color when enabled
+                          : Constants.kGreyColor, // Text color when disabled
+                    ),
+                  ),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    // Add your logic for the second button here
-                  },
+                  onPressed: isCurrentDaySelected
+                      ? () {
+                    debugPrint("Pressed");
+                  } : null,
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
+                    disabledBackgroundColor: Constants.sduGreyColor,
                     backgroundColor: Constants.sduGoldColor,
                   ),
-                  child: Text("Tilføj intentioner"),
+                  child: Text(
+                      "Tilføj nye intentioner",
+                    style: TextStyle(
+                      color: isCurrentDaySelected
+                          ? Constants.kBlackColor // Text color when enabled
+                          : Constants.kGreyColor, // Text color when disabled
+                    ),
+                  ),
                 ),
               ],
             ),
-            Text("Get selected day: " + selectedDay.toString()),
+            Text("Get selected day: " + _selectedDay.toString()),
+            Text("Current day?: " + isCurrentDaySelected.toString()),
             SizedBox(height: 20), // Add some space
           ],
         ),
