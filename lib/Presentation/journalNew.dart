@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '/Presentation/Components/constants.dart';
+
 
 class JournalNew extends StatefulWidget {
   const JournalNew({Key? key}) : super(key: key);
@@ -11,15 +13,28 @@ class JournalNew extends StatefulWidget {
 }
 
 class _JournalNewState extends State<JournalNew> {
-  //bool isCurrentDaySelected = false;
   DateTime today = DateTime.now();
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
+  late TextEditingController _journalController;
+  TextEditingController _intentionController = TextEditingController();
 
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
       today = day;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _journalController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _journalController.dispose();
+    super.dispose();
   }
 
   @override
@@ -94,7 +109,7 @@ class _JournalNewState extends State<JournalNew> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Din dagbog for " + _selectedDay.toString(),
+                  "Din dagbog for d. " + DateFormat('dd/MM').format(_selectedDay),
                   style: const TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
                 ),
               ),
@@ -109,7 +124,17 @@ class _JournalNewState extends State<JournalNew> {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(20, 12, 0, 12),
+              margin: EdgeInsets.fromLTRB(20, 10, 0, 0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Dine intentioner for d. " + DateFormat('dd/MM').format(_selectedDay),
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(20, 0, 0, 22),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -121,9 +146,65 @@ class _JournalNewState extends State<JournalNew> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: isCurrentDaySelected
-                      ? () {
+                  onPressed: isCurrentDaySelected ? () {
                     debugPrint("Pressed");
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text('Tilføj dagbog for i dag'),
+                        content: TextFormField(
+                          controller: _journalController,
+                          maxLines: 6,
+                          decoration: InputDecoration(
+                            hintText: 'Skriv din dagbog her... ✏️',
+                          ),
+                        ),
+                        actions: [
+                          // Add any actions/buttons here
+                          TextButton(
+                            child: const Text(
+                              'Luk',
+                              style: TextStyle(
+                                color: Constants.kBlackColor, // Text color
+                                fontSize: 16.0, // Font size
+                                // Add more styles as needed
+                              ),
+                            ),
+                            onPressed: () {
+                              if (_journalController.text.isEmpty) {
+                                _journalController.clear();
+                                Navigator.pop(context);
+                                return;
+                              }
+                              else {
+                                _journalController.clear();
+                                Navigator.pop(context);
+                              }
+                            },
+                          ),
+                          TextButton(
+                            child: const Text(
+                              'Tilføj',
+                              style: TextStyle(
+                                color: Constants.kBlackColor, // Text color
+                                fontSize: 16.0, // Font size
+                                // Add more styles as needed
+                              ),
+                            ),
+                            onPressed: () {
+                              if (_journalController.text.isEmpty) {
+                                _journalController.clear();
+                                Navigator.pop(context);
+                                return;
+                              }
+                              else {
+                                Navigator.pop(context);
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                    );
                   } : null,
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -142,9 +223,73 @@ class _JournalNewState extends State<JournalNew> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: isCurrentDaySelected
-                      ? () {
-                    debugPrint("Pressed");
+                  onPressed: isCurrentDaySelected ? () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text('Tilføj dagbog for i dag'),
+                        content: TextFormField(
+                          controller: _intentionController,
+                          maxLines: 6,
+                          decoration: InputDecoration(
+                            hintText: 'Skriv din dagbog her... ✏️',
+                            focusedErrorBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Constants.sduGoldColor, // Desired color
+                              ),
+                            ),
+                            errorBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Constants.kRedColor, // Desired color
+                              ),
+                            ),
+                            focusColor: Constants.sduRedColor,
+
+                          ),
+                        ),
+                        actions: [
+                          // Add any actions/buttons here
+                          TextButton(
+                            onPressed: () {
+                              if (_intentionController.text.isEmpty) {
+                                Navigator.pop(context);
+                                return;
+                              }
+                              else {
+                                Navigator.pop(context);
+                              }
+                            },
+                            child: const Text(
+                              'Luk',
+                              style: TextStyle(
+                                color: Constants.kBlackColor, // Text color
+                                fontSize: 16.0, // Font size
+                                // Add more styles as needed
+                              ),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              if (_journalController.text.isEmpty) {
+                                Navigator.pop(context);
+                                return;
+                              }
+                              else {
+                                Navigator.pop(context);
+                              }
+                            },
+                            child: const Text(
+                              'Tilføj',
+                              style: TextStyle(
+                                color: Constants.kBlackColor, // Text color
+                                fontSize: 16.0, // Font size
+                                // Add more styles as needed
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
                   } : null,
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -164,8 +309,8 @@ class _JournalNewState extends State<JournalNew> {
                 ),
               ],
             ),
-            Text("Get selected day: " + _selectedDay.toString()),
-            Text("Current day?: " + isCurrentDaySelected.toString()),
+            //Text("Get selected day: " + _selectedDay.toString()),
+            //Text("Current day?: " + isCurrentDaySelected.toString()),
             SizedBox(height: 20), // Add some space
           ],
         ),

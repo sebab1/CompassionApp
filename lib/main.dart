@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './Presentation/main_menu.dart';
 import './Presentation/Components/Constants.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
 
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

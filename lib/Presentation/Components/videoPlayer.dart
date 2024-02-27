@@ -30,6 +30,7 @@ class VideoPlayer extends StatelessWidget {
             children: [
               Container(
                   padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                   child: HtmlWidget(event.content as String,
                       onTapUrl: (url) => launchUrl(Uri.parse(url)))),
             ],
