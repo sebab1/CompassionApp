@@ -244,7 +244,8 @@ class _KollegaCafeState extends State<KollegaCafe> {
                           shrinkWrap: true,
                           itemCount: snapshot.data.length,
                           itemBuilder: (context, index) {
-                            return SizedBox(
+                            return Container(
+                              padding: EdgeInsets.fromLTRB(0, 0, 0, 4),
                               child: littleCard(
                                 title: snapshot.data[index].title,
                                 iconData: CupertinoIcons.play_rectangle,

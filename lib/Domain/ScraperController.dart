@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:chaleno/chaleno.dart';
-import 'package:compassion_app/Domain/Content.dart';
 import 'package:compassion_app/Domain/Event.dart';
 import 'package:compassion_app/Domain/IScraperController.dart';
 
@@ -16,25 +15,9 @@ class ScraperController {
 
     result.forEach((element) {
       String? title = element.querySelector('.accordion-header__title')!.text;
-      List<Result>? para = element.querySelectorAll('p');
-      String? src = element.querySelector('iframe')?.src;
 
-      List<Content> data = [];
-      for (var element in para!) {
-        var currentElement = element.innerHTML;
-        List<Result>? anchor = element.querySelectorAll('a');
-        print('p: $currentElement');
-        anchor!.forEach((element) {
-          var anchorElement = element.html;
-          print('a: $anchorElement');
-        });
-
-        Content content = Content(currentElement, element.href);
-        //print(content.toString());
-        data.add(content);
-      }
       String? trimTitle = title!.trim();
-      Event event = Event(trimTitle, data, src);
+      Event event = Event(trimTitle, element.html);
 
       events.add(event);
     });

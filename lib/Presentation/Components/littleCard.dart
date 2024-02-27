@@ -33,7 +33,7 @@ class littleCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                margin: EdgeInsets.fromLTRB(12, 0, 0, 0),
                 child: Icon(
                   iconData,
                   size: 60,
@@ -48,7 +48,8 @@ class littleCard extends StatelessWidget {
                       textAlign: TextAlign.center, // Center align the text
                       overflow: TextOverflow.ellipsis,
                       maxLines: 4,
-                      style: TextStyle(fontSize: titleSize, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: titleSize, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),

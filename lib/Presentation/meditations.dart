@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import '/Presentation/Components/constants.dart';
 
 class Meditations extends StatelessWidget {
+  EdgeInsets edgeI = EdgeInsets.fromLTRB(0, 4, 0, 4);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class Meditations extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                padding: EdgeInsets.fromLTRB(25, 0, 25, 10),
                 child: const Text(
                   "Herunder finder du en række meditationsøvelser der kan hjælpe dig til at styrke compassion.",
                   style: TextStyle(
@@ -46,7 +47,7 @@ class Meditations extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
@@ -60,7 +61,7 @@ class Meditations extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
@@ -74,7 +75,7 @@ class Meditations extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
@@ -88,7 +89,7 @@ class Meditations extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
@@ -102,7 +103,7 @@ class Meditations extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
@@ -116,7 +117,7 @@ class Meditations extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
@@ -130,7 +131,7 @@ class Meditations extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
@@ -144,7 +145,7 @@ class Meditations extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
@@ -158,7 +159,7 @@ class Meditations extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
@@ -172,7 +173,7 @@ class Meditations extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(

@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import '/Presentation/Components/constants.dart';
 
 class Exercises extends StatelessWidget {
+  EdgeInsets edgeI = EdgeInsets.fromLTRB(0, 4, 0, 4);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +36,7 @@ class Exercises extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                padding: EdgeInsets.fromLTRB(25, 0, 25, 10),
                 child: const Text(
                   "Disse øvelser retter sig mod sundhedsprofessionelle med inspiration fra Compassion Institute",
                   style: TextStyle(
@@ -46,7 +47,7 @@ class Exercises extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
@@ -68,7 +69,7 @@ class Exercises extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
@@ -82,7 +83,7 @@ class Exercises extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
@@ -96,7 +97,7 @@ class Exercises extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
@@ -110,7 +111,7 @@ class Exercises extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
@@ -124,7 +125,7 @@ class Exercises extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
@@ -138,7 +139,7 @@ class Exercises extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                margin: edgeI,
                 child: Align(
                   alignment: Alignment.center,
                   child: littleCard(
