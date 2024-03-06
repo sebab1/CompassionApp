@@ -45,7 +45,7 @@ class Training extends StatelessWidget {
               title: "Meditationer",
               titleSize: 30,
               subtitle:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim lectus leo, vitae.",
+              "Meditation kan styrke compassion ved at skærpe opmærksomheden på ens egne følelser og andres lidelse, hvilket kan føre til øget empati og medfølelse.",
               iconData: CupertinoIcons.airplane,
               onTap: () {
                 Navigator.push(

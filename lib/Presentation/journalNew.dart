@@ -17,7 +17,9 @@ class _JournalNewState extends State<JournalNew> {
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
   late TextEditingController _journalController;
-  TextEditingController _intentionController = TextEditingController();
+  late TextEditingController _intentionController1;
+  late TextEditingController _intentionController2;
+  late TextEditingController _intentionController3;
 
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
@@ -29,11 +31,17 @@ class _JournalNewState extends State<JournalNew> {
   void initState() {
     super.initState();
     _journalController = TextEditingController();
+    _intentionController1 = TextEditingController();
+    _intentionController2 = TextEditingController();
+    _intentionController3 = TextEditingController();
   }
 
   @override
   void dispose() {
     _journalController.dispose();
+    _intentionController1.dispose();
+    _intentionController2.dispose();
+    _intentionController3.dispose();
     super.dispose();
   }
 
@@ -171,15 +179,8 @@ class _JournalNewState extends State<JournalNew> {
                               ),
                             ),
                             onPressed: () {
-                              if (_journalController.text.isEmpty) {
-                                _journalController.clear();
-                                Navigator.pop(context);
-                                return;
-                              }
-                              else {
-                                _journalController.clear();
-                                Navigator.pop(context);
-                              }
+                              _journalController.clear();
+                              Navigator.pop(context);
                             },
                           ),
                           TextButton(
@@ -227,68 +228,94 @@ class _JournalNewState extends State<JournalNew> {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: Text('Tilføj dagbog for i dag'),
-                        content: TextFormField(
-                          controller: _intentionController,
-                          maxLines: 6,
-                          decoration: InputDecoration(
-                            hintText: 'Skriv din dagbog her... ✏️',
-                            focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Constants.sduGoldColor, // Desired color
+                        title: Text('Tilføj intentioner for i dag'),
+                        content: Column(
+                          children: [
+                            TextFormField(
+                              controller: _intentionController1,
+                              maxLines: 3,
+                              decoration: InputDecoration(
+                                hintText: 'Skriv en intention her... ✏️',
+                                focusedErrorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Constants.sduGoldColor,
+                                  ),
+                                ),
+                                focusColor: Constants.sduRedColor,
                               ),
                             ),
-                            errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Constants.kRedColor, // Desired color
+                            TextFormField(
+                              controller: _intentionController2,
+                              maxLines: 3,
+                              decoration: InputDecoration(
+                                hintText: 'Skriv din anden intention her... ✏️',
+                                focusedErrorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Constants.sduGoldColor,
+                                  ),
+                                ),
+                                focusColor: Constants.sduRedColor,
                               ),
                             ),
-                            focusColor: Constants.sduRedColor,
-
-                          ),
+                            TextFormField(
+                              controller: _intentionController3,
+                              maxLines: 3,
+                              decoration: InputDecoration(
+                                hintText: 'Skriv din tredje intention her... ✏️',
+                                focusedErrorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Constants.sduGoldColor,
+                                  ),
+                                ),
+                                focusColor: Constants.sduRedColor,
+                              ),
+                            ),
+                          ],
                         ),
                         actions: [
                           // Add any actions/buttons here
                           TextButton(
-                            onPressed: () {
-                              if (_intentionController.text.isEmpty) {
-                                Navigator.pop(context);
-                                return;
-                              }
-                              else {
-                                Navigator.pop(context);
-                              }
-                            },
                             child: const Text(
                               'Luk',
                               style: TextStyle(
-                                color: Constants.kBlackColor, // Text color
-                                fontSize: 16.0, // Font size
-                                // Add more styles as needed
+                                color: Constants.kBlackColor,
+                                fontSize: 16.0,
                               ),
                             ),
+                            onPressed: () {
+                              _intentionController1.clear();
+                              _intentionController2.clear();
+                              _intentionController3.clear();
+                              Navigator.pop(context);
+                            },
                           ),
                           TextButton(
+                            child: const Text(
+                              'Tilføj',
+                              style: TextStyle(
+                                color: Constants.kBlackColor,
+                                fontSize: 16.0,
+                              ),
+                            ),
                             onPressed: () {
-                              if (_journalController.text.isEmpty) {
+                              // Handle 'Tilføj' button press
+                              if (_intentionController1.text.isEmpty &&
+                                  _intentionController2.text.isEmpty &&
+                                  _intentionController3.text.isEmpty) {
+                                // Handle case when all three fields are empty
                                 Navigator.pop(context);
                                 return;
                               }
                               else {
+                                // Handle the case when at least one field is non-empty
+                                debugPrint("Lukker uden text");
                                 Navigator.pop(context);
                               }
                             },
-                            child: const Text(
-                              'Tilføj',
-                              style: TextStyle(
-                                color: Constants.kBlackColor, // Text color
-                                fontSize: 16.0, // Font size
-                                // Add more styles as needed
-                              ),
-                            ),
                           ),
                         ],
                       ),
+
                     );
                   } : null,
                   style: ElevatedButton.styleFrom(

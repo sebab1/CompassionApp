@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,9 +12,10 @@ import 'package:just_waveform/just_waveform.dart';
 import './constants.dart';
 
 class Audio extends StatefulWidget {
-  final String exercise;
+  final String title;
   final String desc;
-  const Audio({super.key, required this.exercise, required this.desc});
+  final String audio;
+  const Audio({super.key, required this.title, required this.desc, required this.audio});
 
   @override
   State<Audio> createState() => _AudioState();
@@ -37,7 +37,7 @@ class _AudioState extends State<Audio> {
         ),
       );
 
-  Future<void> _init() async {
+  /*Future<void> _init() async {
     final audioFileName = 'assets/sounds/sound1.mp3';
     final ByteData data = await rootBundle.load(audioFileName);
 
@@ -54,12 +54,12 @@ class _AudioState extends State<Audio> {
     } catch (e) {
       progressStream.addError(e);
     }
-  }
+  }*/
 
   @override
   void initState() {
     super.initState();
-    player = AudioPlayer()..setAsset('assets/sounds/sound1.mp3');
+    player = AudioPlayer()..setAsset(widget.audio);
     //_init();
   }
 
@@ -69,24 +69,31 @@ class _AudioState extends State<Audio> {
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.exercise),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        title: Text(
+          widget.title,
+          maxLines: 2,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Constants.kBlackColor
+          ),
         ),
+        backgroundColor: Constants.sduRedColor,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(
-            widget.desc,
-            textAlign: TextAlign.center,
+          Container(
+            padding: EdgeInsets.fromLTRB(14, 0, 14, 0),
+            child: Text(
+              widget.desc,
+              textAlign: TextAlign.center,
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -117,40 +124,6 @@ class _AudioState extends State<Audio> {
     );
   }
 }
-
-// @override
-// Widget build(BuildContext context) {
-//   return Column(
-//     mainAxisAlignment: MainAxisAlignment.center,
-//     children: [
-//       Container(
-//         height: 150.0,
-//         decoration: BoxDecoration(
-//           color: Colors.white,
-//           borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-//         ),
-//         padding: const EdgeInsets.all(16.0),
-//         width: double.maxFinite,
-//         child: StreamBuilder<WaveformProgress>(
-//           stream: progressStream,
-//           builder: (context, snapshot) {
-//             final progress = snapshot.data?.progress ?? 0.0;
-//             final waveform = snapshot.data?.waveform;
-//             if (waveform == null) {
-//               return const LinearProgressIndicator();
-//             }
-//             return AudioWaveformWidget(
-//               waveform: waveform,
-//               start: Duration.zero,
-//               duration: waveform.duration,
-//             );
-//           },
-//         ),
-//       ),
-//       Controls(player: player),
-//     ],
-//   );
-// }
 
 class PositionData {
   const PositionData(
@@ -221,112 +194,3 @@ class Controls extends StatelessWidget {
         });
   }
 }
-
-// class AudioWaveformWidget extends StatefulWidget {
-//   final Color waveColor;
-//   final double scale;
-//   final double strokeWidth;
-//   final double pixelsPerStep;
-//   final Waveform waveform;
-//   final Duration start;
-//   final Duration duration;
-
-//   const AudioWaveformWidget({
-//     Key? key,
-//     required this.waveform,
-//     required this.start,
-//     required this.duration,
-//     this.waveColor = Colors.blue,
-//     this.scale = 1.0,
-//     this.strokeWidth = 5.0,
-//     this.pixelsPerStep = 8.0,
-//   }) : super(key: key);
-
-//   @override
-//   _AudioWaveformState createState() => _AudioWaveformState();
-// }
-
-// class _AudioWaveformState extends State<AudioWaveformWidget> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return ClipRect(
-//       child: CustomPaint(
-//         painter: AudioWaveformPainter(
-//           waveColor: widget.waveColor,
-//           waveform: widget.waveform,
-//           start: widget.start,
-//           duration: widget.duration,
-//           scale: widget.scale,
-//           strokeWidth: widget.strokeWidth,
-//           pixelsPerStep: widget.pixelsPerStep,
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// class AudioWaveformPainter extends CustomPainter {
-//   final double scale;
-//   final double strokeWidth;
-//   final double pixelsPerStep;
-//   final Paint wavePaint;
-//   final Waveform waveform;
-//   final Duration start;
-//   final Duration duration;
-
-//   AudioWaveformPainter({
-//     required this.waveform,
-//     required this.start,
-//     required this.duration,
-//     Color waveColor = Colors.blue,
-//     this.scale = 1.0,
-//     this.strokeWidth = 5.0,
-//     this.pixelsPerStep = 8.0,
-//   }) : wavePaint = Paint()
-//           ..style = PaintingStyle.stroke
-//           ..strokeWidth = strokeWidth
-//           ..strokeCap = StrokeCap.round
-//           ..color = waveColor;
-
-//   @override
-//   void paint(Canvas canvas, Size size) {
-//     if (duration == Duration.zero) return;
-
-//     double width = size.width;
-//     double height = size.height;
-
-//     final waveformPixelsPerWindow = waveform.positionToPixel(duration).toInt();
-//     final waveformPixelsPerDevicePixel = waveformPixelsPerWindow / width;
-//     final waveformPixelsPerStep = waveformPixelsPerDevicePixel * pixelsPerStep;
-//     final sampleOffset = waveform.positionToPixel(start);
-//     final sampleStart = -sampleOffset % waveformPixelsPerStep;
-//     for (var i = sampleStart.toDouble();
-//         i <= waveformPixelsPerWindow + 1.0;
-//         i += waveformPixelsPerStep) {
-//       final sampleIdx = (sampleOffset + i).toInt();
-//       final x = i / waveformPixelsPerDevicePixel;
-//       final minY = normalise(waveform.getPixelMin(sampleIdx), height);
-//       final maxY = normalise(waveform.getPixelMax(sampleIdx), height);
-//       canvas.drawLine(
-//         Offset(x + strokeWidth / 2, max(strokeWidth * 0.75, minY)),
-//         Offset(x + strokeWidth / 2, min(height - strokeWidth * 0.75, maxY)),
-//         wavePaint,
-//       );
-//     }
-//   }
-
-//   @override
-//   bool shouldRepaint(covariant AudioWaveformPainter oldDelegate) {
-//     return false;
-//   }
-
-//   double normalise(int s, double height) {
-//     if (waveform.flags == 0) {
-//       final y = 32768 + (scale * s).clamp(-32768.0, 32767.0).toDouble();
-//       return height - 1 - y * height / 65536;
-//     } else {
-//       final y = 128 + (scale * s).clamp(-128.0, 127.0).toDouble();
-//       return height - 1 - y * height / 256;
-//     }
-//   }
-// }

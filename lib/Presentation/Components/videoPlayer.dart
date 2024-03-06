@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../Domain/Event.dart';
 import 'Constants.dart';
 
@@ -14,13 +13,16 @@ class VideoPlayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(event.title as String),
-        /*leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),*/
+        title: Text(
+          event.title as String,
+          maxLines: 2,
+          style: TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.bold,
+            color: Constants.kBlackColor,
+          ),
+        ),
+        backgroundColor: Constants.sduRedColor,
       ),
       body: SingleChildScrollView(
         // Lige nu fucker den når man sætter videoen i fullscreen. Det skal fixes på en måde

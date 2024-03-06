@@ -25,7 +25,7 @@ class borderCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 76,
-        margin: EdgeInsets.fromLTRB(20, 6, 20, 6),
+        margin: EdgeInsets.fromLTRB(20, 4, 20, 6),
         child: Card(
           color: Constants.sduGreyColor,
           child: ClipRRect(
