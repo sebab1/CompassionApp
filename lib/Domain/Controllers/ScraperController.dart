@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:chaleno/chaleno.dart';
 import 'package:compassion_app/Domain/Event.dart';
-import 'package:compassion_app/Domain/IScraperController.dart';
+import 'package:compassion_app/Domain/Controllers/IScraperController.dart';
 
 class ScraperController {
   Future<List<Event>> initScraper() async {

@@ -1,4 +1,4 @@
-import 'package:compassion_app/Domain/ScraperController.dart';
+import 'package:compassion_app/Domain/Controllers/ScraperController.dart';
 import 'package:compassion_app/Presentation/Components/borderCard.dart';
 import 'package:compassion_app/Presentation/Components/constants.dart';
 import 'package:flutter/cupertino.dart';
