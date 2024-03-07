@@ -15,10 +15,6 @@ void main() {
     DeviceOrientation.portraitUp,
   ]);
 
-  var sql = SqlDatabase();
-  var cl;
-  sql.init().then((value) => JournalController(sql).getJournals());
-
   runApp(const MyApp());
 }
 

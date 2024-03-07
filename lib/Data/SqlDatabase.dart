@@ -34,7 +34,7 @@ class SqlDatabase implements ISqlDatabase {
     //Insert data into entries table
     await db.insert('entries', {'date': DateTime.now().millisecondsSinceEpoch});
 
-    await db.insert('entries', {'date': DateTime.now().millisecondsSinceEpoch});
+    //await db.insert('entries', {'date': DateTime.now().millisecondsSinceEpoch});
 
     //Insert data into activity journal table
     await db.insert(
@@ -46,10 +46,10 @@ class SqlDatabase implements ISqlDatabase {
       'intention_desc': 'intention 1, intention 2, intention 3'
     });
 
-    await db.insert('intentionJournal', {
-      'entry_id': 2,
-      'intention_desc': 'intention 4, intention 5, intention 6'
-    });
+    // await db.insert('intentionJournal', {
+    //   'entry_id': 2,
+    //   'intention_desc': 'intention 4, intention 5, intention 6'
+    // });
   }
 
   @override
@@ -63,7 +63,7 @@ class SqlDatabase implements ISqlDatabase {
     final q3 = await db.rawQuery('SELECT * FROM entries');
     // print(q1);
     // print(q2);
-    // print(q3);
+    print(q3);
 
     return queryResult;
   }

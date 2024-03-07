@@ -1,9 +1,11 @@
+import 'package:compassion_app/Data/SqlDatabase.dart';
+import 'package:compassion_app/Domain/Controllers/JournalController.dart';
+import 'package:compassion_app/Domain/JournalEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '/Presentation/Components/constants.dart';
-
 
 class JournalNew extends StatefulWidget {
   const JournalNew({Key? key}) : super(key: key);
@@ -13,6 +15,8 @@ class JournalNew extends StatefulWidget {
 }
 
 class _JournalNewState extends State<JournalNew> {
+  Map<DateTime, List<JournalEvent>> selectedEvents = {};
+
   DateTime today = DateTime.now();
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
@@ -27,9 +31,22 @@ class _JournalNewState extends State<JournalNew> {
     });
   }
 
+  Future<Map<DateTime, List<JournalEvent>>> getData() async {
+    var sql = SqlDatabase();
+    await sql.init();
+    return await JournalController(sql).getJournals();
+  }
+
+  List<JournalEvent> _getEventsForDay(DateTime day) {
+    return selectedEvents[day] ?? [];
+  }
+
   @override
   void initState() {
     super.initState();
+
+    getData().then((value) => selectedEvents = value);
+
     _journalController = TextEditingController();
     _intentionController1 = TextEditingController();
     _intentionController2 = TextEditingController();
@@ -91,6 +108,9 @@ class _JournalNewState extends State<JournalNew> {
                     _onDaySelected(selectedDay, focusedDay);
                   }
                 },
+                eventLoader: (day) {
+                  return _getEventsForDay(day);
+                },
                 //enabledDayPredicate: (day) => true,
                 calendarStyle: const CalendarStyle(
                   todayTextStyle: TextStyle(
@@ -117,8 +137,10 @@ class _JournalNewState extends State<JournalNew> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Din dagbog for d. " + DateFormat('dd/MM').format(_selectedDay),
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+                  "Din dagbog for d. " +
+                      DateFormat('dd/MM').format(_selectedDay),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.normal),
                 ),
               ),
             ),
@@ -127,7 +149,12 @@ class _JournalNewState extends State<JournalNew> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Vis journal/event tekst fra den valgte dag her",
+                  isCurrentDaySelected
+                      ? _getEventsForDay(DateTime.fromMillisecondsSinceEpoch(
+                              1709732102314))
+                          .length
+                          .toString()
+                      : '',
                 ),
               ),
             ),
@@ -136,8 +163,10 @@ class _JournalNewState extends State<JournalNew> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Dine intentioner for d. " + DateFormat('dd/MM').format(_selectedDay),
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+                  "Dine intentioner for d. " +
+                      DateFormat('dd/MM').format(_selectedDay),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.normal),
                 ),
               ),
             ),
@@ -154,65 +183,69 @@ class _JournalNewState extends State<JournalNew> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: isCurrentDaySelected ? () {
-                    debugPrint("Pressed");
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: Text('Tilføj dagbog for i dag'),
-                        content: TextFormField(
-                          controller: _journalController,
-                          maxLines: 6,
-                          decoration: InputDecoration(
-                            hintText: 'Skriv din dagbog her... ✏️',
-                          ),
-                        ),
-                        actions: [
-                          // Add any actions/buttons here
-                          TextButton(
-                            child: const Text(
-                              'Luk',
-                              style: TextStyle(
-                                color: Constants.kBlackColor, // Text color
-                                fontSize: 16.0, // Font size
-                                // Add more styles as needed
+                  onPressed: isCurrentDaySelected
+                      ? () {
+                          debugPrint("Pressed");
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text('Tilføj dagbog for i dag'),
+                              content: TextFormField(
+                                controller: _journalController,
+                                maxLines: 6,
+                                decoration: InputDecoration(
+                                  hintText: 'Skriv din dagbog her... ✏️',
+                                ),
                               ),
+                              actions: [
+                                // Add any actions/buttons here
+                                TextButton(
+                                  child: const Text(
+                                    'Luk',
+                                    style: TextStyle(
+                                      color:
+                                          Constants.kBlackColor, // Text color
+                                      fontSize: 16.0, // Font size
+                                      // Add more styles as needed
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    _journalController.clear();
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                                TextButton(
+                                  child: const Text(
+                                    'Tilføj',
+                                    style: TextStyle(
+                                      color:
+                                          Constants.kBlackColor, // Text color
+                                      fontSize: 16.0, // Font size
+                                      // Add more styles as needed
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    print(selectedEvents);
+                                    if (_journalController.text.isEmpty) {
+                                      _journalController.clear();
+                                      Navigator.pop(context);
+                                      return;
+                                    } else {
+                                      Navigator.pop(context);
+                                    }
+                                  },
+                                ),
+                              ],
                             ),
-                            onPressed: () {
-                              _journalController.clear();
-                              Navigator.pop(context);
-                            },
-                          ),
-                          TextButton(
-                            child: const Text(
-                              'Tilføj',
-                              style: TextStyle(
-                                color: Constants.kBlackColor, // Text color
-                                fontSize: 16.0, // Font size
-                                // Add more styles as needed
-                              ),
-                            ),
-                            onPressed: () {
-                              if (_journalController.text.isEmpty) {
-                                _journalController.clear();
-                                Navigator.pop(context);
-                                return;
-                              }
-                              else {
-                                Navigator.pop(context);
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                    );
-                  } : null,
+                          );
+                        }
+                      : null,
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
-                      disabledBackgroundColor: Constants.sduGreyColor,
-                      backgroundColor: Constants.sduGoldColor,
+                    disabledBackgroundColor: Constants.sduGreyColor,
+                    backgroundColor: Constants.sduGoldColor,
                   ),
                   child: Text(
                     "Tilføj ny journal",
@@ -224,100 +257,102 @@ class _JournalNewState extends State<JournalNew> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: isCurrentDaySelected ? () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: Text('Tilføj intentioner for i dag'),
-                        content: Column(
-                          children: [
-                            TextFormField(
-                              controller: _intentionController1,
-                              maxLines: 3,
-                              decoration: InputDecoration(
-                                hintText: 'Skriv en intention her... ✏️',
-                                focusedErrorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Constants.sduGoldColor,
+                  onPressed: isCurrentDaySelected
+                      ? () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text('Tilføj intentioner for i dag'),
+                              content: Column(
+                                children: [
+                                  TextFormField(
+                                    controller: _intentionController1,
+                                    maxLines: 3,
+                                    decoration: InputDecoration(
+                                      hintText: 'Skriv en intention her... ✏️',
+                                      focusedErrorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Constants.sduGoldColor,
+                                        ),
+                                      ),
+                                      focusColor: Constants.sduRedColor,
+                                    ),
                                   ),
-                                ),
-                                focusColor: Constants.sduRedColor,
-                              ),
-                            ),
-                            TextFormField(
-                              controller: _intentionController2,
-                              maxLines: 3,
-                              decoration: InputDecoration(
-                                hintText: 'Skriv din anden intention her... ✏️',
-                                focusedErrorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Constants.sduGoldColor,
+                                  TextFormField(
+                                    controller: _intentionController2,
+                                    maxLines: 3,
+                                    decoration: InputDecoration(
+                                      hintText:
+                                          'Skriv din anden intention her... ✏️',
+                                      focusedErrorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Constants.sduGoldColor,
+                                        ),
+                                      ),
+                                      focusColor: Constants.sduRedColor,
+                                    ),
                                   ),
-                                ),
-                                focusColor: Constants.sduRedColor,
-                              ),
-                            ),
-                            TextFormField(
-                              controller: _intentionController3,
-                              maxLines: 3,
-                              decoration: InputDecoration(
-                                hintText: 'Skriv din tredje intention her... ✏️',
-                                focusedErrorBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Constants.sduGoldColor,
+                                  TextFormField(
+                                    controller: _intentionController3,
+                                    maxLines: 3,
+                                    decoration: InputDecoration(
+                                      hintText:
+                                          'Skriv din tredje intention her... ✏️',
+                                      focusedErrorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Constants.sduGoldColor,
+                                        ),
+                                      ),
+                                      focusColor: Constants.sduRedColor,
+                                    ),
                                   ),
+                                ],
+                              ),
+                              actions: [
+                                // Add any actions/buttons here
+                                TextButton(
+                                  child: const Text(
+                                    'Luk',
+                                    style: TextStyle(
+                                      color: Constants.kBlackColor,
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    _intentionController1.clear();
+                                    _intentionController2.clear();
+                                    _intentionController3.clear();
+                                    Navigator.pop(context);
+                                  },
                                 ),
-                                focusColor: Constants.sduRedColor,
-                              ),
+                                TextButton(
+                                  child: const Text(
+                                    'Tilføj',
+                                    style: TextStyle(
+                                      color: Constants.kBlackColor,
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    // Handle 'Tilføj' button press
+                                    if (_intentionController1.text.isEmpty &&
+                                        _intentionController2.text.isEmpty &&
+                                        _intentionController3.text.isEmpty) {
+                                      // Handle case when all three fields are empty
+                                      Navigator.pop(context);
+                                      return;
+                                    } else {
+                                      // Handle the case when at least one field is non-empty
+                                      debugPrint("Lukker uden text");
+                                      Navigator.pop(context);
+                                    }
+                                  },
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                        actions: [
-                          // Add any actions/buttons here
-                          TextButton(
-                            child: const Text(
-                              'Luk',
-                              style: TextStyle(
-                                color: Constants.kBlackColor,
-                                fontSize: 16.0,
-                              ),
-                            ),
-                            onPressed: () {
-                              _intentionController1.clear();
-                              _intentionController2.clear();
-                              _intentionController3.clear();
-                              Navigator.pop(context);
-                            },
-                          ),
-                          TextButton(
-                            child: const Text(
-                              'Tilføj',
-                              style: TextStyle(
-                                color: Constants.kBlackColor,
-                                fontSize: 16.0,
-                              ),
-                            ),
-                            onPressed: () {
-                              // Handle 'Tilføj' button press
-                              if (_intentionController1.text.isEmpty &&
-                                  _intentionController2.text.isEmpty &&
-                                  _intentionController3.text.isEmpty) {
-                                // Handle case when all three fields are empty
-                                Navigator.pop(context);
-                                return;
-                              }
-                              else {
-                                // Handle the case when at least one field is non-empty
-                                debugPrint("Lukker uden text");
-                                Navigator.pop(context);
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-
-                    );
-                  } : null,
+                          );
+                        }
+                      : null,
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
@@ -326,7 +361,7 @@ class _JournalNewState extends State<JournalNew> {
                     backgroundColor: Constants.sduGoldColor,
                   ),
                   child: Text(
-                      "Tilføj nye intentioner",
+                    "Tilføj nye intentioner",
                     style: TextStyle(
                       color: isCurrentDaySelected
                           ? Constants.kBlackColor // Text color when enabled
@@ -336,7 +371,7 @@ class _JournalNewState extends State<JournalNew> {
                 ),
               ],
             ),
-            //Text("Get selected day: " + _selectedDay.toString()),
+            Text("Get selected day: " + _selectedDay.toString()),
             //Text("Current day?: " + isCurrentDaySelected.toString()),
             SizedBox(height: 20), // Add some space
           ],

@@ -10,17 +10,21 @@ class JournalController implements IJournalController {
   JournalController(this.database);
 
   @override
-  Future<Map<DateTime, JournalEvent>> getJournals() async {
+  Future<Map<DateTime, List<JournalEvent>>> getJournals() async {
     final data = await database.readJournalEvents();
     var map = Map.fromIterable(data,
         key: (element) =>
             new DateTime.fromMillisecondsSinceEpoch(element['date']),
-        value: (element) =>
-            JournalEvent(element['intention_desc'], element['activity_desc']));
+        value: (element) {
+          List<JournalEvent> list = [];
+          list.add(JournalEvent(
+              element['intention_desc'], element['activity_desc']));
+          return list;
+        });
 
-    map.forEach((key, value) {
-      print(value.toString());
-    });
+    // map.forEach((key, value) {
+    //   print(value.toString());
+    // });
 
     return map;
   }
