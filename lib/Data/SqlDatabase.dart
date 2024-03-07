@@ -57,12 +57,12 @@ class SqlDatabase implements ISqlDatabase {
     final queryResult = await db.rawQuery(
         'SELECT entries.date, activityJournal.activity_desc, intentionJournal.intention_desc FROM "entries" FULL JOIN activityJournal ON activityJournal.entry_id = entries.entry_id FULL JOIN intentionJournal ON intentionJournal.entry_id = entries.entry_id');
 
-    //print(queryResult);
+    print(queryResult);
     final q1 = await db.rawQuery('SELECT * FROM activityJournal');
     final q2 = await db.rawQuery('SELECT * FROM intentionJournal');
     final q3 = await db.rawQuery('SELECT * FROM entries');
-    // print(q1);
-    // print(q2);
+    print(q1);
+    print(q2);
     print(q3);
 
     return queryResult;
@@ -74,6 +74,18 @@ class SqlDatabase implements ISqlDatabase {
         'activityJournal', {'entry_id': entryID, 'activity_desc': content});
 
     return query;
+  }
+
+  Future<int> insert(String intention, String content, int entryID) async {
+    print('Inserting data for activity journal');
+    // final query1 = await db
+    //     .insert('entries', {'date': DateTime.now().millisecondsSinceEpoch});
+    final query2 = await db.insert(
+        'intentionJournal', {'entry_id': entryID, 'intention_desc': intention});
+    final query3 = await db.insert(
+        'activityJournal', {'entry_id': entryID, 'activity_desc': content});
+
+    return query3;
   }
 
   Future<int> deleteData(String table, int entryID) async {
