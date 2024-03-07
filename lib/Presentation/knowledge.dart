@@ -10,8 +10,8 @@ import '/Presentation/Components/Card.dart';
 class Knowledge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    String longSampleText =
-        "Tekst om viden-sektionen og hvad man kan finde her. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non sagittis risus, eget condimentum est. Donec sit amet rhoncus tellus. Duis ac ultrices massa. Sed lacinia ante eu eros congue ullamcorper. Mauris maximus dapibus fermentum. Ut maximus risus blandit nulla posuere porttitor. Vestibulum bibendum pretium odio a blandit.";
+    String textDesc =
+        "I denne sektion finder du en masse materialer omhandlende compassion og self-compassion, samt inspiration til hvordan andre mennesker vælge at omfavne det i deres liv og hverdag.";
 
     return MaterialApp(
       theme: ThemeData(
@@ -33,17 +33,20 @@ class Knowledge extends StatelessWidget {
         body: Center(
           child: Column(children: [
             Container(
-              padding: EdgeInsets.fromLTRB(20, 25, 20, 25),
+              padding: EdgeInsets.fromLTRB(20, 25, 20, 10),
               child: Text(
-                longSampleText,
-                style: TextStyle(color: Constants.kBlackColor),
+                textDesc,
+                style: TextStyle(
+                  color: Constants.kBlackColor,
+                  fontSize: 16
+                ),
               ),
             ),
             CardWidget(
               title: "Kollegacafé",
-              titleSize: 30,
+              titleSize: 24,
               subtitle:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim lectus leo, vitae.",
+                  "Vær med til at udvikle en langtidsholdbar kultur for sundhedspersonale via kollegacafé.",
               iconData: CupertinoIcons.airplane,
               onTap: () {
                 debugPrint("Tabbed: Kollegacafé");
@@ -57,7 +60,7 @@ class Knowledge extends StatelessWidget {
               title: "Om compassion",
               titleSize: 24,
               subtitle:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim lectus leo, vitae.",
+                  "Bliv klogere på de mange facetter af compassion og hvordan det kan gavne dig og folk omkring dig.",
               iconData: CupertinoIcons.airplane,
               onTap: () {
                 debugPrint("Tabbed: Om compassion");

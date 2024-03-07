@@ -48,7 +48,7 @@ class CardWidget extends StatelessWidget {
               ),
               Container(
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
+                  padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
                   child: Column(
                     crossAxisAlignment:
                         CrossAxisAlignment.start, // Align text to the left
@@ -62,14 +62,14 @@ class CardWidget extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.fromLTRB(0, 0, 12, 0),
+                        //padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                         width: 200,
                         child: Text(
                           subtitle,
                           textAlign: TextAlign.left,
                           style: TextStyle(color: Constants.kBlackColor),
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
+                          maxLines: 4,
                         ),
                       ),
                     ],

@@ -14,7 +14,7 @@ class Training extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String textDesc =
-        "I Center for Compassion forsøger vi at udbrede kendskabet til compassion gennem et bredt udvalg af aktiviteter, kurser, meditationer og øvelser der bidrager til din udvikling.";
+        "I Center for Compassion forsøger vi at udbrede kendskabet til compassion gennem et bredt udvalg af aktiviteter, værktøjer, meditationer og øvelser der bidrager til din udvikling.";
 
     return Scaffold(
       appBar: AppBar(
@@ -32,7 +32,7 @@ class Training extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.fromLTRB(20, 25, 20, 25),
+              padding: EdgeInsets.fromLTRB(20, 25, 20, 10),
               child: Text(
                 textDesc,
                 style: TextStyle(
@@ -43,7 +43,7 @@ class Training extends StatelessWidget {
             ),
             CardWidget(
               title: "Meditationer",
-              titleSize: 30,
+              titleSize: 24,
               subtitle:
               "Meditation kan styrke compassion ved at skærpe opmærksomheden på ens egne følelser og andres lidelse, hvilket kan føre til øget empati og medfølelse.",
               iconData: CupertinoIcons.airplane,
@@ -56,9 +56,9 @@ class Training extends StatelessWidget {
             ),
             CardWidget(
               title: "Øvelser",
-              titleSize: 30,
+              titleSize: 24,
               subtitle:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim lectus leo, vitae.",
+              "Styrk dit kendskab til compassion gennem en række øvelser du selv kan udføre.",
               iconData: CupertinoIcons.airplane,
               onTap: () {
                 Navigator.push(
@@ -69,9 +69,9 @@ class Training extends StatelessWidget {
             ),
             CardWidget(
               title: "Dagbog",
-              titleSize: 30,
+              titleSize: 24,
               subtitle:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dignissim lectus leo, vitae.",
+              "Beskriv dagen dagbogskalenderen, eller sæt nogle positive intentioner for din dag.",
               iconData: CupertinoIcons.airplane,
               onTap: () {
                 Navigator.push(
