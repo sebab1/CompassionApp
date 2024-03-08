@@ -32,9 +32,9 @@ class SqlDatabase implements ISqlDatabase {
 
     print('inserting data into tables');
     //Insert data into entries table
-    await db.insert('entries', {'date': DateTime.now().millisecondsSinceEpoch});
+    await db.insert('entries', {'date': 1709732102314});
 
-    //await db.insert('entries', {'date': DateTime.now().millisecondsSinceEpoch});
+    await db.insert('entries', {'date': 1709815880812});
 
     //Insert data into activity journal table
     await db.insert(
@@ -55,7 +55,7 @@ class SqlDatabase implements ISqlDatabase {
   @override
   Future<List<Map<String, Object?>>> readJournalEvents() async {
     final queryResult = await db.rawQuery(
-        'SELECT entries.date, activityJournal.activity_desc, intentionJournal.intention_desc FROM "entries" FULL JOIN activityJournal ON activityJournal.entry_id = entries.entry_id FULL JOIN intentionJournal ON intentionJournal.entry_id = entries.entry_id');
+        'SELECT activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc FROM "entries" FULL JOIN activityJournal ON activityJournal.entry_id = entries.entry_id FULL JOIN intentionJournal ON intentionJournal.entry_id = entries.entry_id');
 
     print(queryResult);
     final q1 = await db.rawQuery('SELECT * FROM activityJournal');
@@ -98,4 +98,23 @@ class SqlDatabase implements ISqlDatabase {
 
   Future<void> deleteDatabase() async =>
       databaseFactory.deleteDatabase(await getDatabasesPath());
+
+  @override
+  Future<void> addActivity(int entryID, String content) async {
+    String prompt =
+        'INSERT INTO activityJournal(activity_id, activity_desc) VALUES(?,?) ON CONFLICT(activity_id) DO UPDATE SET activity_desc = excluded.activity_desc';
+    final execute = await db.rawInsert(prompt, [entryID, content]);
+    print('new activity: $execute');
+  }
+
+  Future<int> addEntry(DateTime time) async {
+    final prompt =
+        await db.insert('entries', {'date': time.millisecondsSinceEpoch});
+    print(prompt);
+
+    return prompt;
+  }
+
+  @override
+  Future<void> addIntention(int entryID, String content) async {}
 }

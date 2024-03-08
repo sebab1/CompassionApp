@@ -16,6 +16,7 @@ class JournalNew extends StatefulWidget {
 
 class _JournalNewState extends State<JournalNew> {
   Map<String, List<JournalEvent>>? selectedEvents;
+  late SqlDatabase sql;
 
   DateTime today = DateTime.now();
   DateTime _selectedDay = DateTime.now();
@@ -32,7 +33,7 @@ class _JournalNewState extends State<JournalNew> {
   }
 
   Future<Map<String, List<JournalEvent>>> getData() async {
-    var sql = SqlDatabase();
+    sql = SqlDatabase();
     await sql.init();
     // sql.insert('intention 4, intention 5, intention 6', 'ølbong', 2);
     //sql.deleteData('intentionJournal', 2);
@@ -195,7 +196,7 @@ class _JournalNewState extends State<JournalNew> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: isCurrentDaySelected
+                    onPressed: true
                         ? () {
                             debugPrint("Pressed");
                             showDialog(
@@ -237,12 +238,24 @@ class _JournalNewState extends State<JournalNew> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      print(selectedEvents);
                                       if (_journalController.text.isEmpty) {
                                         _journalController.clear();
                                         Navigator.pop(context);
                                         return;
                                       } else {
+                                        int? id = _getEventsForDay(_selectedDay)
+                                                    .length !=
+                                                0
+                                            ? _getEventsForDay(_selectedDay)
+                                                .first
+                                                .journal_ID
+                                            : null;
+                                        print(id);
+                                        if (id == null) {
+                                          sql.addEntry(_selectedDay);
+                                        } else {
+                                          //sql.addActivity(entryID, content)
+                                        }
                                         Navigator.pop(context);
                                       }
                                     },
@@ -359,6 +372,7 @@ class _JournalNewState extends State<JournalNew> {
                                         return;
                                       } else {
                                         // Handle the case when at least one field is non-empty
+
                                         debugPrint("Lukker uden text");
                                         Navigator.pop(context);
                                       }

@@ -20,8 +20,8 @@ class JournalController implements IJournalController {
       return dateFormat;
     }, value: (element) {
       List<JournalEvent> list = [];
-      list.add(
-          JournalEvent(element['intention_desc'], element['activity_desc']));
+      list.add(JournalEvent(element['intention_desc'], element['activity_desc'],
+          element['activity_id'], element['intention_id']));
       return list;
     });
 
