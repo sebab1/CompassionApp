@@ -22,7 +22,7 @@ class SqlDatabase implements ISqlDatabase {
     String entriesTable =
         'CREATE TABLE IF NOT EXISTS entries(entry_id INTEGER PRIMARY KEY AUTOINCREMENT, date INTEGER NOT NULL)';
     String activityJournalTable =
-        'CREATE TABLE IF NOT EXISTS activityJournal(activity_id INTEGER PRIMARY KEY AUTOINCREMENT, entry_id INTEGER NOT NULL, activity_desc TEXT NOT NULL, FOREIGN KEY (entry_id) REFERENCES entries)';
+        'CREATE TABLE IF NOT EXISTS activityJournal(activity_id INTEGER PRIMARY KEY AUTOINCREMENT, entry_id INTEGER NOT NULL UNIQUE, activity_desc TEXT NOT NULL, FOREIGN KEY (entry_id) REFERENCES entries)';
     String intentionTable =
         'CREATE TABLE IF NOT EXISTS intentionJournal(intention_id INTEGER PRIMARY KEY AUTOINCREMENT, entry_id INTEGER NOT NULL, intention_desc TEXT NOT NULL, FOREIGN KEY (entry_id) REFERENCES entries)';
 
@@ -55,14 +55,14 @@ class SqlDatabase implements ISqlDatabase {
   @override
   Future<List<Map<String, Object?>>> readJournalEvents() async {
     final queryResult = await db.rawQuery(
-        'SELECT activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc FROM "entries" FULL JOIN activityJournal ON activityJournal.entry_id = entries.entry_id FULL JOIN intentionJournal ON intentionJournal.entry_id = entries.entry_id');
+        'SELECT entries.entry_id, activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc FROM "entries" FULL JOIN activityJournal ON activityJournal.entry_id = entries.entry_id FULL JOIN intentionJournal ON intentionJournal.entry_id = entries.entry_id');
 
-    print(queryResult);
+    print('data: $queryResult');
     final q1 = await db.rawQuery('SELECT * FROM activityJournal');
     final q2 = await db.rawQuery('SELECT * FROM intentionJournal');
     final q3 = await db.rawQuery('SELECT * FROM entries');
-    print(q1);
-    print(q2);
+    // print(q1);
+    // print(q2);
     print(q3);
 
     return queryResult;
@@ -102,7 +102,7 @@ class SqlDatabase implements ISqlDatabase {
   @override
   Future<void> addActivity(int entryID, String content) async {
     String prompt =
-        'INSERT INTO activityJournal(activity_id, activity_desc) VALUES(?,?) ON CONFLICT(activity_id) DO UPDATE SET activity_desc = excluded.activity_desc';
+        'INSERT INTO activityJournal(entry_id, activity_desc) VALUES(?,?) ON CONFLICT(activityJournal.entry_id) DO UPDATE SET activity_desc = excluded.activity_desc';
     final execute = await db.rawInsert(prompt, [entryID, content]);
     print('new activity: $execute');
   }
@@ -110,7 +110,7 @@ class SqlDatabase implements ISqlDatabase {
   Future<int> addEntry(DateTime time) async {
     final prompt =
         await db.insert('entries', {'date': time.millisecondsSinceEpoch});
-    print(prompt);
+    print('addEntry: $prompt');
 
     return prompt;
   }

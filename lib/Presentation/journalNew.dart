@@ -35,8 +35,7 @@ class _JournalNewState extends State<JournalNew> {
   Future<Map<String, List<JournalEvent>>> getData() async {
     sql = SqlDatabase();
     await sql.init();
-    // sql.insert('intention 4, intention 5, intention 6', 'ølbong', 2);
-    //sql.deleteData('intentionJournal', 2);
+
     return await JournalController(sql).getJournals();
   }
 
@@ -196,7 +195,7 @@ class _JournalNewState extends State<JournalNew> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: true
+                    onPressed: isCurrentDaySelected
                         ? () {
                             debugPrint("Pressed");
                             showDialog(
@@ -243,18 +242,20 @@ class _JournalNewState extends State<JournalNew> {
                                         Navigator.pop(context);
                                         return;
                                       } else {
-                                        int? id = _getEventsForDay(_selectedDay)
-                                                    .length !=
-                                                0
-                                            ? _getEventsForDay(_selectedDay)
-                                                .first
-                                                .journal_ID
-                                            : null;
-                                        print(id);
-                                        if (id == null) {
+                                        int? entry_id =
+                                            _getEventsForDay(_selectedDay)
+                                                    .isNotEmpty
+                                                ? _getEventsForDay(_selectedDay)
+                                                    .first
+                                                    .entry_ID
+                                                : null;
+                                        print('pressed: $entry_id');
+                                        if (entry_id == null) {
                                           sql.addEntry(_selectedDay);
                                         } else {
-                                          //sql.addActivity(entryID, content)
+                                          String content =
+                                              _journalController.text;
+                                          sql.addActivity(entry_id, content);
                                         }
                                         Navigator.pop(context);
                                       }
