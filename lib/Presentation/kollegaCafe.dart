@@ -3,6 +3,7 @@ import 'package:compassion_app/Presentation/Components/borderCard.dart';
 import 'package:compassion_app/Presentation/Components/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'Components/videoPlayer.dart';
 import 'Components/littleCard.dart';
 
@@ -23,6 +24,16 @@ class _KollegaCafeState extends State<KollegaCafe> {
     var sc = ScraperController();
     events = sc.initScraper();
   }
+
+  // Future<void> _launchUrl(String url) async {
+  //   final Uri uri = Uri(scheme: "https", host: url);
+  //   if(!await launchUrl(
+  //     uri,
+  //     mode: LaunchMode.inAppWebView,
+  //   )) {
+  //     throw "Failed opening the link";
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +57,7 @@ class _KollegaCafeState extends State<KollegaCafe> {
               Container(
                 padding: EdgeInsets.fromLTRB(25, 20, 25, 15),
                 child: const Text(
-                  'Velkommen til Kollegacafé, her finder du information og viden fra tidligere Kollegacaféer, samt et link til fremtidige møder.',
+                  'Velkommen til Kollegacafé, her finder du information og viden fra tidligere Kollegacaféer, samt et link med information om tilmelding og fremtidige møder.',
                   style: TextStyle(
                     color: Constants.kBlackColor,
                     fontSize: 18,
@@ -60,8 +71,12 @@ class _KollegaCafeState extends State<KollegaCafe> {
                   title: "Link til Kollegacafé",
                   iconData: Icons.coffee_rounded,
                   underline: true,
-                  onTap: () {
-                    debugPrint("Tabbed: Dagbog genvej");
+                  onTap: () async {
+                    var url = Uri.https('sdu.dk', '/da/forskning/center_for_compassion/kollegacafe');
+                    if (await canLaunchUrl(url)) {
+                      await launchUrl(url);
+                    }
+                    debugPrint("Clicked link?");
                   },
                   trailingIconData: CupertinoIcons.chevron_forward,
                 ),

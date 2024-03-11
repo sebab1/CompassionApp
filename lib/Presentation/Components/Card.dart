@@ -4,7 +4,7 @@ import '/Presentation/Components/constants.dart';
 import '/Presentation/just_a_class.dart';
 
 class CardWidget extends StatelessWidget {
-  //CardWidget({Key? key}) : super(key: key);
+  // CardWidget({Key? key}) : super(key: key);
 
   final String title;
   final double titleSize;
@@ -38,20 +38,22 @@ class CardWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Container(
-                width: 50,
-                margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
-                child: Icon(
-                  iconData,
-                  size: 60,
+              Flexible(
+                flex: 1, // Adjust this value based on the desired flex ratio
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(24, 0, 10, 0),
+                  child: Icon(
+                    iconData,
+                    size: 60,
+                  ),
                 ),
               ),
-              Container(
+              Flexible(
+                flex: 3, // Adjust this value based on the desired flex ratio
                 child: Container(
                   padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
                   child: Column(
-                    crossAxisAlignment:
-                        CrossAxisAlignment.start, // Align text to the left
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         child: Text(
@@ -62,7 +64,6 @@ class CardWidget extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        //padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                         width: 200,
                         child: Text(
                           subtitle,
@@ -76,18 +77,20 @@ class CardWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                width: 50,
-                child: Icon(
-                  CupertinoIcons.chevron_forward,
-                  size: 48,
-                  color: Constants.sduWhiteColor,
-                ),
-                decoration: BoxDecoration(
-                  color: Constants.sduGoldColor,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(11.0),
-                    bottomRight: Radius.circular(11.0),
+              Flexible(
+                flex: 1, // Adjust this value based on the desired flex ratio
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Constants.sduGoldColor,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(11.0),
+                      bottomRight: Radius.circular(11.0),
+                    ),
+                  ),
+                  child: Icon(
+                    CupertinoIcons.chevron_forward,
+                    size: 48,
+                    color: Constants.sduWhiteColor,
                   ),
                 ),
               ),

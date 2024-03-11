@@ -178,17 +178,21 @@ class _JournalNewState extends State<JournalNew> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(20, 0, 0, 22),
+                margin: EdgeInsets.fromLTRB(20, 0, 0, 20),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    _getEventsForDay(_selectedDay).length > 0 &&
-                            _getEventsForDay(_selectedDay).first.intentions !=
-                                null
-                        ? _getEventsForDay(_selectedDay).first.intentions
-                            as String
-                        : 'Ikke udfyldt for denne dato',
-                  ),
+                  child: _getEventsForDay(_selectedDay).length > 0 &&
+                      _getEventsForDay(_selectedDay).first.intentions != null
+                      ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: _getEventsForDay(_selectedDay)
+                        .first
+                        .intentions
+                        !.split(', ')
+                        .map((intention) => Text('• $intention'))
+                        .toList(),
+                  )
+                      : Text('Ikke udfyldt for denne dato'),
                 ),
               ),
               Row(
