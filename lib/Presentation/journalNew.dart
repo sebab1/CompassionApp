@@ -35,8 +35,13 @@ class _JournalNewState extends State<JournalNew> {
   Future<Map<String, List<JournalEvent>>> getData() async {
     sql = SqlDatabase();
     await sql.init();
-
     return await JournalController(sql).getJournals();
+  }
+
+  void refreshData() {
+    getData().then((value) => setState(() {
+          selectedEvents = value;
+        }));
   }
 
   List<JournalEvent> _getEventsForDay(DateTime day) {
@@ -253,14 +258,29 @@ class _JournalNewState extends State<JournalNew> {
                                                     .first
                                                     .entry_ID
                                                 : null;
+                                        String content =
+                                            _journalController.text;
                                         print('pressed: $entry_id');
+                                        print('Activity content: $content');
                                         if (entry_id == null) {
-                                          sql.addEntry(_selectedDay);
+                                          print('new entry');
+                                          sql
+                                              .addEntry(_selectedDay)
+                                              .then((id) => {
+                                                    print('adding activity'),
+                                                    sql
+                                                        .addActivity(
+                                                            id, content)
+                                                        .then((value) =>
+                                                            refreshData())
+                                                  });
                                         } else {
-                                          String content =
-                                              _journalController.text;
-                                          sql.addActivity(entry_id, content);
+                                          print('updating activity');
+                                          sql
+                                              .addActivity(entry_id, content)
+                                              .then((value) => refreshData());
                                         }
+
                                         Navigator.pop(context);
                                       }
                                     },
@@ -361,6 +381,7 @@ class _JournalNewState extends State<JournalNew> {
                                   ),
                                   TextButton(
                                     child: const Text(
+                                      //Knap til intentioner
                                       'Tilføj',
                                       style: TextStyle(
                                         color: Constants.kBlackColor,
@@ -376,9 +397,33 @@ class _JournalNewState extends State<JournalNew> {
                                         Navigator.pop(context);
                                         return;
                                       } else {
-                                        // Handle the case when at least one field is non-empty
-
-                                        debugPrint("Lukker uden text");
+                                        int? entry_id =
+                                            _getEventsForDay(_selectedDay)
+                                                    .isNotEmpty
+                                                ? _getEventsForDay(_selectedDay)
+                                                    .first
+                                                    .entry_ID
+                                                : null;
+                                        String content = [
+                                          _intentionController1.text,
+                                          _intentionController2.text,
+                                          _intentionController3.text
+                                        ].join(',');
+                                        print('pressed: $entry_id');
+                                        print('content: $content');
+                                        if (entry_id == null) {
+                                          print('new entry');
+                                          sql.addEntry(_selectedDay).then(
+                                              (id) => sql
+                                                  .addIntention(id, content)
+                                                  .then((value) =>
+                                                      refreshData()));
+                                        } else {
+                                          print('updating intention');
+                                          sql
+                                              .addIntention(entry_id, content)
+                                              .then((value) => refreshData());
+                                        }
                                         Navigator.pop(context);
                                       }
                                     },
