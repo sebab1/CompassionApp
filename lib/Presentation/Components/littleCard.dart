@@ -10,6 +10,7 @@ class littleCard extends StatelessWidget {
   final IconData? iconData;
   final VoidCallback onTap;
   final double titleSize;
+  final String? customIcon;
 
   const littleCard({
     super.key,
@@ -17,6 +18,7 @@ class littleCard extends StatelessWidget {
     required this.iconData,
     required this.onTap,
     required this.titleSize,
+    this.customIcon,
   });
 
   Widget iconContainer(IconData? icon) {
@@ -32,7 +34,7 @@ class littleCard extends StatelessWidget {
       return Container(
         margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
         child: SvgPicture.asset(
-          'assets/icons/ic_round-looks-5.svg',
+          'assets/icons/$customIcon',
           width: 60,
           height: 60,
         ),
