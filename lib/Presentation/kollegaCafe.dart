@@ -10,7 +10,6 @@ import 'Components/littleCard.dart';
 class KollegaCafe extends StatefulWidget {
   KollegaCafe({super.key});
 
-
   @override
   _KollegaCafeState createState() => _KollegaCafeState();
 }
@@ -72,7 +71,8 @@ class _KollegaCafeState extends State<KollegaCafe> {
                   iconData: Icons.coffee_rounded,
                   underline: true,
                   onTap: () async {
-                    var url = Uri.https('sdu.dk', '/da/forskning/center_for_compassion/kollegacafe');
+                    var url = Uri.https('sdu.dk',
+                        '/da/forskning/center_for_compassion/kollegacafe');
                     if (await canLaunchUrl(url)) {
                       await launchUrl(url);
                     }
@@ -107,6 +107,7 @@ class _KollegaCafeState extends State<KollegaCafe> {
                               child: littleCard(
                                 title: snapshot.data[index].title,
                                 iconData: CupertinoIcons.play_rectangle,
+                                customIcon: null,
                                 onTap: () {
                                   Navigator.push(
                                       context,
