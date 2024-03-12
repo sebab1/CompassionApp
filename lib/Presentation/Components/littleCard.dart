@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import './constants.dart';
 
 class littleCard extends StatelessWidget {
   //const littleCard({super.key});
 
   final String title;
-  final IconData iconData;
+  final IconData? iconData;
   final VoidCallback onTap;
   final double titleSize;
 
@@ -17,6 +18,27 @@ class littleCard extends StatelessWidget {
     required this.onTap,
     required this.titleSize,
   });
+
+  Widget iconContainer(IconData? icon) {
+    if (iconData != null) {
+      return Container(
+        margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
+        child: Icon(
+          iconData,
+          size: 60,
+        ),
+      );
+    } else {
+      return Container(
+        margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
+        child: SvgPicture.asset(
+          'assets/icons/ic_round-looks-5.svg',
+          width: 60,
+          height: 60,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +54,7 @@ class littleCard extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                margin: EdgeInsets.fromLTRB(12, 0, 0, 0),
-                child: Icon(
-                  iconData,
-                  size: 60,
-                ),
-              ),
+              iconContainer(iconData),
               Expanded(
                 child: Center(
                   child: Container(
@@ -47,7 +63,7 @@ class littleCard extends StatelessWidget {
                       title,
                       textAlign: TextAlign.center, // Center align the text
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 3,
+                      maxLines: 4,
                       style: TextStyle(
                           fontSize: titleSize, fontWeight: FontWeight.bold),
                     ),

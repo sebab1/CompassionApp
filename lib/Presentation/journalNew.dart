@@ -187,16 +187,17 @@ class _JournalNewState extends State<JournalNew> {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: _getEventsForDay(_selectedDay).length > 0 &&
-                      _getEventsForDay(_selectedDay).first.intentions != null
+                          _getEventsForDay(_selectedDay).first.intentions !=
+                              null
                       ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: _getEventsForDay(_selectedDay)
-                        .first
-                        .intentions
-                        !.split(', ')
-                        .map((intention) => Text('• $intention'))
-                        .toList(),
-                  )
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: _getEventsForDay(_selectedDay)
+                              .first
+                              .intentions!
+                              .split(';#')
+                              .map((intention) => Text('• $intention'))
+                              .toList(),
+                        )
                       : Text('Ikke udfyldt for denne dato'),
                 ),
               ),
@@ -206,6 +207,12 @@ class _JournalNewState extends State<JournalNew> {
                   ElevatedButton(
                     onPressed: isCurrentDaySelected
                         ? () {
+                            var selected = _getEventsForDay(_selectedDay);
+                            if (selected.isNotEmpty &&
+                                selected.first.journal != null) {
+                              _journalController.text =
+                                  selected.first.journal as String;
+                            }
                             debugPrint("Pressed");
                             showDialog(
                               context: context,
@@ -237,7 +244,7 @@ class _JournalNewState extends State<JournalNew> {
                                   ),
                                   TextButton(
                                     child: const Text(
-                                      'Tilføj',
+                                      'Gem',
                                       style: TextStyle(
                                         color:
                                             Constants.kBlackColor, // Text color
@@ -309,6 +316,27 @@ class _JournalNewState extends State<JournalNew> {
                   ElevatedButton(
                     onPressed: isCurrentDaySelected
                         ? () {
+                            List<JournalEvent> selected =
+                                _getEventsForDay(_selectedDay);
+
+                            List<TextEditingController> intentionsController = [
+                              _intentionController1,
+                              _intentionController2,
+                              _intentionController3
+                            ];
+                            List<String>? intentions =
+                                selected.first.intentions?.split(';#');
+                            if (selected.isNotEmpty && intentions != null) {
+                              for (var i = 0;
+                                  i < intentionsController.length;
+                                  i++) {
+                                TextEditingController c =
+                                    intentionsController[i];
+
+                                c.text = intentions[i];
+                              }
+                            }
+
                             showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
@@ -382,7 +410,7 @@ class _JournalNewState extends State<JournalNew> {
                                   TextButton(
                                     child: const Text(
                                       //Knap til intentioner
-                                      'Tilføj',
+                                      'Gem',
                                       style: TextStyle(
                                         color: Constants.kBlackColor,
                                         fontSize: 16.0,
@@ -408,7 +436,7 @@ class _JournalNewState extends State<JournalNew> {
                                           _intentionController1.text,
                                           _intentionController2.text,
                                           _intentionController3.text
-                                        ].join(',');
+                                        ].join(';#');
                                         print('pressed: $entry_id');
                                         print('content: $content');
                                         if (entry_id == null) {

@@ -39,6 +39,8 @@ dependencies:
   fl_chart: ^0.63.0
   table_calendar: ^3.0.9
 
+  flutter_svg: ^2.0.5
+
   #dependencies for audio related.
   just_audio: ^0.9.36
   rxdart: ^0.27.7
@@ -79,7 +81,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/sounds/
-    #- assets/sounds/sound1.mp3
+    - assets/icons/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

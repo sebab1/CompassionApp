@@ -43,7 +43,7 @@ class SqlDatabase implements ISqlDatabase {
     //Insert data into intention table
     await db.insert('intentionJournal', {
       'entry_id': 1,
-      'intention_desc': 'intention 1, intention 2, intention 3'
+      'intention_desc': 'intention 1;#intention 2;#intention 3'
     });
 
     // await db.insert('intentionJournal', {
@@ -62,7 +62,7 @@ class SqlDatabase implements ISqlDatabase {
     final q2 = await db.rawQuery('SELECT * FROM intentionJournal');
     final q3 = await db.rawQuery('SELECT * FROM entries');
     // print(q1);
-    // print(q2);
+    print(q2);
     // print(q3);
 
     return queryResult;
