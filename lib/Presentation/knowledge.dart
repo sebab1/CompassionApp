@@ -60,7 +60,7 @@ class Knowledge extends StatelessWidget {
               ),
               CardWidget(
                 title: "Om compassion",
-                titleSize: 24,
+                titleSize: 20,
                 subtitle:
                 "Bliv klogere på de mange facetter af compassion og hvordan det kan gavne dig og folk omkring dig.",
                 iconData: CupertinoIcons.airplane,

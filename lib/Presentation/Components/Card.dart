@@ -39,7 +39,7 @@ class CardWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Flexible(
-                flex: 1, // Adjust this value based on the desired flex ratio
+                flex: 2, // Adjust this value based on the desired flex ratio
                 child: Container(
                   margin: EdgeInsets.fromLTRB(24, 0, 10, 0),
                   child: Icon(
