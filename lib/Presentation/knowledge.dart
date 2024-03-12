@@ -42,7 +42,7 @@ class Knowledge extends StatelessWidget {
               titleSize: 24,
               subtitle:
                   "Vær med til at udvikle en langtidsholdbar kultur for sundhedspersonale via kollegacafé.",
-              iconData: CupertinoIcons.airplane,
+              iconPath: 'exercise_brain.svg',
               onTap: () {
                 debugPrint("Tabbed: Kollegacafé");
                 Navigator.push(context,
@@ -54,7 +54,7 @@ class Knowledge extends StatelessWidget {
               titleSize: 20,
               subtitle:
                   "Bliv klogere på de mange facetter af compassion og hvordan det kan gavne dig og folk omkring dig.",
-              iconData: CupertinoIcons.airplane,
+              iconPath: 'exercise_brain.svg',
               onTap: () {
                 debugPrint("Tabbed: Om compassion");
                 Navigator.push(

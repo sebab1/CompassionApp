@@ -44,8 +44,8 @@ class Training extends StatelessWidget {
                 title: "Meditationer",
                 titleSize: 24,
                 subtitle:
-                "Meditation kan styrke compassion ved at skærpe opmærksomheden på ens egne følelser og andres lidelse, hvilket kan føre til øget empati og medfølelse.",
-                iconData: CupertinoIcons.airplane,
+                    "Meditation kan styrke compassion ved at skærpe opmærksomheden på ens egne følelser og andres lidelse, hvilket kan føre til øget empati og medfølelse.",
+                iconPath: 'solar_meditation-round-outline.svg',
                 onTap: () {
                   Navigator.push(
                     context,
@@ -57,8 +57,8 @@ class Training extends StatelessWidget {
                 title: "Øvelser",
                 titleSize: 24,
                 subtitle:
-                "Styrk dit kendskab til compassion gennem en række øvelser du selv kan udføre.",
-                iconData: CupertinoIcons.airplane,
+                    "Styrk dit kendskab til compassion gennem en række øvelser du selv kan udføre.",
+                iconPath: 'exercise_brain.svg',
                 onTap: () {
                   Navigator.push(
                     context,
@@ -70,8 +70,8 @@ class Training extends StatelessWidget {
                 title: "Dagbog",
                 titleSize: 24,
                 subtitle:
-                "Beskriv dagen dagbogskalenderen, eller sæt nogle positive intentioner for din dag.",
-                iconData: CupertinoIcons.airplane,
+                    "Beskriv dagen dagbogskalenderen, eller sæt nogle positive intentioner for din dag.",
+                iconPath: 'exercise_brain.svg',
                 onTap: () {
                   Navigator.push(
                     context,

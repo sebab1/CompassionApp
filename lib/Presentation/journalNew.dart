@@ -99,7 +99,7 @@ class _JournalNewState extends State<JournalNew> {
                 padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
                 child: TableCalendar(
                   startingDayOfWeek: StartingDayOfWeek.monday,
-                  locale: 'en_US',
+                  locale: 'da_DK',
                   availableGestures: AvailableGestures.all,
                   headerStyle: const HeaderStyle(
                     formatButtonVisible: false,
@@ -219,6 +219,7 @@ class _JournalNewState extends State<JournalNew> {
                               builder: (context) => AlertDialog(
                                 title: Text('Tilføj dagbog for i dag'),
                                 content: TextFormField(
+                                  autofocus: true,
                                   controller: _journalController,
                                   maxLines: 6,
                                   decoration: InputDecoration(
@@ -344,6 +345,7 @@ class _JournalNewState extends State<JournalNew> {
                                 content: Column(
                                   children: [
                                     TextFormField(
+                                      autofocus: true,
                                       controller: _intentionController1,
                                       maxLines: 1,
                                       decoration: InputDecoration(

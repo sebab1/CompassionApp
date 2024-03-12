@@ -5,7 +5,7 @@ class CardData {
   String desc;
   String audioPath;
   IconData? icon;
-  String customIcon;
+  String? customIcon;
 
   CardData(this.title, this.desc, this.audioPath, this.icon, this.customIcon);
 }

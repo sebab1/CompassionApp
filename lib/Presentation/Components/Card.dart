@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import '/Presentation/Components/constants.dart';
 import '/Presentation/just_a_class.dart';
 
@@ -9,7 +10,7 @@ class CardWidget extends StatelessWidget {
   final String title;
   final double titleSize;
   final String subtitle;
-  final IconData iconData;
+  final String iconPath;
   final VoidCallback onTap;
 
   const CardWidget({
@@ -17,7 +18,7 @@ class CardWidget extends StatelessWidget {
     required this.title,
     required this.titleSize,
     required this.subtitle,
-    required this.iconData,
+    required this.iconPath,
     required this.onTap,
   });
 
@@ -29,73 +30,73 @@ class CardWidget extends StatelessWidget {
         height: 130,
         margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
         child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(11.0),
-          ),
-          elevation: 7,
-          color: Constants.sduGreyColor,
-          child: Row(
-            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                flex: 2,
-                child: Container(
-                  padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
-                  child: Icon(
-                    iconData,
-                    size: 60,
-                  ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(11.0),
+            ),
+            elevation: 7,
+            color: Constants.sduGreyColor,
+            child: Row(
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                      padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                      child: SvgPicture.asset(
+                        'assets/icons/$iconPath',
+                        height: 60,
+                        width: 60,
+                      )),
                 ),
-              ),
-              Expanded(
-                flex: 5,
-                child: Container(
-                  padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        child: Text(
-                          title,
-                          style: TextStyle(
-                              fontSize: titleSize, fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.left,
+                Expanded(
+                  flex: 5,
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: Text(
+                            title,
+                            style: TextStyle(
+                                fontSize: titleSize,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.left,
+                          ),
                         ),
-                      ),
-                      Container(
-                        child: Text(
-                          subtitle,
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: Constants.kBlackColor),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 4,
+                        Container(
+                          child: Text(
+                            subtitle,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(color: Constants.kBlackColor),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 4,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Constants.sduGoldColor,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(11.0),
-                      bottomRight: Radius.circular(11.0),
+                      ],
                     ),
                   ),
-                  child: Icon(
-                    CupertinoIcons.chevron_forward,
-                    size: 48,
-                    color: Constants.sduWhiteColor,
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Constants.sduGoldColor,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(11.0),
+                        bottomRight: Radius.circular(11.0),
+                      ),
+                    ),
+                    child: Icon(
+                      CupertinoIcons.chevron_forward,
+                      size: 48,
+                      color: Constants.sduWhiteColor,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          )
-        ),
+              ],
+            )),
       ),
     );
   }
