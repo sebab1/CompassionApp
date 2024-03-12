@@ -46,7 +46,7 @@ class littleCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 86,
+        height: 80,
         margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
         child: Card(
           color: Constants.sduGreyColor,
@@ -63,9 +63,11 @@ class littleCard extends StatelessWidget {
                       title,
                       textAlign: TextAlign.center, // Center align the text
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 4,
+                      maxLines: 3,
                       style: TextStyle(
-                          fontSize: titleSize, fontWeight: FontWeight.bold),
+                          fontSize: titleSize,
+                          //fontWeight: FontWeight.bold
+                      ),
                     ),
                   ),
                 ),

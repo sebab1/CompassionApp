@@ -35,21 +35,21 @@ class CardWidget extends StatelessWidget {
           elevation: 7,
           color: Constants.sduGreyColor,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Flexible(
-                flex: 2, // Adjust this value based on the desired flex ratio
+              Expanded(
+                flex: 2,
                 child: Container(
-                  margin: EdgeInsets.fromLTRB(24, 0, 10, 0),
+                  padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
                   child: Icon(
                     iconData,
                     size: 60,
                   ),
                 ),
               ),
-              Flexible(
-                flex: 3, // Adjust this value based on the desired flex ratio
+              Expanded(
+                flex: 5,
                 child: Container(
                   padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
                   child: Column(
@@ -64,7 +64,6 @@ class CardWidget extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        width: 200,
                         child: Text(
                           subtitle,
                           textAlign: TextAlign.left,
@@ -77,8 +76,8 @@ class CardWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Flexible(
-                flex: 1, // Adjust this value based on the desired flex ratio
+              Expanded(
+                flex: 1,
                 child: Container(
                   decoration: BoxDecoration(
                     color: Constants.sduGoldColor,
@@ -95,7 +94,7 @@ class CardWidget extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          )
         ),
       ),
     );

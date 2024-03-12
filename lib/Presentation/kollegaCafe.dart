@@ -40,7 +40,7 @@ class _KollegaCafeState extends State<KollegaCafe> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Kollegacaféer',
+          'Kollegacafé',
           style: TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.bold,
@@ -60,7 +60,7 @@ class _KollegaCafeState extends State<KollegaCafe> {
                   'Velkommen til Kollegacafé, her finder du information og viden fra tidligere Kollegacaféer, samt et link med information om tilmelding og fremtidige møder.',
                   style: TextStyle(
                     color: Constants.kBlackColor,
-                    fontSize: 18,
+                    fontSize: 14,
                     fontWeight: FontWeight.normal,
                   ),
                 ),
@@ -82,7 +82,7 @@ class _KollegaCafeState extends State<KollegaCafe> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(25, 20, 25, 15),
+                padding: EdgeInsets.fromLTRB(25, 20, 25, 8),
                 child: const Text(
                   'Tidligere møder',
                   style: TextStyle(

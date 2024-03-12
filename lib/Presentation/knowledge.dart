@@ -13,67 +13,57 @@ class Knowledge extends StatelessWidget {
     String textDesc =
         "I denne sektion finder du en masse materialer omhandlende compassion og self-compassion, samt inspiration til hvordan andre mennesker vælge at omfavne det i deres liv og hverdag.";
 
-    return MaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: Constants.kWhiteColor,
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle.dark,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Viden',
+          style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Constants.kBlackColor),
         ),
+        backgroundColor: Constants.sduRedColor,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Viden',
-            style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Constants.kBlackColor),
-          ),
-          backgroundColor: Constants.sduRedColor,
-        ),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(20, 25, 20, 10),
-                child: Text(
-                  textDesc,
-                  style: TextStyle(
-                    color: Constants.kBlackColor,
-                    fontSize: 16,
-                  ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(children: [
+            Container(
+              padding: EdgeInsets.fromLTRB(20, 25, 20, 10),
+              child: Text(
+                textDesc,
+                style: TextStyle(
+                  color: Constants.kBlackColor,
+                  fontSize: 16,
                 ),
               ),
-              CardWidget(
-                title: "Kollegacafé",
-                titleSize: 24,
-                subtitle:
-                "Vær med til at udvikle en langtidsholdbar kultur for sundhedspersonale via kollegacafé.",
-                iconData: CupertinoIcons.airplane,
-                onTap: () {
-                  debugPrint("Tabbed: Kollegacafé");
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => KollegaCafe()));
-                },
-              ),
-              CardWidget(
-                title: "Om compassion",
-                titleSize: 20,
-                subtitle:
-                "Bliv klogere på de mange facetter af compassion og hvordan det kan gavne dig og folk omkring dig.",
-                iconData: CupertinoIcons.airplane,
-                onTap: () {
-                  debugPrint("Tabbed: Om compassion");
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AboutCompassion()));
-                },
-              )
-            ]),
-          ),
+            ),
+            CardWidget(
+              title: "Kollegacafé",
+              titleSize: 24,
+              subtitle:
+                  "Vær med til at udvikle en langtidsholdbar kultur for sundhedspersonale via kollegacafé.",
+              iconData: CupertinoIcons.airplane,
+              onTap: () {
+                debugPrint("Tabbed: Kollegacafé");
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => KollegaCafe()));
+              },
+            ),
+            CardWidget(
+              title: "Om compassion",
+              titleSize: 20,
+              subtitle:
+                  "Bliv klogere på de mange facetter af compassion og hvordan det kan gavne dig og folk omkring dig.",
+              iconData: CupertinoIcons.airplane,
+              onTap: () {
+                debugPrint("Tabbed: Om compassion");
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AboutCompassion()));
+              },
+            )
+          ]),
         ),
       ),
     );
