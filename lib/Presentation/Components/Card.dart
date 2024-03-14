@@ -42,13 +42,8 @@ class CardWidget extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: Container(
-                      padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
-                      child: SvgPicture.asset(
-                        'assets/icons/$iconPath',
-                        height: 40,
-                        width: 40,
-                      )
-                  ),
+                      padding: EdgeInsets.fromLTRB(6, 0, 6, 0),
+                      child: SvgPicture.asset('assets/icons/$iconPath')),
                 ),
                 Expanded(
                   flex: 5,

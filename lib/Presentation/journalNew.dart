@@ -326,9 +326,11 @@ class _JournalNewState extends State<JournalNew> {
                               _intentionController2,
                               _intentionController3
                             ];
-                            List<String>? intentions =
-                                selected.first.intentions?.split(';#');
-                            if (selected.isNotEmpty && intentions != null) {
+                            List<String>? intentions = selected.isNotEmpty
+                                ? selected.first.intentions?.split(';#')
+                                : null;
+
+                            if (intentions != null) {
                               for (var i = 0;
                                   i < intentionsController.length;
                                   i++) {

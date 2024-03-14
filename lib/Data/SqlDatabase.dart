@@ -13,13 +13,13 @@ class SqlDatabase implements ISqlDatabase {
     final queryResult = await db.rawQuery(
         'SELECT entries.entry_id, activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc FROM "entries" FULL JOIN activityJournal ON activityJournal.entry_id = entries.entry_id FULL JOIN intentionJournal ON intentionJournal.entry_id = entries.entry_id');
 
-    // print('data: $queryResult');
+    print('data: $queryResult');
     final q1 = await db.rawQuery('SELECT * FROM activityJournal');
     final q2 = await db.rawQuery('SELECT * FROM intentionJournal');
     final q3 = await db.rawQuery('SELECT * FROM entries');
-    // print(q1);
+    print(q1);
     print(q2);
-    // print(q3);
+    print(q3);
 
     return queryResult;
   }
