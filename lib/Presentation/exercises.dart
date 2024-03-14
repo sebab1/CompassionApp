@@ -14,49 +14,49 @@ List<CardData> cards = [
       "En 9 minutters øvelse til brug når du her angst og kæmper med svære følelser.",
       "assets/sounds/Oevelse_1_Angst_og_svaere_feolelser.mp3",
       null,
-      'ic_round-looks-5.svg'),
+      'cil_audio.svg'),
   // 2.
   CardData(
       "Centrér vejrtrækningen",
       "Dit åndedræt regulerer dit autonome nervesystem. Dybe vejrtrækninger med forlænget udånding gennem munden skaber ro ved at aktivere det parasympatiske nervesystem. Øvelse nr. 2 er en ultrakort øvelse til at berolige nervesystemet.",
       "assets/sounds/Oevelse_1_Angst_og_svaere_feolelser.mp3",
       null,
-      'icon-park_oval-love.svg'),
+      'cil_audio.svg'),
   // 3.
   CardData(
       "Compassion vejrtrækning",
       "Når vi er ophidsede, kan det være svært at fungere og reagere adækvat på det som sker omkring os. Det er som at opleve et indre stormvejr, mens vi prøver at navigere i den ydre verden. I stedet for at modstå og undertrykke de følelser, når den kommer op, hvilket kan føre til en intensivering, hjælper denne øvelse dig med at finde stabilitet og lede dig sikkert gennem processen.",
       "assets/sounds/Oevelse_3_Compassion_vejrtraekning.mp3",
       null,
-      'icon-park_oval-love.svg'),
+      'cil_audio.svg'),
   // 4.
   CardData(
       "Før arbejde",
       "En øvelse der retter sig til dig, før du tager på arbejde",
       "assets/sounds/Oevelse_4_Foer_arbejde.mp3",
       null,
-      'icon-park_oval-love.svg'),
+      'cil_audio.svg'),
   // 5.
   CardData(
       "Efter arbejde",
       "En øvelse der retter sig til dig, efter arbejde",
       "assets/sounds/Oevelse_5_Efterarbejde.mp3",
       null,
-      'icon-park_oval-love.svg'),
+      'cil_audio.svg'),
   // 6.
   CardData(
       "Vejrtrækning 1234",
       "Når vores nervesystem er i overdrive, f.eks. når vi føler frygt, panik eller raseri, eller når vi oplever følelsesløshed eller magtesløshed, er vi oftest ikke i stand til at tænke klart eller reagere optimalt på, hvad der sker omkring os. Gennem Vejrtrækning-1234-øvelsens tælling engagerer din præfrontale cortex og regulerer nervesystemet.",
       "assets/sounds/Oevelse_6_Vejrtraekning1234.mp3",
       null,
-      'icon-park_oval-love.svg'),
+      'cil_audio.svg'),
   // 7.
   CardData(
       "Ligesom jeg",
       "Resultaterne er entydige. Når en kliniker udviser compassion, forbedrer det patientens sundhedsresultater, patientens egenomsorg samt kvaliteten og plejeprocessen betydeligt. Desuden mindsker det medicinske fejl. Klinikerens niveau af compassion er også tæt forbundet med klinikerens egen velbefindende i hverdagen. Graden af compassion man udviser, udmønter sig i lavere niveauer af udbrændthed, færre stress- og depressionssymptomer og en generel større følelse af personlig præstation og forbedret livskvalitet. Når compassion er en integreret del af kulturen på arbejdspladsen, er niveauet af følelsesmæssig udmattelse og udbrændthed markant mindre. Derfor er compassion godt for alle involverede, både patienter, pårørende og personalet. Øvelse 7 er en måde at håndtere svære situationer på.",
       "assets/sounds/Oevelse_7_ Ligesom_jeg.mp3",
       null,
-      'icon-park_oval-love.svg'),
+      'cil_audio.svg'),
 ];
 
 class Exercises extends StatelessWidget {

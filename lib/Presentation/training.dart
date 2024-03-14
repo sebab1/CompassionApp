@@ -71,7 +71,7 @@ class Training extends StatelessWidget {
                 titleSize: 24,
                 subtitle:
                     "Beskriv dagen dagbogskalenderen, eller sæt nogle positive intentioner for din dag.",
-                iconPath: 'exercise_brain.svg',
+                iconPath: 'ion_calendar-outline.svg',
                 onTap: () {
                   Navigator.push(
                     context,

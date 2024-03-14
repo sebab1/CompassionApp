@@ -64,7 +64,7 @@ class Home extends StatelessWidget {
                 children: [
                   borderCard(
                     title: "Dagbog",
-                    iconData: CupertinoIcons.calendar,
+                    iconPath: 'ion_calendar-outline.svg',
                     underline: false,
                     onTap: () {
                       Navigator.push(
@@ -76,7 +76,7 @@ class Home extends StatelessWidget {
                   ),
                   borderCard(
                     title: "Kollegacafé",
-                    iconData: CupertinoIcons.heart_circle,
+                    iconPath: 'carbon_cafe.svg',
                     underline: false,
                     onTap: () {
                       Navigator.push(

@@ -68,7 +68,7 @@ class _KollegaCafeState extends State<KollegaCafe> {
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                 child: borderCard(
                   title: "Link til Kollegacafé",
-                  iconData: Icons.coffee_rounded,
+                  iconPath: 'carbon_cafe.svg',
                   underline: true,
                   onTap: () async {
                     var url = Uri.https('sdu.dk',

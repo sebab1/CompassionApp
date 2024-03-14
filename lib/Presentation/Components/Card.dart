@@ -42,12 +42,13 @@ class CardWidget extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: Container(
-                      padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                      padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
                       child: SvgPicture.asset(
                         'assets/icons/$iconPath',
                         height: 60,
                         width: 60,
-                      )),
+                      )
+                  ),
                 ),
                 Expanded(
                   flex: 5,

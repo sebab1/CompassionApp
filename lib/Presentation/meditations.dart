@@ -14,70 +14,70 @@ List<CardData> cards = [
       "En kort meditation for begyndere som kan udføres siddende i løbet af dagen.",
       "assets/sounds/Meditation_1_5_min_meditation.mp3",
       null,
-      'icon-park_oval-love.svg'),
+      'cil_audio.svg'),
   // 2.
   CardData(
       "Compassion i åndedrættet",
       "En længere meditation med fokus på kærlig venlighed og omsorg for dig selv og andre.",
       "assets/sounds/Meditation_2_Compassion_i_aandedraettet.mp3",
       null,
-      'icon-park_oval-love.svg'),
+      'cil_audio.svg'),
   // 3.
   CardData(
       "Loving Kindness Meditation for begyndere",
       "10 minutters meditation for begyndere med fokus på kærlig venlighed",
       "assets/sounds/Meditation_2_Compassion_i_aandedraettet.mp3",
       null,
-      'icon-park_oval-love.svg'),
+      'cil_audio.svg'),
   // 4.
   CardData(
       "Opmærksomhedstræning med åndedrættet",
       "En kort opmærksomhedstræning med fokus på nærvær, lyde og åndedræt.",
       "assets/sounds/Meditation_4_Opmaerksomhedstraening_med_aandedraettet.mp3",
       null,
-      'icon-park_oval-love.svg'),
+      'cil_audio.svg'),
   // 5.
   CardData(
       "Vejrtrækning med maven",
       "En 2 minutters vejrtrækningsøvelse til afstresning.",
       "assets/sounds/Meditation_5_Vejrtraekning_med_maven.mp3",
       null,
-      'icon-park_oval-love.svg'),
+      'cil_audio.svg'),
   // 6.
   CardData(
       "Selvcompassion pause",
       "5 minutters pause til at mærke dig selv og give dig selv omsorg, hvis noget er svært.",
       "assets/sounds/Meditation_6_Selvcompassion_pause.mp3",
       null,
-      'icon-park_oval-love.svg'),
+      'cil_audio.svg'),
   // 7.
   CardData(
       "Vejrtrækningen som anker og en dejlig dag",
       "5 minutters pause til at mærke dig selv og give dig selv omsorg, hvis noget er svært.",
       "assets/sounds/Meditation_7_Vejrtraekningen_som_anker_og_en_dejlig_dag.mp3",
       null,
-      'icon-park_oval-love.svg'),
+      'cil_audio.svg'),
   // 8.
   CardData(
       "Vejrtrækningsøvelse",
       "6 minutters meditation med fokus på vejrtrækningen.",
       "assets/sounds/Meditation_8_Vejrtraekningsoevelse.mp3",
       null,
-      'icon-park_oval-love.svg'),
+      'cil_audio.svg'),
   // 9.
   CardData(
       "Ruths trick - Få værktøjer til at tæmme sindet",
       "Åndedræt og afslapning er de første skridt til at tæmme sindet. Denne meditation stammer fra bogen: Den magiske butik - En neurokirurgs søgen efter hjernens mysterier og hjertets hemmeligheder af læge James Doty.",
       "assets/sounds/Ruths_trick_nr_1.mp3",
       null,
-      'icon-park_oval-love.svg'),
+      'cil_audio.svg'),
   // 10.
   CardData(
       "Ruths trick - Få værktøjer til at åbne dit hjerte",
       "Det betyder noget, at du har et åbent hjerte. Et åbent hjerte får kontakt med andre, og det ændrer alting. Denne meditation stammer fra bogen: Den magiske butik - En neurokirurgs søgen efter hjernens mysterier og hjertets hemmeligheder af læge James Doty.",
       "assets/sounds/Ruths_trick_nr_3.mp3",
       null,
-      'icon-park_oval-love.svg'),
+      'cil_audio.svg'),
 ];
 
 class Meditations extends StatelessWidget {

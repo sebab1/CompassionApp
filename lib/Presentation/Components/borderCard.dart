@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import './constants.dart';
 
 class borderCard extends StatelessWidget {
 
   final String title;
-  final IconData iconData;
+  //final IconData iconData;
   final VoidCallback onTap;
+  final String iconPath;
   final IconData? trailingIconData;
   final bool underline;
 
@@ -14,7 +16,8 @@ class borderCard extends StatelessWidget {
       {super.key,
       required this.underline,
       required this.title,
-      required this.iconData,
+      //required this.iconData,
+      required this.iconPath,
       required this.onTap,
       this.trailingIconData // Make trailing icon optional
       });
@@ -25,7 +28,7 @@ class borderCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 76,
-        margin: EdgeInsets.fromLTRB(20, 4, 20, 6),
+        margin: EdgeInsets.fromLTRB(20, 4, 20, 4),
         child: Card(
           color: Constants.sduGreyColor,
           child: ClipRRect(
@@ -43,10 +46,13 @@ class borderCard extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  leading: Icon(
-                    iconData,
-                    size: 50,
-                    color: Constants.kBlackColor,
+                  leading: Container(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 6),
+                    child: SvgPicture.asset(
+                      'assets/icons/$iconPath',
+                      height: 50,
+                      width: 50,
+                    ),
                   ),
                   title: Align(
                     alignment: Alignment.centerLeft,

@@ -42,7 +42,7 @@ class Knowledge extends StatelessWidget {
               titleSize: 24,
               subtitle:
                   "Vær med til at udvikle en langtidsholdbar kultur for sundhedspersonale via kollegacafé.",
-              iconPath: 'exercise_brain.svg',
+              iconPath: 'carbon_cafe.svg',
               onTap: () {
                 debugPrint("Tabbed: Kollegacafé");
                 Navigator.push(context,
