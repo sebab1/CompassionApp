@@ -482,7 +482,7 @@ class _JournalNewState extends State<JournalNew> {
                   ),
                 ],
               ),
-              Text("Get selected day: " + _selectedDay.toString()),
+              //Text("Get selected day: " + _selectedDay.toString()),
               //Text("Current day?: " + isCurrentDaySelected.toString()),
               SizedBox(height: 20), // Add some space
             ],

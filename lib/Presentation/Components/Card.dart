@@ -45,15 +45,15 @@ class CardWidget extends StatelessWidget {
                       padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
                       child: SvgPicture.asset(
                         'assets/icons/$iconPath',
-                        height: 60,
-                        width: 60,
+                        height: 40,
+                        width: 40,
                       )
                   ),
                 ),
                 Expanded(
                   flex: 5,
                   child: Container(
-                    padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
+                    padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -72,7 +72,7 @@ class CardWidget extends StatelessWidget {
                             textAlign: TextAlign.left,
                             style: TextStyle(color: Constants.kBlackColor),
                             overflow: TextOverflow.ellipsis,
-                            maxLines: 4,
+                            maxLines: 3,
                           ),
                         ),
                       ],

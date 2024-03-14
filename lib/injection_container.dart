@@ -41,7 +41,7 @@ Future<Database> _initDatabase() async {
       //Insert data into entries table
       db.insert('entries', {'date': 1709732102314});
 
-      db.insert('entries', {'date': 1709815880812});
+      //db.insert('entries', {'date': 1709815880812});
 
       //Insert data into activity journal table
       db.insert(
