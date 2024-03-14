@@ -35,4 +35,19 @@ class JournalController implements IJournalController {
 
     return map;
   }
+
+  @override
+  Future<void> saveActivity(int entry_id, String activity) async {
+    return await database.addActivity(entry_id, activity);
+  }
+
+  @override
+  Future<int> saveEntry(DateTime time) async {
+    return await database.addEntry(time);
+  }
+
+  @override
+  Future<void> saveIntentions(int entry_id, String intentions) async {
+    return await database.addIntention(entry_id, intentions);
+  }
 }

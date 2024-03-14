@@ -8,9 +8,11 @@ import 'package:sqflite/sqflite.dart';
 import './Presentation/main_menu.dart';
 import './Presentation/Components/Constants.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'injection_container.dart' as di;
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);

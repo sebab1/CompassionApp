@@ -1,10 +1,12 @@
 import 'package:compassion_app/Data/SqlDatabase.dart';
+import 'package:compassion_app/Domain/Controllers/IJournalController.dart';
 import 'package:compassion_app/Domain/Controllers/JournalController.dart';
 import 'package:compassion_app/Domain/JournalEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+import '../injection_container.dart';
 import '/Presentation/Components/constants.dart';
 
 class JournalNew extends StatefulWidget {
@@ -16,7 +18,8 @@ class JournalNew extends StatefulWidget {
 
 class _JournalNewState extends State<JournalNew> {
   Map<String, List<JournalEvent>>? selectedEvents;
-  late SqlDatabase sql;
+
+  late IJournalController jc;
 
   DateTime today = DateTime.now();
   DateTime _selectedDay = DateTime.now();
@@ -33,9 +36,7 @@ class _JournalNewState extends State<JournalNew> {
   }
 
   Future<Map<String, List<JournalEvent>>> getData() async {
-    sql = SqlDatabase();
-    await sql.init();
-    return await JournalController(sql).getJournals();
+    return await jc.getJournals();
   }
 
   void refreshData() {
@@ -52,7 +53,7 @@ class _JournalNewState extends State<JournalNew> {
   @override
   void initState() {
     super.initState();
-
+    jc = sl<IJournalController>();
     getData().then((value) => setState(() {
           this.selectedEvents = value;
         }));
@@ -272,20 +273,20 @@ class _JournalNewState extends State<JournalNew> {
                                         print('Activity content: $content');
                                         if (entry_id == null) {
                                           print('new entry');
-                                          sql
-                                              .addEntry(_selectedDay)
+                                          jc
+                                              .saveEntry(_selectedDay)
                                               .then((id) => {
                                                     print('adding activity'),
-                                                    sql
-                                                        .addActivity(
+                                                    jc
+                                                        .saveActivity(
                                                             id, content)
                                                         .then((value) =>
                                                             refreshData())
                                                   });
                                         } else {
                                           print('updating activity');
-                                          sql
-                                              .addActivity(entry_id, content)
+                                          jc
+                                              .saveActivity(entry_id, content)
                                               .then((value) => refreshData());
                                         }
 
@@ -443,15 +444,15 @@ class _JournalNewState extends State<JournalNew> {
                                         print('content: $content');
                                         if (entry_id == null) {
                                           print('new entry');
-                                          sql.addEntry(_selectedDay).then(
-                                              (id) => sql
-                                                  .addIntention(id, content)
+                                          jc.saveEntry(_selectedDay).then(
+                                              (id) => jc
+                                                  .saveIntentions(id, content)
                                                   .then((value) =>
                                                       refreshData()));
                                         } else {
                                           print('updating intention');
-                                          sql
-                                              .addIntention(entry_id, content)
+                                          jc
+                                              .saveIntentions(entry_id, content)
                                               .then((value) => refreshData());
                                         }
                                         Navigator.pop(context);

@@ -4,53 +4,9 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 
 class SqlDatabase implements ISqlDatabase {
-  late Database db;
+  Database db;
 
-  // this opens the database (and creates it if it doesn't exist)
-  Future<void> init() async {
-    print('creating db');
-    final path = join(await getDatabasesPath(), 'journal.db');
-    db = await openDatabase(
-      path,
-      version: 1,
-      onCreate: _onCreate,
-    );
-  }
-
-  _onCreate(Database db, int version) async {
-    print('Creating tables');
-    String entriesTable =
-        'CREATE TABLE IF NOT EXISTS entries(entry_id INTEGER PRIMARY KEY AUTOINCREMENT, date INTEGER NOT NULL)';
-    String activityJournalTable =
-        'CREATE TABLE IF NOT EXISTS activityJournal(activity_id INTEGER PRIMARY KEY AUTOINCREMENT, entry_id INTEGER NOT NULL UNIQUE, activity_desc TEXT NOT NULL, FOREIGN KEY (entry_id) REFERENCES entries)';
-    String intentionTable =
-        'CREATE TABLE IF NOT EXISTS intentionJournal(intention_id INTEGER PRIMARY KEY AUTOINCREMENT, entry_id INTEGER NOT NULL UNIQUE, intention_desc TEXT NOT NULL, FOREIGN KEY (entry_id) REFERENCES entries)';
-
-    await db.execute(entriesTable);
-    await db.execute(activityJournalTable);
-    await db.execute(intentionTable);
-
-    print('inserting data into tables');
-    //Insert data into entries table
-    await db.insert('entries', {'date': 1709732102314});
-
-    await db.insert('entries', {'date': 1709815880812});
-
-    //Insert data into activity journal table
-    await db.insert(
-        'activityJournal', {'entry_id': 1, 'activity_desc': 'ZAAAZAAA'});
-
-    //Insert data into intention table
-    await db.insert('intentionJournal', {
-      'entry_id': 1,
-      'intention_desc': 'intention 1;#intention 2;#intention 3'
-    });
-
-    // await db.insert('intentionJournal', {
-    //   'entry_id': 2,
-    //   'intention_desc': 'intention 4, intention 5, intention 6'
-    // });
-  }
+  SqlDatabase(this.db);
 
   @override
   Future<List<Map<String, Object?>>> readJournalEvents() async {
@@ -68,36 +24,10 @@ class SqlDatabase implements ISqlDatabase {
     return queryResult;
   }
 
-  Future<int> insertData(String content, int entryID) async {
-    print('Inserting data for activity journal');
-    final query = await db.insert(
-        'activityJournal', {'entry_id': entryID, 'activity_desc': content});
-
-    return query;
+  Future<void> deleteDatabase() async {
+    print('deleting db');
+    databaseFactory.deleteDatabase(await getDatabasesPath());
   }
-
-  Future<int> insert(String intention, String content, int entryID) async {
-    print('Inserting data for activity journal');
-    // final query1 = await db
-    //     .insert('entries', {'date': DateTime.now().millisecondsSinceEpoch});
-    final query2 = await db.insert(
-        'intentionJournal', {'entry_id': entryID, 'intention_desc': intention});
-    final query3 = await db.insert(
-        'activityJournal', {'entry_id': entryID, 'activity_desc': content});
-
-    return query3;
-  }
-
-  Future<int> deleteData(String table, int entryID) async {
-    print('Deleting data for $table');
-    final query =
-        await db.delete(table, where: 'entry_id = ?', whereArgs: [entryID]);
-
-    return query;
-  }
-
-  Future<void> deleteDatabase() async =>
-      databaseFactory.deleteDatabase(await getDatabasesPath());
 
   @override
   Future<void> addActivity(int entryID, String content) async {

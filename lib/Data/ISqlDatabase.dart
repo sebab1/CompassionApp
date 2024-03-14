@@ -4,4 +4,6 @@ abstract class ISqlDatabase {
   Future<void> addIntention(int entryID, String content);
 
   Future<void> addActivity(int entryID, String content);
+
+  Future<int> addEntry(DateTime time);
 }
