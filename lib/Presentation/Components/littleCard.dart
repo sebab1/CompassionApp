@@ -51,7 +51,7 @@ class littleCard extends StatelessWidget {
         height: 80,
         margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
         child: Card(
-          color: Constants.sduGreyColor,
+          color: Constants.cardColor,
           elevation: 4,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

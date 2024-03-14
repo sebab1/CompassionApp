@@ -33,8 +33,8 @@ class CardWidget extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(11.0),
             ),
-            elevation: 7,
-            color: Constants.sduGreyColor,
+            elevation: 4,
+            color: Constants.cardColor,
             child: Row(
               //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -30,7 +30,8 @@ class borderCard extends StatelessWidget {
         height: 76,
         margin: EdgeInsets.fromLTRB(20, 4, 20, 4),
         child: Card(
-          color: Constants.sduGreyColor,
+          elevation: 4,
+          color: Constants.cardColor,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10.0),
             child: Stack(
