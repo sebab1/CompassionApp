@@ -1,10 +1,10 @@
 import 'package:compassion_app/Presentation/journalNew.dart';
-import 'package:compassion_app/Presentation/kollegaCafe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'Components/borderCard.dart';
 import '/Presentation/Components/constants.dart';
+import 'aboutCompassion.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -75,13 +75,13 @@ class Home extends StatelessWidget {
                     trailingIconData: CupertinoIcons.chevron_forward,
                   ),
                   borderCard(
-                    title: "Kollegacafé",
-                    iconPath: 'carbon_cafe.svg',
+                    title: "Om compassion",
+                    iconPath: 'icon-park_oval-love.svg',
                     underline: false,
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => KollegaCafe()),
+                        MaterialPageRoute(builder: (context) => AboutCompassion()),
                       );
                     },
                     trailingIconData: CupertinoIcons.chevron_forward,

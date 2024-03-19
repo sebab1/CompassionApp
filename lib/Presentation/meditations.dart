@@ -1,8 +1,6 @@
 import 'package:compassion_app/Presentation/Components/audio.dart';
-import 'package:flutter/cupertino.dart';
 import '/Presentation/Components/littleCard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '/Presentation/Components/constants.dart';
 import 'cardData.dart';
 
@@ -81,7 +79,9 @@ List<CardData> cards = [
 ];
 
 class Meditations extends StatelessWidget {
-  EdgeInsets edgeI = EdgeInsets.fromLTRB(0, 4, 0, 4);
+  Meditations({super.key});
+
+  final EdgeInsets edgeI = EdgeInsets.fromLTRB(0, 4, 0, 4);
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +154,8 @@ class Meditations extends StatelessWidget {
                         ),
                       ),
                     );
-                  })
+                  }),
+              const SizedBox(height: 20),
             ],
           ),
         ),

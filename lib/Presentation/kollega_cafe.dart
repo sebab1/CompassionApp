@@ -8,7 +8,7 @@ import 'Components/videoPlayer.dart';
 import 'Components/littleCard.dart';
 
 class KollegaCafe extends StatefulWidget {
-  KollegaCafe({super.key});
+  const KollegaCafe({super.key});
 
   @override
   _KollegaCafeState createState() => _KollegaCafeState();
@@ -38,7 +38,7 @@ class _KollegaCafeState extends State<KollegaCafe> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Kollegacafé',
           style: TextStyle(
             fontSize: 28,
@@ -54,7 +54,7 @@ class _KollegaCafeState extends State<KollegaCafe> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.fromLTRB(25, 20, 25, 15),
+                padding: const EdgeInsets.fromLTRB(25, 20, 25, 15),
                 child: const Text(
                   'Velkommen til Kollegacafé, her finder du information og viden fra tidligere Kollegacaféer, samt et link med information om tilmelding og fremtidige møder.',
                   style: TextStyle(
@@ -65,7 +65,7 @@ class _KollegaCafeState extends State<KollegaCafe> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                 child: borderCard(
                   title: "Link til Kollegacafé",
                   iconPath: 'carbon_cafe.svg',
@@ -82,7 +82,7 @@ class _KollegaCafeState extends State<KollegaCafe> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(25, 20, 25, 8),
+                padding: const EdgeInsets.fromLTRB(25, 20, 25, 8),
                 child: const Text(
                   'Tidligere møder',
                   style: TextStyle(
@@ -96,37 +96,36 @@ class _KollegaCafeState extends State<KollegaCafe> {
                   future: events,
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
-                      return Container(
-                        child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: snapshot.data.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              padding: EdgeInsets.fromLTRB(0, 0, 0, 4),
-                              child: littleCard(
-                                title: snapshot.data[index].title,
-                                iconData: CupertinoIcons.play_rectangle,
-                                customIcon: null,
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => VideoPlayer(
-                                              event: snapshot.data[index])));
-                                },
-                                titleSize: 15,
-                              ),
-                            );
-                          },
-                        ),
+                      return ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 4),
+                            child: littleCard(
+                              title: snapshot.data[index].title,
+                              iconData: CupertinoIcons.play_rectangle,
+                              customIcon: null,
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => VideoPlayer(
+                                            event: snapshot.data[index])));
+                              },
+                              titleSize: 15,
+                            ),
+                          );
+                        },
                       );
                     } else {
                       return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }
-                  })
+                  }),
+              const SizedBox(height: 20),
             ],
           ),
         ),

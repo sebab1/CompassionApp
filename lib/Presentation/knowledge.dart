@@ -5,7 +5,7 @@ import 'aboutCompassion.dart';
 import 'main_menu.dart';
 import '/Presentation/Components/constants.dart';
 import '/Presentation/Components/Card.dart';
-import 'kollegaCafe.dart';
+import 'kollega_cafe.dart';
 
 class Knowledge extends StatelessWidget {
   @override
@@ -54,7 +54,7 @@ class Knowledge extends StatelessWidget {
               titleSize: 20,
               subtitle:
                   "Bliv klogere på de mange facetter af compassion og hvordan det kan gavne dig og folk omkring dig.",
-              iconPath: 'exercise_brain.svg',
+              iconPath: 'icon-park_oval-love.svg',
               onTap: () {
                 debugPrint("Tabbed: Om compassion");
                 Navigator.push(
