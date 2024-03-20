@@ -10,8 +10,27 @@ class SqlDatabase implements ISqlDatabase {
 
   @override
   Future<List<Map<String, Object?>>> readJournalEvents() async {
-    final queryResult = await db.rawQuery(
-        'SELECT entries.entry_id, activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc FROM "entries" FULL JOIN activityJournal ON activityJournal.entry_id = entries.entry_id FULL JOIN intentionJournal ON intentionJournal.entry_id = entries.entry_id');
+
+    String stoneAgeQuery = 'SELECT entries.entry_id, activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc ' +
+                   ' FROM entries ' +
+                    'LEFT JOIN activityJournal ON activityJournal.entry_id = entries.entry_id ' +
+                    'LEFT JOIN intentionJournal ON intentionJournal.entry_id = entries.entry_id ' +
+                    'UNION ' +
+                    'SELECT entries.entry_id, activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc ' +
+                    'FROM activityJournal ' +
+                    'LEFT JOIN entries ON activityJournal.entry_id = entries.entry_id ' +
+                    'LEFT JOIN intentionJournal ON intentionJournal.entry_id = entries.entry_id ' +
+                    'WHERE entries.entry_id IS NULL ' +
+                    'UNION ' +
+                    'SELECT entries.entry_id, activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc ' +
+                    'FROM intentionJournal ' +
+                    'LEFT JOIN entries ON intentionJournal.entry_id = entries.entry_id ' +
+                    'LEFT JOIN activityJournal ON activityJournal.entry_id = entries.entry_id ' +
+                    'WHERE entries.entry_id IS NULL';
+
+  String newQuery = 'SELECT entries.entry_id, activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc FROM "entries" FULL JOIN activityJournal ON activityJournal.entry_id = entries.entry_id FULL JOIN intentionJournal ON intentionJournal.entry_id = entries.entry_id';
+
+    final queryResult = await db.rawQuery(stoneAgeQuery);
 
     print('data: $queryResult');
     final q1 = await db.rawQuery('SELECT * FROM activityJournal');
