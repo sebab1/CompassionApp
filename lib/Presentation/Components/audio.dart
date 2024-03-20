@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:path/path.dart' as p;
@@ -15,7 +16,9 @@ class Audio extends StatefulWidget {
   final String title;
   final String desc;
   final String audio;
-  const Audio({super.key, required this.title, required this.desc, required this.audio});
+  final String category;
+  const Audio({super.key, required this.title, required this.desc, required this.audio, required this.category});
+ 
 
   @override
   State<Audio> createState() => _AudioState();
@@ -37,29 +40,11 @@ class _AudioState extends State<Audio> {
         ),
       );
 
-  /*Future<void> _init() async {
-    final audioFileName = 'assets/sounds/sound1.mp3';
-    final ByteData data = await rootBundle.load(audioFileName);
-
-    final List<int> bytes = data.buffer.asUint8List();
-    final audioFile =
-        File(p.join((await getTemporaryDirectory()).path, 'sound1.mp3'));
-
-    try {
-      await audioFile.writeAsBytes(bytes);
-      final waveFile =
-          File(p.join((await getTemporaryDirectory()).path, 'waveform.wave'));
-      JustWaveform.extract(audioInFile: audioFile, waveOutFile: waveFile)
-          .listen(progressStream.add, onError: progressStream.addError);
-    } catch (e) {
-      progressStream.addError(e);
-    }
-  }*/
-
   @override
   void initState() {
     super.initState();
-    player = AudioPlayer()..setAsset(widget.audio);
+    player = AudioPlayer();
+    player.setAudioSource(AudioSource.asset(widget.audio, tag: MediaItem(id: '0', title: widget.title, artist: widget.category)));
     //_init();
   }
 

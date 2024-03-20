@@ -24,7 +24,6 @@ Future<void> init() async {
 }
 
 Future<Database> _initDatabase() async {
-  print('creating db');
   String path = await getDatabasesPath();
   return await openDatabase(
     join(path, db_name),
@@ -41,26 +40,6 @@ Future<Database> _initDatabase() async {
       db.execute(activityJournalTable);
       db.execute(intentionTable);
 
-      print('inserting data into tables');
-      //Insert data into entries table
-      db.insert('entries', {'date': 1709732102314});
-
-      //db.insert('entries', {'date': 1709815880812});
-
-      //Insert data into activity journal table
-      db.insert(
-          'activityJournal', {'entry_id': 1, 'activity_desc': 'ZAAAZAAA'});
-
-      //Insert data into intention table
-      db.insert('intentionJournal', {
-        'entry_id': 1,
-        'intention_desc': 'intention 1;#intention 2;#intention 3'
-      });
-
-      // await db.insert('intentionJournal', {
-      //   'entry_id': 2,
-      //   'intention_desc': 'intention 4, intention 5, intention 6'
-      // });
     },
     version: 1,
   );

@@ -147,6 +147,7 @@ class Meditations extends StatelessWidget {
                                         title: card.title,
                                         desc: card.desc,
                                         audio: card.audioPath,
+                                        category: 'Meditation',
                                       )),
                             );
                           },

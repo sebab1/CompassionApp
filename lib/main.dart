@@ -3,6 +3,7 @@ import 'package:compassion_app/Domain/Controllers/JournalController.dart';
 import 'package:compassion_app/Domain/Controllers/ScraperController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import './Presentation/main_menu.dart';
@@ -10,7 +11,13 @@ import './Presentation/Components/Constants.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'injection_container.dart' as di;
 
-void main() async {
+Future<void> main() async {
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true
+  );
+
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   SystemChrome.setPreferredOrientations([
