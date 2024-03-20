@@ -7,6 +7,7 @@ class SqlDatabase implements ISqlDatabase {
   Database db;
 
   SqlDatabase(this.db);
+  
 
   @override
   Future<List<Map<String, Object?>>> readJournalEvents() async {
@@ -43,17 +44,25 @@ class SqlDatabase implements ISqlDatabase {
     return queryResult;
   }
 
-  Future<void> deleteDatabase() async {
+  Future<void> deleteDatabase(String path) async {
     print('deleting db');
-    databaseFactory.deleteDatabase(await getDatabasesPath());
+    databaseFactory.deleteDatabase(path);
   }
 
   @override
   Future<void> addActivity(int entryID, String content) async {
-    String prompt =
-        'INSERT INTO activityJournal(entry_id, activity_desc) VALUES(?,?) ON CONFLICT(activityJournal.entry_id) DO UPDATE SET activity_desc = excluded.activity_desc';
-    final execute = await db.rawInsert(prompt, [entryID, content]);
-    print('new activity: $execute');
+    // String insert1 =
+    //     'INSERT INTO activityJournal(entry_id, activity_desc) VALUES(?,?) ON CONFLICT(activityJournal.entry_id) DO UPDATE SET activity_desc = excluded.activity_desc';
+
+    String insert = 'INSERT OR IGNORE INTO activityJournal (entry_id, activity_desc) VALUES (?, ?)';
+    String update = 'UPDATE activityJournal SET activity_desc = ? WHERE entry_id = ?';
+    final execute = await db.rawInsert(insert, [entryID, content]);
+    if(execute == 0){
+       final executeUpdate = await db.rawInsert(update, [content, entryID]);
+      print('Update: $executeUpdate');
+    }
+    print('Insert: $execute');
+
   }
 
   Future<int> addEntry(DateTime time) async {
@@ -66,9 +75,16 @@ class SqlDatabase implements ISqlDatabase {
 
   @override
   Future<void> addIntention(int entryID, String content) async {
-    String prompt =
-        'INSERT INTO intentionJournal(entry_id, intention_desc) VALUES(?,?) ON CONFLICT(intentionJournal.entry_id) DO UPDATE SET intention_desc = excluded.intention_desc';
-    final execute = await db.rawInsert(prompt, [entryID, content]);
-    print('new intention: $execute');
+    // String prompt =
+    //     'INSERT INTO intentionJournal(entry_id, intention_desc) VALUES(?,?) ON CONFLICT(intentionJournal.entry_id) DO UPDATE SET intention_desc = excluded.intention_desc';
+
+    String insert = 'INSERT OR IGNORE INTO intentionJournal (entry_id, intention_desc) VALUES (?, ?)';
+    String update = 'UPDATE intentionJournal SET intention_desc = ? WHERE entry_id = ?';
+    final execute = await db.rawInsert(insert, [entryID, content]);
+    if(execute == 0) {
+          final executeUpdate = await db.rawInsert(update, [content, entryID]);
+          print('Update: $executeUpdate');
+    }
+    print('Insert: $execute');
   }
 }

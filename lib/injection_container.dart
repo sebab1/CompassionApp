@@ -14,7 +14,11 @@ Future<void> init() async {
   final Database database = await _initDatabase();
   sl.registerLazySingleton<Database>(() => database);
 
-  sl.registerLazySingleton<ISqlDatabase>(() => SqlDatabase(sl()));
+  var sql = SqlDatabase(sl());
+
+  // await sql.deleteDatabase(await getDatabasesPath());
+
+  sl.registerLazySingleton<ISqlDatabase>(() => sql);
 
   sl.registerLazySingleton<IJournalController>(() => JournalController(sl()));
 }
