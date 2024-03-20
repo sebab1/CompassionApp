@@ -24,20 +24,11 @@ class _KollegaCafeState extends State<KollegaCafe> {
     events = sc.initScraper();
   }
 
-  // Future<void> _launchUrl(String url) async {
-  //   final Uri uri = Uri(scheme: "https", host: url);
-  //   if(!await launchUrl(
-  //     uri,
-  //     mode: LaunchMode.inAppWebView,
-  //   )) {
-  //     throw "Failed opening the link";
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text(
           'Kollegacafé',
           style: TextStyle(

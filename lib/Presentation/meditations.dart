@@ -87,6 +87,7 @@ class Meditations extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           'Meditationer',
           style: TextStyle(

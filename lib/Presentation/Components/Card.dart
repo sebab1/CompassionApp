@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '/Presentation/Components/constants.dart';
-import '/Presentation/just_a_class.dart';
 
 class CardWidget extends StatelessWidget {
   // CardWidget({Key? key}) : super(key: key);
@@ -28,7 +27,7 @@ class CardWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 130,
-        margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+        margin: EdgeInsets.fromLTRB(20, 0, 20, 8),
         child: Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(11.0),

@@ -1,13 +1,9 @@
-import 'package:compassion_app/Presentation/Components/videoPlayer.dart';
-import 'package:compassion_app/Presentation/exercises.dart';
 import 'package:compassion_app/Presentation/knowledge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import './Components/constants.dart';
-import './Components/videoPlayer.dart';
 import './home.dart';
-import './just_a_class.dart';
 import './training.dart';
 
 class Main_menu extends StatefulWidget {

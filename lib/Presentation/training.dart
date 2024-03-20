@@ -16,6 +16,7 @@ class Training extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           'Træning',
           style: TextStyle(
@@ -79,6 +80,7 @@ class Training extends StatelessWidget {
                   );
                 },
               ),
+              const SizedBox(height: 24),
             ],
           ),
         ),

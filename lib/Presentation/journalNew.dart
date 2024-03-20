@@ -83,6 +83,7 @@ class _JournalNewState extends State<JournalNew> {
     } else {
       return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: Text(
             'Dagbog',
             style: TextStyle(
