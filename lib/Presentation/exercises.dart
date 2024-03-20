@@ -125,7 +125,7 @@ class Exercises extends StatelessWidget {
                                         title: card.title,
                                         desc: card.desc,
                                         audio: card.audioPath,
-                                        isMeditation: false,
+                                        category: 'Øvelser',
                                       )),
                             );
                           },
