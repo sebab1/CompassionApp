@@ -17,8 +17,12 @@ class Audio extends StatefulWidget {
   final String desc;
   final String audio;
   final String category;
-  const Audio({super.key, required this.title, required this.desc, required this.audio, required this.category});
- 
+  const Audio(
+      {super.key,
+      required this.title,
+      required this.desc,
+      required this.audio,
+      required this.category});
 
   @override
   State<Audio> createState() => _AudioState();
@@ -44,7 +48,8 @@ class _AudioState extends State<Audio> {
   void initState() {
     super.initState();
     player = AudioPlayer();
-    player.setAudioSource(AudioSource.asset(widget.audio, tag: MediaItem(id: '0', title: widget.title, artist: widget.category)));
+    player.setAudioSource(AudioSource.asset(widget.audio,
+        tag: MediaItem(id: '0', title: widget.title, artist: widget.category)));
     //_init();
   }
 
@@ -54,7 +59,6 @@ class _AudioState extends State<Audio> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,10 +67,9 @@ class _AudioState extends State<Audio> {
           widget.title,
           maxLines: 2,
           style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Constants.kBlackColor
-          ),
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Constants.kBlackColor),
         ),
         backgroundColor: Constants.sduRedColor,
       ),
