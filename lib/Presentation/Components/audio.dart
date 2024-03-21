@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:path/path.dart' as p;
@@ -45,18 +46,31 @@ class _AudioState extends State<Audio> {
         ),
       );
 
-  @override
-  void initState() {
-    super.initState();
-    player = AudioPlayer();
+  Future<void> _init() async {
+    final byteData =
+        await rootBundle.load('assets/logos/compassionAppIcon.png');
+    final buffer = byteData.buffer;
+    Directory tempDir = await getApplicationDocumentsDirectory();
+    String tempPath = tempDir.path;
+    var filePath =
+        tempPath + '/file_01.png'; // file_01.tmp is dump file, can be anything
+    Uri uri = (await File(filePath).writeAsBytes(
+            buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes)))
+        .uri;
+
     player.setAudioSource(AudioSource.asset(widget.audio,
         tag: MediaItem(
             id: '0',
             title: widget.title,
             artist: widget.category,
-            artUri: Uri.file('/assets/logos/compassionAppIcon.png',
-                windows: false))));
-    //_init();
+            artUri: uri)));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    player = AudioPlayer();
+    _init();
   }
 
   @override
