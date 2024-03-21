@@ -32,6 +32,7 @@ class _AudioState extends State<Audio> {
   late AudioPlayer player;
   final progressStream = BehaviorSubject<WaveformProgress>();
 
+
   Stream<PositionData> get _positionDataStream =>
       Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
         player.positionStream,

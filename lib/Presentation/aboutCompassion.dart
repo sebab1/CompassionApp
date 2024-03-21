@@ -215,7 +215,26 @@ class AboutCompassion extends StatelessWidget {
                 ),
               ),
             ),
-
+            Padding(
+              padding: EdgeInsets.fromLTRB(14, 20, 14, 20),
+              child: InkWell(
+                child: const Text(
+                  "Link til artiklen, og meget andet på DSA.dk, kan findes her.",
+                  style: TextStyle(
+                    fontSize: 16,
+                      decoration: TextDecoration.underline
+                  ),
+                ),
+                onTap: () async {
+                  var url = Uri.https('dsa.dk',
+                      '/katinka');
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url);
+                  }
+                  debugPrint("Clicked link?");
+                },
+              ),
+            ),
             const SizedBox(height: 20),
           ],
         ),
