@@ -24,7 +24,7 @@ List<CardData> cards = [
   CardData(
       "Loving Kindness Meditation for begyndere",
       "10 minutters meditation for begyndere med fokus på kærlig venlighed",
-      "assets/sounds/Meditation_2_Compassion_i_aandedraettet.mp3",
+      "assets/sounds/Meditation_3_Loving_Kindness_Meditation_for_begyndere.mp3",
       null,
       'cil_audio.svg'),
   // 4.

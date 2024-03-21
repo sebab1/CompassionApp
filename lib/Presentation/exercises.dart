@@ -19,7 +19,7 @@ List<CardData> cards = [
   CardData(
       "Centrér vejrtrækningen",
       "Dit åndedræt regulerer dit autonome nervesystem. Dybe vejrtrækninger med forlænget udånding gennem munden skaber ro ved at aktivere det parasympatiske nervesystem. Øvelse nr. 2 er en ultrakort øvelse til at berolige nervesystemet.",
-      "assets/sounds/Oevelse_1_Angst_og_svaere_feolelser.mp3",
+      "assets/sounds/Oevelse_2_Centrer_vejrtraekningen.mp3",
       null,
       'cil_audio.svg'),
   // 3.
