@@ -49,7 +49,12 @@ class _AudioState extends State<Audio> {
     super.initState();
     player = AudioPlayer();
     player.setAudioSource(AudioSource.asset(widget.audio,
-        tag: MediaItem(id: '0', title: widget.title, artist: widget.category)));
+        tag: MediaItem(
+            id: '0',
+            title: widget.title,
+            artist: widget.category,
+            artUri: Uri.file('/assets/logos/compassionAppIcon.png',
+                windows: false))));
     //_init();
   }
 
