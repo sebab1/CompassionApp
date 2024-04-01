@@ -346,55 +346,57 @@ class _JournalNewState extends State<JournalNew> {
                               context: context,
                               builder: (context) => AlertDialog(
                                 title: Text('Tilføj intentioner for i dag'),
-                                content: Column(
-                                  children: [
-                                    TextFormField(
-                                      autofocus: true,
-                                      controller: _intentionController1,
-                                      maxLines: 1,
-                                      decoration: InputDecoration(
-                                        hintText:
-                                            'Skriv en intention her... ✏️',
-                                        focusedErrorBorder:
-                                            UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Constants.sduGoldColor,
+                                content: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      TextFormField(
+                                        autofocus: true,
+                                        controller: _intentionController1,
+                                        maxLines: 1,
+                                        decoration: InputDecoration(
+                                          hintText:
+                                              'Skriv en intention her... ✏️',
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Constants.sduGoldColor,
+                                            ),
                                           ),
+                                          focusColor: Constants.sduRedColor,
                                         ),
-                                        focusColor: Constants.sduRedColor,
                                       ),
-                                    ),
-                                    TextFormField(
-                                      controller: _intentionController2,
-                                      maxLines: 1,
-                                      decoration: InputDecoration(
-                                        hintText:
-                                            'Skriv din anden intention her... ✏️',
-                                        focusedErrorBorder:
-                                            UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Constants.sduGoldColor,
+                                      TextFormField(
+                                        controller: _intentionController2,
+                                        maxLines: 1,
+                                        decoration: InputDecoration(
+                                          hintText:
+                                              'Skriv din anden intention her... ✏️',
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Constants.sduGoldColor,
+                                            ),
                                           ),
+                                          focusColor: Constants.sduRedColor,
                                         ),
-                                        focusColor: Constants.sduRedColor,
                                       ),
-                                    ),
-                                    TextFormField(
-                                      controller: _intentionController3,
-                                      maxLines: 1,
-                                      decoration: InputDecoration(
-                                        hintText:
-                                            'Skriv din tredje intention her... ✏️',
-                                        focusedErrorBorder:
-                                            UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Constants.sduGoldColor,
+                                      TextFormField(
+                                        controller: _intentionController3,
+                                        maxLines: 1,
+                                        decoration: InputDecoration(
+                                          hintText:
+                                              'Skriv din tredje intention her... ✏️',
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Constants.sduGoldColor,
+                                            ),
                                           ),
+                                          focusColor: Constants.sduRedColor,
                                         ),
-                                        focusColor: Constants.sduRedColor,
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                                 actions: [
                                   // Add any actions/buttons here
