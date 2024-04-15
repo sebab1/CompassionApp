@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '/Presentation/Components/constants.dart';
-import '/Presentation/Components/Card.dart';
+import '/Presentation/Components/card.dart';
 import 'exercises.dart';
 import 'meditations.dart';
 import 'journalNew.dart';

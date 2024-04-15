@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:just_audio_background/just_audio_background.dart';
-import './Presentation/main_menu.dart';
 import './Presentation/Components/Constants.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'Presentation/Components/onboarding.dart';
 import 'injection_container.dart' as di;
 
 Future<void> main() async {
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: Main_menu(),
+      home: Onboarding(),
     );
   }
 }

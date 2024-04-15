@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'aboutCompassion.dart';
 import 'main_menu.dart';
 import '/Presentation/Components/constants.dart';
-import '/Presentation/Components/Card.dart';
+import '/Presentation/Components/card.dart';
 import 'kollega_cafe.dart';
 
 class Knowledge extends StatelessWidget {
