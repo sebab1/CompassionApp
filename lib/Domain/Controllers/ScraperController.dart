@@ -4,8 +4,8 @@ import 'package:chaleno/chaleno.dart';
 import 'package:compassion_app/Domain/Event.dart';
 import 'package:compassion_app/Domain/Controllers/IScraperController.dart';
 
-class ScraperController {
-  Future<List<Event>> initScraper() async {
+class ScraperController implements IScraperController{
+  Future<List<Event>> getEvents() async {
     final scraper = await Chaleno().load(
         'https://www.sdu.dk/da/forskning/center_for_compassion/kollegacafe/materiale');
 

@@ -1,7 +1,10 @@
 import 'package:compassion_app/Data/ISqlDatabase.dart';
 import 'package:compassion_app/Data/SqlDatabase.dart';
 import 'package:compassion_app/Domain/Controllers/IJournalController.dart';
+import 'package:compassion_app/Domain/Controllers/IScraperController.dart';
 import 'package:compassion_app/Domain/Controllers/JournalController.dart';
+import 'package:compassion_app/Domain/Controllers/ScraperController.dart';
+import 'package:compassion_app/Presentation/kollega_cafe.dart';
 import 'package:get_it/get_it.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -17,6 +20,9 @@ Future<void> init() async {
   var sql = SqlDatabase(sl());
 
   // await sql.deleteDatabase(await getDatabasesPath());
+  sl.registerLazySingleton<ScraperController>(() => ScraperController());
+
+  sl.registerLazySingleton<KollegaCafe>(() => KollegaCafe(sc: sl()));
 
   sl.registerLazySingleton<ISqlDatabase>(() => sql);
 

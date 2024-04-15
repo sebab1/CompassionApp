@@ -1,3 +1,4 @@
+import 'package:compassion_app/injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -48,7 +49,7 @@ class Knowledge extends StatelessWidget {
                 onTap: () {
                   debugPrint("Tabbed: Kollegacafé");
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => KollegaCafe()));
+                      MaterialPageRoute(builder: (context) => sl<KollegaCafe>()));
                 },
               ),
               CardWidget(

@@ -8,7 +8,9 @@ import 'Components/kollegacafeContent.dart';
 import 'Components/littleCard.dart';
 
 class KollegaCafe extends StatefulWidget {
-  const KollegaCafe({super.key});
+  final ScraperController sc;
+
+  const KollegaCafe({super.key, required this.sc});
 
   @override
   _KollegaCafeState createState() => _KollegaCafeState();
@@ -20,8 +22,7 @@ class _KollegaCafeState extends State<KollegaCafe> {
   @override
   void initState() {
     super.initState();
-    var sc = ScraperController();
-    events = sc.initScraper();
+    events = widget.sc.getEvents();
   }
 
   @override
