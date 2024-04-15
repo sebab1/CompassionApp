@@ -4,7 +4,7 @@ import 'package:compassion_app/Presentation/Components/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'Components/videoPlayer.dart';
+import 'Components/kollegacafeContent.dart';
 import 'Components/littleCard.dart';
 
 class KollegaCafe extends StatefulWidget {
