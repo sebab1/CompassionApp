@@ -1,4 +1,5 @@
 import 'package:compassion_app/Presentation/journalNew.dart';
+import 'package:compassion_app/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -79,25 +80,14 @@ class Home extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   borderCard(
-                    title: "Dagbog",
-                    iconPath: 'ion_calendar-outline.svg',
-                    underline: false,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const JournalNew()),
-                      );
-                    },
-                    trailingIconData: CupertinoIcons.chevron_forward,
-                  ),
-                  borderCard(
                     title: "Om compassion",
                     iconPath: 'icon-park_oval-love.svg',
                     underline: false,
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AboutCompassion()),
+                        MaterialPageRoute(
+                            builder: (context) => AboutCompassion()),
                       );
                     },
                     trailingIconData: CupertinoIcons.chevron_forward,

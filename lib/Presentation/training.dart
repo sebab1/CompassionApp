@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../injection_container.dart';
 import '/Presentation/Components/constants.dart';
 import '/Presentation/Components/card.dart';
 import 'Components/settings.dart';
@@ -79,19 +80,6 @@ class Training extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Exercises()),
-                  );
-                },
-              ),
-              CardWidget(
-                title: "Dagbog",
-                titleSize: 24,
-                subtitle:
-                    "Beskriv dagen dagbogskalenderen, eller sæt nogle positive intentioner for din dag.",
-                iconPath: 'ion_calendar-outline.svg',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const JournalNew()),
                   );
                 },
               ),

@@ -10,7 +10,9 @@ import '../injection_container.dart';
 import '/Presentation/Components/constants.dart';
 
 class JournalNew extends StatefulWidget {
-  const JournalNew({Key? key}) : super(key: key);
+  final IJournalController ijournalController;
+  const JournalNew({Key? key, required this.ijournalController})
+      : super(key: key);
 
   @override
   _JournalNewState createState() => _JournalNewState();
@@ -53,7 +55,7 @@ class _JournalNewState extends State<JournalNew> {
   @override
   void initState() {
     super.initState();
-    jc = sl<IJournalController>();
+    jc = widget.ijournalController;
     getData().then((value) => setState(() {
           this.selectedEvents = value;
         }));
