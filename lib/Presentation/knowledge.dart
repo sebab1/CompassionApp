@@ -2,8 +2,8 @@ import 'package:compassion_app/injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'Components/settings.dart';
 import 'aboutCompassion.dart';
-import 'main_menu.dart';
 import '/Presentation/Components/constants.dart';
 import '/Presentation/Components/card.dart';
 import 'kollega_cafe.dart';
@@ -12,7 +12,7 @@ class Knowledge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String textDesc =
-        "I denne sektion finder du en masse materialer omhandlende compassion og self-compassion, samt inspiration til hvordan andre mennesker vælge at omfavne det i deres liv og hverdag.";
+        "I denne sektion finder du en masse materialer omhandlende compassion og self-compassion, samt inspiration til hvordan andre mennesker vælger at omfavne det i deres liv og hverdag.";
 
     return Scaffold(
       appBar: AppBar(
@@ -20,10 +20,25 @@ class Knowledge extends StatelessWidget {
         title: Text(
           'Viden',
           style: TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-              color: Constants.kBlackColor),
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: Constants.kBlackColor,
+          ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.settings_outlined,
+              color: Constants.kBlackColor,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Settings()),
+              );
+            },
+          )
+        ],
         backgroundColor: Constants.sduRedColor,
       ),
       body: SingleChildScrollView(

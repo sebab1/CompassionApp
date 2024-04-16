@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '/Presentation/Components/constants.dart';
 import '/Presentation/Components/card.dart';
+import 'Components/settings.dart';
 import 'exercises.dart';
 import 'meditations.dart';
 import 'journalNew.dart';
@@ -25,6 +26,20 @@ class Training extends StatelessWidget {
             color: Constants.kBlackColor,
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.settings_outlined,
+              color: Constants.kBlackColor,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Settings()),
+              );
+            },
+          )
+        ],
         backgroundColor: Constants.sduRedColor,
       ),
       body: SingleChildScrollView(

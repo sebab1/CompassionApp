@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'Components/borderCard.dart';
 import '/Presentation/Components/constants.dart';
+import 'Components/settings.dart';
 import 'aboutCompassion.dart';
 
 class Home extends StatelessWidget {
@@ -20,6 +21,20 @@ class Home extends StatelessWidget {
             color: Constants.kBlackColor,
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.settings_outlined,
+              color: Constants.kBlackColor,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Settings()),
+              );
+            },
+          )
+        ],
         backgroundColor: Constants.sduRedColor,
       ),
       body: Center(
