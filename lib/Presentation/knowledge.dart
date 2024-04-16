@@ -17,7 +17,7 @@ class Knowledge extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Viden',
           style: TextStyle(
             fontSize: 28,
@@ -27,7 +27,7 @@ class Knowledge extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.settings_outlined,
               color: Constants.kBlackColor,
             ),
@@ -49,7 +49,7 @@ class Knowledge extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(20, 25, 20, 10),
                 child: Text(
                   textDesc,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Constants.kBlackColor,
                     fontSize: 16,
                   ),

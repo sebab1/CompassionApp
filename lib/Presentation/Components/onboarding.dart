@@ -32,12 +32,13 @@ class Onboarding extends StatelessWidget {
       done: const Text(
           'Fortsæt',
         style: TextStyle(
-            color: Constants.kWhiteColor
+            color: Constants.kWhiteColor,
+          fontSize: 18
         ),
       ),
       next: const Icon(
           Icons.arrow_forward,
-        size: 36,
+        size: 30,
         color: Constants.sduGoldColor,
       ),
       dotsDecorator: const DotsDecorator(

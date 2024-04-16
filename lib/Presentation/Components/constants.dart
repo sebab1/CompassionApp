@@ -13,6 +13,7 @@ class Constants {
   static const kCyanColor = Color(0xFF50E4FF);
   static const kYellowColor = Colors.yellow;
   static const kDarkBlueColor = Color(0xff151f43);
+  static const kDarkGreyColor = Colors.black54;
 
   static const sduRedColor = Color(0xffd15a56);
   static const sduWhiteColor = Color(0xffF9F8F8);
