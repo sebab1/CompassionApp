@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
 
+import 'Constants.dart';
+
 class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        centerTitle: true,
+        title: const Text(
+          'Træning',
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: Constants.kBlackColor,
+          ),
+        ),
+        backgroundColor: Constants.sduRedColor,
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
