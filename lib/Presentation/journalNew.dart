@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../injection_container.dart';
 import '/Presentation/Components/constants.dart';
+import 'Components/settings.dart';
 
 class JournalNew extends StatefulWidget {
   final IJournalController ijournalController;
@@ -87,13 +88,27 @@ class _JournalNewState extends State<JournalNew> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            'Dagbog',
+            'Dagbogsnotat',
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
               color: Constants.kBlackColor,
             ),
           ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.settings_outlined,
+                color: Constants.kBlackColor,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Settings()),
+                );
+              },
+            )
+          ],
           backgroundColor: Constants.sduRedColor,
         ),
         body: SingleChildScrollView(
