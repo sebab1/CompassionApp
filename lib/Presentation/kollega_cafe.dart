@@ -1,3 +1,4 @@
+import 'package:compassion_app/Domain/Controllers/IScraperController.dart';
 import 'package:compassion_app/Domain/Controllers/ScraperController.dart';
 import 'package:compassion_app/Presentation/Components/borderCard.dart';
 import 'package:compassion_app/Presentation/Components/constants.dart';
@@ -8,7 +9,7 @@ import 'Components/kollegacafeContent.dart';
 import 'Components/littleCard.dart';
 
 class KollegaCafe extends StatefulWidget {
-  final ScraperController sc;
+  final IScraperController sc;
 
   const KollegaCafe({super.key, required this.sc});
 

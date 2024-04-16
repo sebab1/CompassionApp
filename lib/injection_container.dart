@@ -4,6 +4,7 @@ import 'package:compassion_app/Domain/Controllers/IJournalController.dart';
 import 'package:compassion_app/Domain/Controllers/IScraperController.dart';
 import 'package:compassion_app/Domain/Controllers/JournalController.dart';
 import 'package:compassion_app/Domain/Controllers/ScraperController.dart';
+import 'package:compassion_app/Presentation/journalNew.dart';
 import 'package:compassion_app/Presentation/kollega_cafe.dart';
 import 'package:get_it/get_it.dart';
 import 'package:path/path.dart';
@@ -20,13 +21,16 @@ Future<void> init() async {
   var sql = SqlDatabase(sl());
 
   // await sql.deleteDatabase(await getDatabasesPath());
-  sl.registerLazySingleton<ScraperController>(() => ScraperController());
+  sl.registerLazySingleton<IScraperController>(() => ScraperController());
 
   sl.registerLazySingleton<KollegaCafe>(() => KollegaCafe(sc: sl()));
 
   sl.registerLazySingleton<ISqlDatabase>(() => sql);
 
   sl.registerLazySingleton<IJournalController>(() => JournalController(sl()));
+
+  sl.registerLazySingleton<JournalNew>(
+      () => JournalNew(ijournalController: sl()));
 }
 
 Future<Database> _initDatabase() async {
@@ -45,7 +49,6 @@ Future<Database> _initDatabase() async {
       db.execute(entriesTable);
       db.execute(activityJournalTable);
       db.execute(intentionTable);
-
     },
     version: 1,
   );

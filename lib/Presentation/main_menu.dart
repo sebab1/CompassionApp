@@ -1,6 +1,9 @@
+import 'package:compassion_app/Presentation/journalNew.dart';
 import 'package:compassion_app/Presentation/knowledge.dart';
+import 'package:compassion_app/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import './Components/constants.dart';
 import './home.dart';
@@ -63,11 +66,7 @@ class _Main_menuState extends State<Main_menu> {
   }
 
   List<Widget> _buildScreens() {
-    return [
-      Home(),
-      Training(),
-      Knowledge(),
-    ];
+    return [Home(), Training(), Knowledge(), sl<JournalNew>()];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -90,6 +89,14 @@ class _Main_menuState extends State<Main_menu> {
         activeColorPrimary: activeColor,
         inactiveColorPrimary: unSelectedColor,
       ),
+      PersistentBottomNavBarItem(
+        icon: Container(
+          child: SvgPicture.asset('assets/icons/ion_calendar-outline.svg'),
+        ),
+        title: "Dagbogsnotat",
+        activeColorPrimary: activeColor,
+        inactiveColorPrimary: unSelectedColor,
+      )
     ];
   }
 }
