@@ -3,9 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'Components/settings.dart';
-import 'aboutCompassion.dart';
+import 'dsaArticle.dart';
 import '/Presentation/Components/constants.dart';
 import '/Presentation/Components/card.dart';
+import 'aboutCompassionMenu.dart';
 import 'kollega_cafe.dart';
 
 class Knowledge extends StatelessWidget {
@@ -78,7 +79,7 @@ class Knowledge extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const AboutCompassion()));
+                          builder: (context) => AboutCompassionMenu()));
                 },
               ),
               const SizedBox(height: 24),

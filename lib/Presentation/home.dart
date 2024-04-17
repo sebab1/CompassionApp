@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'Components/borderCard.dart';
 import '/Presentation/Components/constants.dart';
 import 'Components/settings.dart';
-import 'aboutCompassion.dart';
+import 'aboutCompassionMenu.dart';
 
 class Home extends StatelessWidget {
 
@@ -93,7 +93,7 @@ class Home extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AboutCompassion()),
+                            builder: (context) => AboutCompassionMenu()),
                       );
                     },
                     trailingIconData: CupertinoIcons.chevron_forward,

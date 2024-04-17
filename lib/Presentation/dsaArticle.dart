@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '/Presentation/Components/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AboutCompassion extends StatelessWidget {
-  const AboutCompassion({Key? key}) : super(key: key);
+class DsaArticle extends StatelessWidget {
+  const DsaArticle({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
