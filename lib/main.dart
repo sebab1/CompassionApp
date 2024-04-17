@@ -1,12 +1,14 @@
+import 'package:background_fetch/background_fetch.dart';
 import 'package:compassion_app/Domain/notification_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 import 'package:just_audio_background/just_audio_background.dart';
 import './Presentation/Components/Constants.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'Presentation/Components/onboarding.dart';
 import 'injection_container.dart' as di;
+
 
 Future<void> main() async {
   await JustAudioBackground.init(
@@ -15,11 +17,13 @@ Future<void> main() async {
     androidNotificationOngoing: true
   );
 
-
-
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
-  await NotificationApi.initialize();
+   NotificationApi notificationApi = NotificationApi();
+   await notificationApi.initialize();
+
+
+  
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
