@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationApi {
@@ -5,14 +7,18 @@ class NotificationApi {
 
 
 
-static void initialize() {
+static Future<void> initialize() async {
     // Initialization  setting for android
 const AndroidInitializationSettings initializationSettingsAndroid =
-    AndroidInitializationSettings('app_icon');
+    AndroidInitializationSettings('ic_launcher');
+
+    _notifications.resolvePlatformSpecificImplementation<
+    AndroidFlutterLocalNotificationsPlugin>()?.requestNotificationsPermission();
 
     final InitializationSettings initializationSettings = InitializationSettings(
     android: initializationSettingsAndroid);
-    _notifications.initialize(
+
+    await _notifications.initialize(
       initializationSettings,
       // to handle event when we receive notification 
       onDidReceiveNotificationResponse: (details) => null
@@ -21,7 +27,7 @@ const AndroidInitializationSettings initializationSettingsAndroid =
 
   static Future _notificationDetails() async {
     return NotificationDetails(
-      android: AndroidNotificationDetails('channel id', 'channel name', channelDescription: 'channel description', importance: Importance.max, priority: Priority.high, ticker: 'ticker'),
+      android: AndroidNotificationDetails('channel id', 'channel name', channelDescription: 'channel description', importance: Importance.max, priority: Priority.high, ticker: 'ticker', color: Color(0xffd15a56)),
       iOS: DarwinNotificationDetails(),
     );
   }

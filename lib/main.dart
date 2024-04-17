@@ -19,7 +19,7 @@ Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
-  NotificationApi.initialize();
+  await NotificationApi.initialize();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);

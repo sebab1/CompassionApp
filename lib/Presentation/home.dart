@@ -34,7 +34,7 @@ class Home extends StatelessWidget {
             onPressed: () async {
 
               
-              await NotificationApi.showNotification(title: '123', body: '321', payload: '123.ab');
+              await NotificationApi.showNotification(title: 'Compassion App', body: 'Hej! Måske trænger du til tid til afstresning med en dagbogsindtastning eller meditation.', payload: '123.ab');
               // Navigator.push(
               //   context,
               //   MaterialPageRoute(builder: (context) => Settings()),
