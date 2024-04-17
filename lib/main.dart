@@ -1,5 +1,7 @@
+import 'package:compassion_app/Domain/notification_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import './Presentation/Components/Constants.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -13,8 +15,11 @@ Future<void> main() async {
     androidNotificationOngoing: true
   );
 
+
+
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
+  NotificationApi.initialize();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
