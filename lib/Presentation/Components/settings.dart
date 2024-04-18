@@ -9,7 +9,7 @@ class Settings extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          'Træning',
+          'Indstillinger',
           style: TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.bold,

@@ -22,6 +22,8 @@ class JournalNew extends StatefulWidget {
 class _JournalNewState extends State<JournalNew> {
   Map<String, List<JournalEvent>>? selectedEvents;
 
+  List<bool> intentionCb = [false, false, false];
+
   late IJournalController jc;
 
   DateTime today = DateTime.now();
@@ -124,7 +126,6 @@ class _JournalNewState extends State<JournalNew> {
               );
             },
           ),
-
           backgroundColor: Constants.sduRedColor,
         ),
         body: SingleChildScrollView(
@@ -186,15 +187,14 @@ class _JournalNewState extends State<JournalNew> {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Din dagbog for d. " +
-                        DateFormat('dd/MM').format(_selectedDay),
+                    "Din dagbog",
                     style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.normal),
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(20, 0, 0, 12),
+                margin: EdgeInsets.fromLTRB(20, 0, 20, 12),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -206,33 +206,24 @@ class _JournalNewState extends State<JournalNew> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(20, 10, 0, 0),
+                margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Dine intentioner for d. " +
-                        DateFormat('dd/MM').format(_selectedDay),
+                    "Dine intentioner",
                     style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.normal),
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(20, 0, 0, 20),
+                margin: EdgeInsets.fromLTRB(6, 0, 6, 10),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: _getEventsForDay(_selectedDay).length > 0 &&
-                      _getEventsForDay(_selectedDay).first.intentions !=
-                          null
-                      ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: _getEventsForDay(_selectedDay)
-                        .first
-                        .intentions!
-                        .split(';#')
-                        .map((intention) => Text('• $intention'))
-                        .toList(),
-                  )
+                          _getEventsForDay(_selectedDay).first.intentions !=
+                              null
+                      ? intentionLayout()
                       : Text('Ikke udfyldt for denne dato'),
                 ),
               ),
@@ -529,6 +520,38 @@ class _JournalNewState extends State<JournalNew> {
       );
     }
   }
+
+  Widget intentionLayout() {
+    List<String> intentions = _getEventsForDay(_selectedDay)
+        .first
+        .intentions!
+        .split(';#')
+        .where((element) => element != '')
+        .toList();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: intentions.length,
+            itemBuilder: (context, index) {
+              String intention = intentions[index];
+              return CheckboxListTile(
+                title: Text(intention),
+                onChanged: (bool? value) {
+                  setState(() {
+                    intentionCb[index] = value!;
+                  });
+                },
+                value: intentionCb[index],
+                //visualDensity: VisualDensity.compact,
+                activeColor: Constants.kGreenColor,
+              );
+            })
+      ],
+    );
+  }
 }
 
 
@@ -536,24 +559,17 @@ class InfoDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Om Dagbogsnotat'),
-      content: const SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text(
-            'Dagbogsnotat er et redskab du kan bruge til refleksion og selvudvikling. '
-                'Du kan skrive dine umiddelbare tanker og følelser ned, eller blot hvad '
-                'du har oplevet i dag på godt og ondt. '
-                '\n'
-                'Ved at tilføje nye intentioner kan du også sætte dig personlige mål for dagen.'
-                '\n'
-                '\n'
-                'Hverken dagbogsnotaterne eller dine personlige intentioner deles eller gemmes '
-                'andre steder, så det er kun dig der kan se indholdet her.',
-            //textAlign: TextAlign.center,
-          ),
-        ),
-      ),
+      title: Text('Om Dagbogsnotat'),
+      content: Text(
+          'Dagbogsnotat er et redskab du kan bruge til refleksion og selvudvikling. '
+          'Du kan skrive dine umiddelbare tanker og følelser ned, eller bare hvad '
+          'du har oplevet i dag, på godt og ondt. '
+          '\n'
+          'Ved at tilføje nye intentioner kan du også sætte dig personlige mål for dagen.'
+          '\n'
+          '\n'
+          'Hverken dagbogsnotaterne eller dine personlige intentioner deles og gemmes '
+          'ikke andre steder, så det er kun dig der kan se indholdet her.'),
       actions: <Widget>[
         TextButton(
           onPressed: () {
@@ -561,9 +577,7 @@ class InfoDialog extends StatelessWidget {
           },
           child: const Text(
             'OK',
-            style: TextStyle(
-              color: Constants.kBlackColor,
-            ),
+            style: TextStyle(color: Constants.kBlackColor),
           ),
         ),
       ],
