@@ -46,8 +46,8 @@ class _JournalNewState extends State<JournalNew> {
 
   void refreshData() {
     getData().then((value) => setState(() {
-      selectedEvents = value;
-    }));
+          selectedEvents = value;
+        }));
   }
 
   List<JournalEvent> _getEventsForDay(DateTime day) {
@@ -60,8 +60,8 @@ class _JournalNewState extends State<JournalNew> {
     super.initState();
     jc = widget.ijournalController;
     getData().then((value) => setState(() {
-      this.selectedEvents = value;
-    }));
+          this.selectedEvents = value;
+        }));
 
     _journalController = TextEditingController();
     _intentionController1 = TextEditingController();
@@ -80,7 +80,6 @@ class _JournalNewState extends State<JournalNew> {
 
   @override
   Widget build(BuildContext context) {
-    bool isCurrentDaySelected = isSameDay(today, DateTime.now());
     if (selectedEvents == null) {
       return Center(
         child: CircularProgressIndicator(),
@@ -128,6 +127,8 @@ class _JournalNewState extends State<JournalNew> {
           ),
           backgroundColor: Constants.sduRedColor,
         ),
+        floatingActionButton: floatingButtons(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -199,9 +200,10 @@ class _JournalNewState extends State<JournalNew> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     _getEventsForDay(_selectedDay).length > 0 &&
-                        _getEventsForDay(_selectedDay).first.journal != null
+                            _getEventsForDay(_selectedDay).first.journal != null
                         ? _getEventsForDay(_selectedDay).first.journal as String
                         : 'Ikke udfyldt for denne dato',
+                    style: TextStyle(fontSize: 16),
                   ),
                 ),
               ),
@@ -224,296 +226,14 @@ class _JournalNewState extends State<JournalNew> {
                           _getEventsForDay(_selectedDay).first.intentions !=
                               null
                       ? intentionLayout()
-                      : Text('Ikke udfyldt for denne dato'),
+                      : Container(
+                          margin: EdgeInsets.fromLTRB(14, 0, 6, 10),
+                          child: Text('Ikke udfyldt for denne dato')),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: isCurrentDaySelected
-                        ? () {
-                      var selected = _getEventsForDay(_selectedDay);
-                      if (selected.isNotEmpty &&
-                          selected.first.journal != null) {
-                        _journalController.text =
-                        selected.first.journal as String;
-                      }
-                      debugPrint("Pressed");
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: Text('Tilføj dagbog for i dag'),
-                          content: TextFormField(
-                            autofocus: true,
-                            controller: _journalController,
-                            maxLines: 6,
-                            decoration: InputDecoration(
-                              hintText: 'Skriv din dagbog her... ✏️',
-                            ),
-                          ),
-                          actions: [
-                            // Add any actions/buttons here
-                            TextButton(
-                              child: const Text(
-                                'Luk',
-                                style: TextStyle(
-                                  color:
-                                  Constants.kBlackColor, // Text color
-                                  fontSize: 16.0, // Font size
-                                  // Add more styles as needed
-                                ),
-                              ),
-                              onPressed: () {
-                                _journalController.clear();
-                                Navigator.pop(context);
-                              },
-                            ),
-                            TextButton(
-                              child: const Text(
-                                'Gem',
-                                style: TextStyle(
-                                  color:
-                                  Constants.kBlackColor, // Text color
-                                  fontSize: 16.0, // Font size
-                                  // Add more styles as needed
-                                ),
-                              ),
-                              onPressed: () {
-                                if (_journalController.text.isEmpty) {
-                                  _journalController.clear();
-                                  Navigator.pop(context);
-                                  return;
-                                } else {
-                                  int? entry_id =
-                                  _getEventsForDay(_selectedDay)
-                                      .isNotEmpty
-                                      ? _getEventsForDay(_selectedDay)
-                                      .first
-                                      .entry_ID
-                                      : null;
-                                  String content =
-                                      _journalController.text;
-                                  print('pressed: $entry_id');
-                                  print('Activity content: $content');
-                                  if (entry_id == null) {
-                                    print('new entry');
-                                    jc
-                                        .saveEntry(_selectedDay)
-                                        .then((id) => {
-                                      print('adding activity'),
-                                      jc
-                                          .saveActivity(
-                                          id, content)
-                                          .then((value) =>
-                                          refreshData())
-                                    });
-                                  } else {
-                                    print('updating activity');
-                                    jc
-                                        .saveActivity(entry_id, content)
-                                        .then((value) => refreshData());
-                                  }
-
-                                  Navigator.pop(context);
-                                }
-                              },
-                            ),
-                          ],
-                        ),
-                      );
-                    }
-                        : null,
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      disabledBackgroundColor: Constants.sduGreyColor,
-                      backgroundColor: Constants.sduGoldColor,
-                    ),
-                    child: Text(
-                      "Tilføj ny journal",
-                      style: TextStyle(
-                        color: isCurrentDaySelected
-                            ? Constants.kBlackColor // Text color when enabled
-                            : Constants.kGreyColor, // Text color when disabled
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: isCurrentDaySelected
-                        ? () {
-                      List<JournalEvent> selected =
-                      _getEventsForDay(_selectedDay);
-
-                      List<TextEditingController> intentionsController = [
-                        _intentionController1,
-                        _intentionController2,
-                        _intentionController3
-                      ];
-                      List<String>? intentions = selected.isNotEmpty
-                          ? selected.first.intentions?.split(';#')
-                          : null;
-
-                      if (intentions != null) {
-                        for (var i = 0;
-                        i < intentionsController.length;
-                        i++) {
-                          TextEditingController c =
-                          intentionsController[i];
-
-                          c.text = intentions[i];
-                        }
-                      }
-
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: Text('Tilføj intentioner for i dag'),
-                          content: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                TextFormField(
-                                  autofocus: true,
-                                  controller: _intentionController1,
-                                  maxLines: 1,
-                                  decoration: InputDecoration(
-                                    hintText:
-                                    'Skriv en intention her... ✏️',
-                                    focusedErrorBorder:
-                                    UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Constants.sduGoldColor,
-                                      ),
-                                    ),
-                                    focusColor: Constants.sduRedColor,
-                                  ),
-                                ),
-                                TextFormField(
-                                  controller: _intentionController2,
-                                  maxLines: 1,
-                                  decoration: InputDecoration(
-                                    hintText:
-                                    'Skriv din anden intention her... ✏️',
-                                    focusedErrorBorder:
-                                    UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Constants.sduGoldColor,
-                                      ),
-                                    ),
-                                    focusColor: Constants.sduRedColor,
-                                  ),
-                                ),
-                                TextFormField(
-                                  controller: _intentionController3,
-                                  maxLines: 1,
-                                  decoration: InputDecoration(
-                                    hintText:
-                                    'Skriv din tredje intention her... ✏️',
-                                    focusedErrorBorder:
-                                    UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Constants.sduGoldColor,
-                                      ),
-                                    ),
-                                    focusColor: Constants.sduRedColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          actions: [
-                            // Add any actions/buttons here
-                            TextButton(
-                              child: const Text(
-                                'Luk',
-                                style: TextStyle(
-                                  color: Constants.kBlackColor,
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              onPressed: () {
-                                _intentionController1.clear();
-                                _intentionController2.clear();
-                                _intentionController3.clear();
-                                Navigator.pop(context);
-                              },
-                            ),
-                            TextButton(
-                              child: const Text(
-                                //Knap til intentioner
-                                'Gem',
-                                style: TextStyle(
-                                  color: Constants.kBlackColor,
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              onPressed: () {
-                                // Handle 'Tilføj' button press
-                                if (_intentionController1.text.isEmpty &&
-                                    _intentionController2.text.isEmpty &&
-                                    _intentionController3.text.isEmpty) {
-                                  // Handle case when all three fields are empty
-                                  Navigator.pop(context);
-                                  return;
-                                } else {
-                                  int? entry_id =
-                                  _getEventsForDay(_selectedDay)
-                                      .isNotEmpty
-                                      ? _getEventsForDay(_selectedDay)
-                                      .first
-                                      .entry_ID
-                                      : null;
-                                  String content = [
-                                    _intentionController1.text,
-                                    _intentionController2.text,
-                                    _intentionController3.text
-                                  ].join(';#');
-                                  print('pressed: $entry_id');
-                                  print('content: $content');
-                                  if (entry_id == null) {
-                                    print('new entry');
-                                    jc.saveEntry(_selectedDay).then(
-                                            (id) => jc
-                                            .saveIntentions(id, content)
-                                            .then((value) =>
-                                            refreshData()));
-                                  } else {
-                                    print('updating intention');
-                                    jc
-                                        .saveIntentions(entry_id, content)
-                                        .then((value) => refreshData());
-                                  }
-                                  Navigator.pop(context);
-                                }
-                              },
-                            ),
-                          ],
-                        ),
-                      );
-                    }
-                        : null,
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      disabledBackgroundColor: Constants.sduGreyColor,
-                      backgroundColor: Constants.sduGoldColor,
-                    ),
-                    child: Text(
-                      "Tilføj nye intentioner",
-                      style: TextStyle(
-                        color: isCurrentDaySelected
-                            ? Constants.kBlackColor // Text color when enabled
-                            : Constants.kGreyColor, // Text color when disabled
-                      ),
-                    ),
-                  ),
-                ],
               ),
               //Text("Get selected day: " + _selectedDay.toString()),
               //Text("Current day?: " + isCurrentDaySelected.toString()),
-              SizedBox(height: 20), // Add some space
+              SizedBox(height: 60), // Add some space
             ],
           ),
         ),
@@ -545,15 +265,296 @@ class _JournalNewState extends State<JournalNew> {
                   });
                 },
                 value: intentionCb[index],
-                //visualDensity: VisualDensity.compact,
+                visualDensity: const VisualDensity(vertical: -2.0),
                 activeColor: Constants.kGreenColor,
               );
             })
       ],
     );
   }
-}
 
+  Widget floatingButtons() {
+    bool isCurrentDaySelected = isSameDay(today, DateTime.now());
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        ElevatedButton(
+          onPressed: isCurrentDaySelected
+              ? () {
+                  var selected = _getEventsForDay(_selectedDay);
+                  if (selected.isNotEmpty && selected.first.journal != null) {
+                    _journalController.text = selected.first.journal as String;
+                  }
+                  debugPrint("Pressed");
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Tilføj dagbog for i dag'),
+                      content: TextFormField(
+                        autofocus: true,
+                        controller: _journalController,
+                        maxLines: 6,
+                        decoration: InputDecoration(
+                          hintText: 'Skriv din dagbog her... ✏️',
+                        ),
+                      ),
+                      actions: [
+                        // Add any actions/buttons here
+                        TextButton(
+                          child: const Text(
+                            'Luk',
+                            style: TextStyle(
+                              color: Constants.kBlackColor, // Text color
+                              fontSize: 16.0, // Font size
+                              // Add more styles as needed
+                            ),
+                          ),
+                          onPressed: () {
+                            _journalController.clear();
+                            Navigator.pop(context);
+                          },
+                        ),
+                        TextButton(
+                          child: const Text(
+                            'Gem',
+                            style: TextStyle(
+                              color: Constants.kBlackColor, // Text color
+                              fontSize: 16.0, // Font size
+                              // Add more styles as needed
+                            ),
+                          ),
+                          onPressed: () {
+                            if (_journalController.text.isEmpty) {
+                              _journalController.clear();
+                              Navigator.pop(context);
+                              return;
+                            } else {
+                              int? entry_id =
+                                  _getEventsForDay(_selectedDay).isNotEmpty
+                                      ? _getEventsForDay(_selectedDay)
+                                          .first
+                                          .entry_ID
+                                      : null;
+                              String content = _journalController.text;
+                              print('pressed: $entry_id');
+                              print('Activity content: $content');
+                              if (entry_id == null) {
+                                print('new entry');
+                                jc.saveEntry(_selectedDay).then((id) => {
+                                      print('adding activity'),
+                                      jc
+                                          .saveActivity(id, content)
+                                          .then((value) => refreshData())
+                                    });
+                              } else {
+                                print('updating activity');
+                                jc
+                                    .saveActivity(entry_id, content)
+                                    .then((value) => refreshData());
+                              }
+
+                              Navigator.pop(context);
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              : null,
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            disabledBackgroundColor: Constants.sduGreyColor,
+            backgroundColor: Constants.sduGoldColor,
+          ),
+          child: Row(
+            children: [
+              Icon(Icons.edit_note_outlined,
+                  color: isCurrentDaySelected
+                      ? Constants.kBlackColor // Text color when enabled
+                      : Constants.kGreyColor),
+              Text(
+                "Dagbog",
+                style: TextStyle(
+                  color: isCurrentDaySelected
+                      ? Constants.kBlackColor // Text color when enabled
+                      : Constants.kGreyColor, // Text color when disabled
+                ),
+              ),
+            ],
+          ),
+        ),
+        ElevatedButton(
+          onPressed: isCurrentDaySelected
+              ? () {
+                  List<JournalEvent> selected = _getEventsForDay(_selectedDay);
+
+                  List<TextEditingController> intentionsController = [
+                    _intentionController1,
+                    _intentionController2,
+                    _intentionController3
+                  ];
+                  List<String>? intentions = selected.isNotEmpty
+                      ? selected.first.intentions?.split(';#')
+                      : null;
+
+                  if (intentions != null) {
+                    for (var i = 0; i < intentionsController.length; i++) {
+                      TextEditingController c = intentionsController[i];
+
+                      c.text = intentions[i];
+                    }
+                  }
+
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Tilføj intentioner for i dag'),
+                      content: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              autofocus: true,
+                              controller: _intentionController1,
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                hintText: 'Skriv en intention her... ✏️',
+                                focusedErrorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Constants.sduGoldColor,
+                                  ),
+                                ),
+                                focusColor: Constants.sduRedColor,
+                              ),
+                            ),
+                            TextFormField(
+                              controller: _intentionController2,
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                hintText: 'Skriv din anden intention her... ✏️',
+                                focusedErrorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Constants.sduGoldColor,
+                                  ),
+                                ),
+                                focusColor: Constants.sduRedColor,
+                              ),
+                            ),
+                            TextFormField(
+                              controller: _intentionController3,
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                hintText:
+                                    'Skriv din tredje intention her... ✏️',
+                                focusedErrorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Constants.sduGoldColor,
+                                  ),
+                                ),
+                                focusColor: Constants.sduRedColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      actions: [
+                        // Add any actions/buttons here
+                        TextButton(
+                          child: const Text(
+                            'Luk',
+                            style: TextStyle(
+                              color: Constants.kBlackColor,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                          onPressed: () {
+                            _intentionController1.clear();
+                            _intentionController2.clear();
+                            _intentionController3.clear();
+                            Navigator.pop(context);
+                          },
+                        ),
+                        TextButton(
+                          child: const Text(
+                            //Knap til intentioner
+                            'Gem',
+                            style: TextStyle(
+                              color: Constants.kBlackColor,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                          onPressed: () {
+                            // Handle 'Tilføj' button press
+                            if (_intentionController1.text.isEmpty &&
+                                _intentionController2.text.isEmpty &&
+                                _intentionController3.text.isEmpty) {
+                              // Handle case when all three fields are empty
+                              Navigator.pop(context);
+                              return;
+                            } else {
+                              int? entry_id =
+                                  _getEventsForDay(_selectedDay).isNotEmpty
+                                      ? _getEventsForDay(_selectedDay)
+                                          .first
+                                          .entry_ID
+                                      : null;
+                              String content = [
+                                _intentionController1.text,
+                                _intentionController2.text,
+                                _intentionController3.text
+                              ].join(';#');
+                              print('pressed: $entry_id');
+                              print('content: $content');
+                              if (entry_id == null) {
+                                print('new entry');
+                                jc.saveEntry(_selectedDay).then((id) => jc
+                                    .saveIntentions(id, content)
+                                    .then((value) => refreshData()));
+                              } else {
+                                print('updating intention');
+                                jc
+                                    .saveIntentions(entry_id, content)
+                                    .then((value) => refreshData());
+                              }
+                              Navigator.pop(context);
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              : null,
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            disabledBackgroundColor: Constants.sduGreyColor,
+            backgroundColor: Constants.sduGoldColor,
+          ),
+          child: Row(
+            children: [
+              Icon(Icons.edit_note_outlined,
+                  color: isCurrentDaySelected
+                      ? Constants.kBlackColor // Text color when enabled
+                      : Constants.kGreyColor),
+              Text(
+                "Intentioner",
+                style: TextStyle(
+                  color: isCurrentDaySelected
+                      ? Constants.kBlackColor // Text color when enabled
+                      : Constants.kGreyColor, // Text color when disabled
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
 
 class InfoDialog extends StatelessWidget {
   @override
