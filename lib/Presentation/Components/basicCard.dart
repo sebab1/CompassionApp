@@ -1,50 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import './constants.dart';
 
-class littleCard extends StatelessWidget {
-  //const littleCard({super.key});
-
+class BasicCard extends StatelessWidget {
   final String title;
   final IconData? iconData;
   final VoidCallback onTap;
   final double titleSize;
-  final String? customIcon;
+  final double? iconSize; // Make iconSize optional
 
-  const littleCard({
-    super.key,
+  const BasicCard({
+    Key? key,
     required this.title,
     this.iconData,
     required this.onTap,
     required this.titleSize,
-    this.customIcon,
-  });
-
-  Widget iconContainer(IconData? icon) {
-    if (iconData != null) {
-      return Container(
-        margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
-        child: Icon(
-          iconData,
-          size: 60,
-        ),
-      );
-    } else {
-      return Container(
-        margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
-        child: SvgPicture.asset(
-          'assets/icons/$customIcon',
-          width: 60,
-          height: 60,
-        ),
-      );
-    }
-  }
+    this.iconSize, // Declare iconSize as optional
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -56,7 +31,14 @@ class littleCard extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              iconContainer(iconData),
+              if (iconData != null) // Check if the icon is provided
+                Container(
+                  margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                  child: Icon(
+                    iconData,
+                    size: iconSize ?? 60, // Use iconSize if provided, otherwise default to 60
+                  ),
+                ),
               Expanded(
                 child: Center(
                   child: Container(
@@ -67,8 +49,7 @@ class littleCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
                       style: TextStyle(
-                          fontSize: titleSize,
-                          //fontWeight: FontWeight.bold
+                        fontSize: titleSize,
                       ),
                     ),
                   ),

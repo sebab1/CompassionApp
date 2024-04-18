@@ -1,7 +1,7 @@
 import 'package:compassion_app/Presentation/dsaArticle.dart';
 import 'package:flutter/material.dart';
 import 'Components/Constants.dart';
-import 'Components/littleCard.dart';
+import 'Components/basicCard.dart';
 
 class AboutCompassionMenu extends StatelessWidget {
   @override
@@ -45,9 +45,8 @@ class AboutCompassionMenu extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.symmetric(vertical: 4),
               children: <Widget>[
-                littleCard(
-                  title: 'Artikel om compassion',
-                  iconData: Icons.home,
+                BasicCard(
+                  title: 'Oversygeplejerske stjal 5 minutter hver dag til meditation',
                   onTap: () {
                     debugPrint("Tabbed: Om compassion");
                     Navigator.push(
@@ -55,21 +54,23 @@ class AboutCompassionMenu extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => DsaArticle()));
                   },
-                  titleSize: 18,
+                  titleSize: 14,
                 ),
                 SizedBox(height: 8), // Add vertical margin between menu items
-                littleCard(
-                  title: 'Title 2',
-                  iconData: Icons.settings,
+                BasicCard(
+                  title: 'Hvad er compassion?',
+                  iconData: Icons.library_books_outlined,
+                  iconSize: 30,
                   onTap: () {
                     // Handle onTap event
                   },
                   titleSize: 18,
                 ),
                 SizedBox(height: 8), // Add vertical margin between menu items
-                littleCard(
-                  title: 'Title 3',
-                  iconData: Icons.book,
+                BasicCard(
+                  title: 'Vigtigheden af self-compassion',
+                  iconData: Icons.library_books_outlined,
+                  iconSize: 30,
                   onTap: () {
                     // Handle onTap event
                   },

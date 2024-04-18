@@ -5,7 +5,7 @@ import '/Presentation/Components/constants.dart';
 import 'cardData.dart';
 
 // -------------- Deklarerer alle menu-punkter -----------------
-List<CardData> cards = [
+List<CardData> cardsBeginner = [
   // 1.
   CardData(
       "5 minutters meditation",
@@ -34,6 +34,9 @@ List<CardData> cards = [
       "assets/sounds/Meditation_4_Opmaerksomhedstraening_med_aandedraettet.mp3",
       null,
       'cil_audio.svg'),
+];
+
+List<CardData> cardsIntermediate = [
   // 5.
   CardData(
       "Vejrtrækning med maven",
@@ -55,6 +58,9 @@ List<CardData> cards = [
       "assets/sounds/Meditation_7_Vejrtraekningen_som_anker_og_en_dejlig_dag.mp3",
       null,
       'cil_audio.svg'),
+];
+
+List<CardData> cardsExperienced = [
   // 8.
   CardData(
       "Vejrtrækningsøvelse",
@@ -88,7 +94,7 @@ class Meditations extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Meditationer',
           style: TextStyle(
             fontSize: 28,
@@ -125,12 +131,25 @@ class Meditations extends StatelessWidget {
                   ),
                 ),
               ),
+
+              // ---------- Beginner level ---------------
+              Container(
+                padding: EdgeInsets.fromLTRB(25, 20, 25, 0),
+                child: const Text(
+                  "Begynder-niveau",
+                  style: TextStyle(
+                    color: Constants.kBlackColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
               ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: cards.length,
+                  itemCount: cardsBeginner.length,
                   itemBuilder: (context, index) {
-                    CardData card = cards[index];
+                    CardData card = cardsBeginner[index];
                     return Container(
                       margin: EdgeInsets.fromLTRB(0, 4, 0, 4),
                       child: Align(
@@ -149,14 +168,110 @@ class Meditations extends StatelessWidget {
                                         desc: card.desc,
                                         audio: card.audioPath,
                                         category: 'Meditation',
-                                      )),
+                                      )
+                              ),
                             );
                           },
                           titleSize: 17,
                         ),
                       ),
                     );
-                  }),
+                  }
+              ),
+
+              // ------------- Intermediate level -----------------
+              Container(
+                padding: EdgeInsets.fromLTRB(25, 30, 25, 0),
+                child: const Text(
+                  "Middel-niveau",
+                  style: TextStyle(
+                    color: Constants.kBlackColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: cardsIntermediate.length,
+                  itemBuilder: (context, index) {
+                    CardData card = cardsIntermediate[index];
+                    return Container(
+                      margin: EdgeInsets.fromLTRB(0, 4, 0, 4),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: littleCard(
+                          title: card.title,
+                          iconData: card.icon,
+                          customIcon: card.customIcon!,
+                          onTap: () {
+                            debugPrint("Card tabbed");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Audio(
+                                    title: card.title,
+                                    desc: card.desc,
+                                    audio: card.audioPath,
+                                    category: 'Meditation',
+                                  )
+                              ),
+                            );
+                          },
+                          titleSize: 17,
+                        ),
+                      ),
+                    );
+                  }
+              ),
+
+              // ------------- Experienced level -----------------
+              Container(
+                padding: EdgeInsets.fromLTRB(25, 30, 25, 0),
+                child: const Text(
+                  "Erfaren-niveau",
+                  style: TextStyle(
+                    color: Constants.kBlackColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: cardsExperienced.length,
+                  itemBuilder: (context, index) {
+                    CardData card = cardsExperienced[index];
+                    return Container(
+                      margin: EdgeInsets.fromLTRB(0, 4, 0, 4),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: littleCard(
+                          title: card.title,
+                          iconData: card.icon,
+                          customIcon: card.customIcon!,
+                          onTap: () {
+                            debugPrint("Card tabbed");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Audio(
+                                    title: card.title,
+                                    desc: card.desc,
+                                    audio: card.audioPath,
+                                    category: 'Meditation',
+                                  )
+                              ),
+                            );
+                          },
+                          titleSize: 17,
+                        ),
+                      ),
+                    );
+                  }
+              ),
               const SizedBox(height: 20),
             ],
           ),

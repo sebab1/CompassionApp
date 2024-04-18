@@ -7,7 +7,7 @@ import '/Presentation/Components/constants.dart';
 import 'cardData.dart';
 
 // ------------- Deklarerer alle menu-punkter -------------------
-List<CardData> cards = [
+List<CardData> cardsBeginner = [
   // 1.
   CardData(
       "Angst og svære følelser",
@@ -29,6 +29,9 @@ List<CardData> cards = [
       "assets/sounds/Oevelse_3_Compassion_vejrtraekning.mp3",
       null,
       'cil_audio.svg'),
+];
+
+List<CardData> cardsIntermediate = [
   // 4.
   CardData(
       "Før arbejde",
@@ -43,6 +46,9 @@ List<CardData> cards = [
       "assets/sounds/Oevelse_5_Efterarbejde.mp3",
       null,
       'cil_audio.svg'),
+];
+
+List<CardData> cardsExperienced = [
   // 6.
   CardData(
       "Vejrtrækning 1234",
@@ -66,7 +72,7 @@ class Exercises extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Øvelser',
           style: TextStyle(
             fontSize: 28,
@@ -103,12 +109,25 @@ class Exercises extends StatelessWidget {
                   ),
                 ),
               ),
+
+              // ------------ Beginner level --------------
+              Container(
+                padding: EdgeInsets.fromLTRB(25, 20, 25, 0),
+                child: const Text(
+                  "Begynder-niveau",
+                  style: TextStyle(
+                    color: Constants.kBlackColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
               ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: cards.length,
+                  itemCount: cardsBeginner.length,
                   itemBuilder: (context, index) {
-                    CardData card = cards[index];
+                    CardData card = cardsBeginner[index];
                     return Container(
                       margin: EdgeInsets.fromLTRB(0, 4, 0, 4),
                       child: Align(
@@ -127,7 +146,100 @@ class Exercises extends StatelessWidget {
                                         desc: card.desc,
                                         audio: card.audioPath,
                                         category: 'Øvelser',
-                                      )),
+                                      )
+                              ),
+                            );
+                          },
+                          titleSize: 17,
+                        ),
+                      ),
+                    );
+                  }),
+
+              // --------------- Intermediate level -----------------
+              Container(
+                padding: EdgeInsets.fromLTRB(25, 30, 25, 0),
+                child: const Text(
+                  "Middel-niveau",
+                  style: TextStyle(
+                    color: Constants.kBlackColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: cardsIntermediate.length,
+                  itemBuilder: (context, index) {
+                    CardData card = cardsIntermediate[index];
+                    return Container(
+                      margin: EdgeInsets.fromLTRB(0, 4, 0, 4),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: littleCard(
+                          title: card.title,
+                          iconData: card.icon,
+                          customIcon: card.customIcon!,
+                          onTap: () {
+                            debugPrint("Card tabbed");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Audio(
+                                    title: card.title,
+                                    desc: card.desc,
+                                    audio: card.audioPath,
+                                    category: 'Øvelser',
+                                  )
+                              ),
+                            );
+                          },
+                          titleSize: 17,
+                        ),
+                      ),
+                    );
+                  }),
+
+              // ------------- Experience level ----------------
+              Container(
+                padding: EdgeInsets.fromLTRB(25, 30, 25, 0),
+                child: const Text(
+                  "Erfaren-niveau",
+                  style: TextStyle(
+                    color: Constants.kBlackColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: cardsIntermediate.length,
+                  itemBuilder: (context, index) {
+                    CardData card = cardsIntermediate[index];
+                    return Container(
+                      margin: EdgeInsets.fromLTRB(0, 4, 0, 4),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: littleCard(
+                          title: card.title,
+                          iconData: card.icon,
+                          customIcon: card.customIcon!,
+                          onTap: () {
+                            debugPrint("Card tabbed");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Audio(
+                                    title: card.title,
+                                    desc: card.desc,
+                                    audio: card.audioPath,
+                                    category: 'Øvelser',
+                                  )
+                              ),
                             );
                           },
                           titleSize: 17,
