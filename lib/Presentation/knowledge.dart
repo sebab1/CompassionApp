@@ -33,9 +33,12 @@ class Knowledge extends StatelessWidget {
               color: Constants.kBlackColor,
             ),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Settings()),
+              showModalBottomSheet(
+                useRootNavigator: true,
+                context: context,
+                builder: (BuildContext context) {
+                  return Settings();
+                },
               );
             },
           )

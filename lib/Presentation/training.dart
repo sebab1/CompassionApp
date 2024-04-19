@@ -6,7 +6,6 @@ import '/Presentation/Components/card.dart';
 import 'Components/settings.dart';
 import 'exercises.dart';
 import 'meditations.dart';
-import 'journalNew.dart';
 
 class Training extends StatelessWidget {
   const Training({super.key});
@@ -19,7 +18,7 @@ class Training extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Træning',
           style: TextStyle(
             fontSize: 28,
@@ -29,14 +28,17 @@ class Training extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.settings_outlined,
               color: Constants.kBlackColor,
             ),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Settings()),
+              showModalBottomSheet(
+                useRootNavigator: true,
+                context: context,
+                builder: (BuildContext context) {
+                  return Settings();
+                },
               );
             },
           )

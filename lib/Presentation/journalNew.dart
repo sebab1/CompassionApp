@@ -289,7 +289,7 @@ class _JournalNewState extends State<JournalNew> {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: Text('Tilføj dagbog for i dag'),
+                      title: Text('Tilføj dagbogsnotat for i dag'),
                       content: TextFormField(
                         autofocus: true,
                         controller: _journalController,
@@ -561,16 +561,19 @@ class InfoDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text('Om Dagbogsnotat'),
-      content: Text(
-          'Dagbogsnotat er et redskab du kan bruge til refleksion og selvudvikling. '
-          'Du kan skrive dine umiddelbare tanker og følelser ned, eller bare hvad '
-          'du har oplevet i dag, på godt og ondt. '
-          '\n'
-          'Ved at tilføje nye intentioner kan du også sætte dig personlige mål for dagen.'
-          '\n'
-          '\n'
-          'Hverken dagbogsnotaterne eller dine personlige intentioner deles og gemmes '
-          'ikke andre steder, så det er kun dig der kan se indholdet her.'),
+      content: SingleChildScrollView(
+        child: Text(
+            'Dagbogsnotat er et redskab du kan bruge til refleksion og selvudvikling. '
+                'Du kan skrive dine umiddelbare tanker og følelser ned, eller bare hvad '
+                'du har oplevet i dag, på godt og ondt. '
+                '\n'
+                'Ved at tilføje nye intentioner kan du også sætte dig personlige mål for dagen.'
+                '\n'
+                '\n'
+                'Hverken dagbogsnotaterne eller dine personlige intentioner deles og gemmes '
+                'andre steder, så det er kun dig der kan se indholdet her.'
+        ),
+      ),
       actions: <Widget>[
         TextButton(
           onPressed: () {

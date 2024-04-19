@@ -31,7 +31,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Appen bruger ikke din mikrofon, men skal have tilladelse alligevel, så den kan vise vist indhold.</string>
+	<string>Appen bruger ikke din mikrofon, men skal have tilladelse alligevel, så den kan vise bestemt indhold.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

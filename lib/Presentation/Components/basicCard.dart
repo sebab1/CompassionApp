@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import './constants.dart';
 
 class BasicCard extends StatelessWidget {
@@ -40,21 +40,23 @@ class BasicCard extends StatelessWidget {
                   ),
                 ),
               Expanded(
-                child: Center(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      title,
-                      textAlign: TextAlign.center, // Center align the text
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 3,
-                      style: TextStyle(
-                        fontSize: titleSize,
-                      ),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    title,
+                    // Align text to the left or center depending on if icon exists
+                    textAlign: iconData != null ? TextAlign.center : TextAlign.left,
+                    //textAlign: TextAlign.left,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                    style: TextStyle(
+                      fontSize: titleSize,
                     ),
                   ),
                 ),
               ),
+              if (iconData != null) // Add an empty container to maintain spacing when the icon is present
+                Container(width: 40), // Adjust width as needed
               Container(
                 margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
                 child: Icon(
