@@ -1,6 +1,4 @@
 import 'package:compassion_app/Domain/notification_api.dart';
-import 'package:compassion_app/Presentation/journalNew.dart';
-import 'package:compassion_app/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -10,8 +8,6 @@ import 'Components/settings.dart';
 import 'aboutCompassionMenu.dart';
 
 class Home extends StatelessWidget {
-
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

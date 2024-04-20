@@ -35,6 +35,8 @@ class Training extends StatelessWidget {
             onPressed: () {
               showModalBottomSheet(
                 useRootNavigator: true,
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
                 context: context,
                 builder: (BuildContext context) {
                   return Settings();

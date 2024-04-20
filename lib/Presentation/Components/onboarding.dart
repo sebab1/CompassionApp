@@ -42,46 +42,46 @@ class _OnboardingState extends State<Onboarding> {
   Widget build(BuildContext context) {
     return _showOnboarding
         ? IntroductionScreen(
-      pages: onboardingPages,
-      globalBackgroundColor: Constants.sduRedColor,
-      onDone: () {
-        // Mark onboarding as completed and navigate to the main menu
-        _completeOnboarding();
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => Main_menu()),
-        );
-      },
-      onSkip: () {
-        // Mark onboarding as completed and navigate to the main menu
-        _completeOnboarding();
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => Main_menu()),
-        );
-      },
-      showSkipButton: true,
-      skip: const Text(
-        'Spring over',
-        style: TextStyle(color: Constants.kBlackColor),
-      ),
-      done: const Text(
-        'Fortsæt',
-        style: TextStyle(color: Constants.kWhiteColor, fontSize: 18),
-      ),
-      next: const Icon(
-        Icons.arrow_forward,
-        size: 30,
-        color: Constants.sduGoldColor,
-      ),
-      dotsDecorator: const DotsDecorator(
-        size: Size(10.0, 10.0),
-        color: Constants.sduWhiteColor,
-        activeColor: Constants.sduGoldColor,
-        activeSize: Size(22.0, 10.0),
-        activeShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(25.0)),
-        ),
-      ),
-    )
+            pages: onboardingPages,
+            globalBackgroundColor: Constants.sduRedColor,
+            onDone: () {
+              // Mark onboarding as completed and navigate to the main menu
+              _completeOnboarding();
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => Main_menu()),
+              );
+            },
+            onSkip: () {
+              // Mark onboarding as completed and navigate to the main menu
+              _completeOnboarding();
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => Main_menu()),
+              );
+            },
+            showSkipButton: true,
+            skip: const Text(
+              'Spring over',
+              style: TextStyle(color: Constants.kBlackColor),
+            ),
+            done: const Text(
+              'Fortsæt',
+              style: TextStyle(color: Constants.kWhiteColor, fontSize: 18),
+            ),
+            next: const Icon(
+              Icons.arrow_forward,
+              size: 30,
+              color: Constants.sduGoldColor,
+            ),
+            dotsDecorator: const DotsDecorator(
+              size: Size(10.0, 10.0),
+              color: Constants.sduWhiteColor,
+              activeColor: Constants.sduGoldColor,
+              activeSize: Size(22.0, 10.0),
+              activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(25.0)),
+              ),
+            ),
+          )
         : Main_menu();
   }
 }

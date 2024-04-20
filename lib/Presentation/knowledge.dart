@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'Components/settings.dart';
-import 'dsaArticle.dart';
 import '/Presentation/Components/constants.dart';
 import '/Presentation/Components/card.dart';
 import 'aboutCompassionMenu.dart';
@@ -34,7 +33,9 @@ class Knowledge extends StatelessWidget {
             ),
             onPressed: () {
               showModalBottomSheet(
-                useRootNavigator: true,
+                //useRootNavigator: true,
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
                 context: context,
                 builder: (BuildContext context) {
                   return Settings();

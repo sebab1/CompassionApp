@@ -104,9 +104,14 @@ class _JournalNewState extends State<JournalNew> {
                 color: Constants.kBlackColor,
               ),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Settings()),
+                showModalBottomSheet(
+                  useRootNavigator: true,
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Settings();
+                  },
                 );
               },
             )
