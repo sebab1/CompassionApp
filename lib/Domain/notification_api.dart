@@ -1,22 +1,20 @@
-import 'package:background_fetch/background_fetch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationApi {
   static final _notifications = FlutterLocalNotificationsPlugin();
 
   Future<void> initialize() async {
-    await BackgroundFetch.configure(
-      BackgroundFetchConfig(
-        minimumFetchInterval: 15, // minimum interval in minutes
-        stopOnTerminate: false,
-        enableHeadless: true,
-        startOnBoot: true,
-      ),
-      backgroundFetchCallback,
-    );
+
+    final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
+    tz.initializeTimeZones();
+    tz.setLocalLocation(tz.getLocation(currentTimeZone));
+
     // Initialization  setting for android
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('ic_launcher');
@@ -60,24 +58,34 @@ class NotificationApi {
       await _notifications.show(id, title, body, await _notificationDetails(),
           payload: payload);
 
-  void backgroundFetchCallback(String taskId) async {
-    // Check last app usage time
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    DateTime lastUsageTime =
-        DateTime.fromMillisecondsSinceEpoch(prefs.getInt('lastUsageTime') ?? 0);
-    DateTime currentTime = DateTime.now();
+  
+  static Future recurringNotification({
+        int id = 0,
+    String? title,
+    String? body,
+    String? payload,
+    required int hour,
+    required int minutes
+  }) async => await _notifications.zonedSchedule(id, title, body,_nextInstanceOfTimeOfDay(hour, minutes), await _notificationDetails(), uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime, androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle, matchDateTimeComponents: DateTimeComponents.time);
 
-    print('bg callback');
-
-    // If it has been more than 12 hours since last usage, show notification
-    //if (currentTime.difference(lastUsageTime).inMinutes >= 2) {
-    showNotification(
-        title: 'Compassion App',
-        body:
-            'Hej! Måske trænger du til tid til afstresning med en dagbogsindtastning eller meditation.',
-        payload: '123.ab');
-    //}
-
-    BackgroundFetch.finish(taskId);
+  static tz.TZDateTime _nextInstanceOfTimeOfDay(int hour, int minutes) {
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    print(now);
+    tz.TZDateTime scheduledDate =
+    tz.TZDateTime(tz.local, now.year, now.month, now.day, hour, minutes);
+    print(scheduledDate);
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+    print(scheduledDate);
+    return scheduledDate;
   }
+
+  static Future pending() async{
+             final List<PendingNotificationRequest> pendingNotificationRequests =
+    await _notifications.pendingNotificationRequests();
+
+    print(pendingNotificationRequests.first.body);
+  }
+
 }

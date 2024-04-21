@@ -1,4 +1,3 @@
-import 'package:background_fetch/background_fetch.dart';
 import 'package:compassion_app/Domain/notification_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

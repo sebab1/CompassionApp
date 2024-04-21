@@ -2,6 +2,7 @@ import 'package:compassion_app/Domain/notification_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'Components/borderCard.dart';
 import '/Presentation/Components/constants.dart';
 import 'Components/settings.dart';
@@ -21,6 +22,9 @@ class Home extends StatelessWidget {
             color: Constants.kBlackColor,
           ),
         ),
+        leading: IconButton(onPressed: () async {
+          await NotificationApi.pending();
+        }, icon: Icon(Icons.abc)),
         actions: <Widget>[
           IconButton(
             icon: Icon(
@@ -30,7 +34,7 @@ class Home extends StatelessWidget {
             onPressed: () async {
 
               
-              await NotificationApi.showNotification(title: 'Compassion App', body: 'Hej! Måske trænger du til tid til afstresning med en dagbogsindtastning eller meditation.', payload: '123.ab');
+              await NotificationApi.recurringNotification(title: 'Compassion App', body: 'Måske trænger du til tid til afstresning med en at skrive i din dagbog eller meditation.', payload: '123.ab', hour: 21, minutes: 55);
               // Navigator.push(
               //   context,
               //   MaterialPageRoute(builder: (context) => Settings()),
