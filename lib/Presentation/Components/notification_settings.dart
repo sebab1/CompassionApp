@@ -124,8 +124,9 @@ class _NotificationSettingsState extends State<NotificationSettings> {
                   ),
                 ],
               ),
-              OutlinedButton(
-                style: ButtonStyle(),
+              ElevatedButton(
+                style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll<Color>(Constants.sduGoldColor)),
                 onPressed: (
                 ) async {
 
@@ -133,7 +134,7 @@ class _NotificationSettingsState extends State<NotificationSettings> {
                   then((value) => showSnackBar(context));
 
                 },
-                child: Text('Gem'),
+                child: Text('Gem', style: TextStyle(color: Constants.kBlackColor),),
               )
             ],
           ),
