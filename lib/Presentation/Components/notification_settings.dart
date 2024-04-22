@@ -115,8 +115,8 @@ class _NotificationSettingsState extends State<NotificationSettings> {
             Row(
               children: [
                 Icon(switchOn
-                    ? Icons.notifications_active
-                    : Icons.notifications),
+                    ? Icons.notifications_active_outlined
+                    : Icons.notifications_off_outlined),
                 Container(
                   padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
                 ),
