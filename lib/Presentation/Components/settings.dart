@@ -1,6 +1,9 @@
+import 'package:compassion_app/Presentation/Components/notification_settings.dart';
 import 'package:compassion_app/Presentation/aboutApp.dart';
+import 'package:compassion_app/injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:wheel_picker/wheel_picker.dart';
 import 'Constants.dart';
 import 'basicCard.dart';
 import './Onboarding.dart';
@@ -71,6 +74,7 @@ class Settings extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
+
               BasicCard(
                 title: "Gense introduktion til app'en",
                 onTap: () async {
@@ -97,7 +101,8 @@ class Settings extends StatelessWidget {
                 },
                 titleSize: 18,
               ),
-              //SizedBox(height: 60),
+              SizedBox(height: 10),
+               sl<NotificationSettings>(),
             ],
           ),
         ),

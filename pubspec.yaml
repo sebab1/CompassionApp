@@ -63,6 +63,7 @@ dependencies:
   shared_preferences: ^2.2.3
   timezone: ^0.9.2
   flutter_timezone: ^1.0.8
+  wheel_picker: ^0.0.4
 
 
 

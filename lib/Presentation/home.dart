@@ -22,23 +22,22 @@ class Home extends StatelessWidget {
             color: Constants.kBlackColor,
           ),
         ),
-        leading: IconButton(onPressed: () async {
-          await NotificationApi.pending();
-        }, icon: Icon(Icons.abc)),
         actions: <Widget>[
           IconButton(
             icon: Icon(
               Icons.settings_outlined,
               color: Constants.kBlackColor,
             ),
-            onPressed: () async {
-
-              
-              await NotificationApi.recurringNotification(title: 'Compassion App', body: 'Måske trænger du til tid til afstresning med en at skrive i din dagbog eller meditation.', payload: '123.ab', hour: 21, minutes: 55);
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => Settings()),
-              // );
+            onPressed: () {
+              showModalBottomSheet(
+                useRootNavigator: true,
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                context: context,
+                builder: (BuildContext context) {
+                  return Settings();
+                },
+              );
             },
           )
         ],

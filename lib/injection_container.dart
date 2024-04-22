@@ -4,6 +4,8 @@ import 'package:compassion_app/Domain/Controllers/IJournalController.dart';
 import 'package:compassion_app/Domain/Controllers/IScraperController.dart';
 import 'package:compassion_app/Domain/Controllers/JournalController.dart';
 import 'package:compassion_app/Domain/Controllers/ScraperController.dart';
+import 'package:compassion_app/Domain/notification_api.dart';
+import 'package:compassion_app/Presentation/Components/notification_settings.dart';
 import 'package:compassion_app/Presentation/journalNew.dart';
 import 'package:compassion_app/Presentation/kollega_cafe.dart';
 import 'package:get_it/get_it.dart';
@@ -31,6 +33,10 @@ Future<void> init() async {
 
   sl.registerLazySingleton<JournalNew>(
       () => JournalNew(ijournalController: sl()));
+
+  sl.registerLazySingleton<NotificationApi>(() => NotificationApi());
+
+  sl.registerLazySingleton<NotificationSettings>(() => NotificationSettings(notificationApi: sl()));
 }
 
 Future<Database> _initDatabase() async {

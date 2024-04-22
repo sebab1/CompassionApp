@@ -1,4 +1,5 @@
 import 'package:compassion_app/Domain/notification_api.dart';
+import 'package:compassion_app/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:just_audio_background/just_audio_background.dart';
@@ -17,11 +18,7 @@ Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
-   NotificationApi notificationApi = NotificationApi();
-   await notificationApi.initialize();
-
-
-  
+  await sl<NotificationApi>().initialize();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);

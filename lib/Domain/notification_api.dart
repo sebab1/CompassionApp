@@ -58,8 +58,11 @@ class NotificationApi {
       await _notifications.show(id, title, body, await _notificationDetails(),
           payload: payload);
 
+  Future cancelAllNotification() async {
+    return _notifications.cancelAll();
+  }
   
-  static Future recurringNotification({
+  Future recurringNotification({
         int id = 0,
     String? title,
     String? body,
