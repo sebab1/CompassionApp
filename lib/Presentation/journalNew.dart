@@ -5,6 +5,7 @@ import 'package:compassion_app/Domain/JournalEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../injection_container.dart';
 import '/Presentation/Components/constants.dart';
@@ -23,7 +24,6 @@ class _JournalNewState extends State<JournalNew> {
   Map<String, List<JournalEvent>>? selectedEvents;
 
   List<bool> intentionCb = [false, false, false];
-
   late IJournalController jc;
 
   DateTime today = DateTime.now();

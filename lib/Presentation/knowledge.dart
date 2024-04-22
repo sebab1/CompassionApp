@@ -33,7 +33,7 @@ class Knowledge extends StatelessWidget {
             ),
             onPressed: () {
               showModalBottomSheet(
-                //useRootNavigator: true,
+                useRootNavigator: true,
                 isScrollControlled: true,
                 backgroundColor: Colors.transparent,
                 context: context,
@@ -51,7 +51,7 @@ class Knowledge extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                padding: EdgeInsets.fromLTRB(20, 25, 20, 10),
+                padding: EdgeInsets.fromLTRB(20, 25, 20, 20),
                 child: Text(
                   textDesc,
                   style: const TextStyle(
@@ -64,7 +64,7 @@ class Knowledge extends StatelessWidget {
                 title: "Kollegacafé",
                 titleSize: 24,
                 subtitle:
-                    "Vær med til at udvikle en langtidsholdbar kultur for sundhedspersonale via kollegacafé.",
+                    "Vær med til at udvikle en langtidsholdbar kultur for sundhedspersonale.",
                 iconPath: 'carbon_cafe.svg',
                 onTap: () {
                   debugPrint("Tabbed: Kollegacafé");

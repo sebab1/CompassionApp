@@ -49,10 +49,20 @@ class _KollegaCafeState extends State<KollegaCafe> {
               Container(
                 padding: const EdgeInsets.fromLTRB(25, 20, 25, 15),
                 child: const Text(
-                  'Velkommen til Kollegacafé, her finder du information og viden fra tidligere Kollegacaféer, samt et link med information om tilmelding og fremtidige møder.',
+                      'Er du også optaget af omsorg for andre mennesker? '
+                      'Det være sig patienter, studerende, arbejdskollegaer og ikke mindst dig selv '
+                      '- så deltag i kollegacaféen.\n'
+                          '\n'
+                      'Her kan du mødes uformelt med kollegaer, deltage '
+                      'i guidede meditationer og få tips til hvordan compassion og mindfulness kan '
+                      'integreres i arbejdslivet, samt få anbefalet bøger og lignende.\n'
+                      '\n'
+                      'På denne side finder du '
+                      'information og viden fra tidligere '
+                      'Kollegacaféer samt et link med information om tilmelding til fremtidige møder.',
                   style: TextStyle(
                     color: Constants.kBlackColor,
-                    fontSize: 14,
+                    fontSize: 15,
                     fontWeight: FontWeight.normal,
                   ),
                 ),

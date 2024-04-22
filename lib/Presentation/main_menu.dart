@@ -90,9 +90,7 @@ class _Main_menuState extends State<Main_menu> {
         inactiveColorPrimary: unSelectedColor,
       ),
       PersistentBottomNavBarItem(
-        icon: Container(
-          child: SvgPicture.asset('assets/icons/ion_calendar-outline.svg'),
-        ),
+        icon: Icon(CupertinoIcons.calendar_today),
         title: "Dagbogsnotat",
         activeColorPrimary: activeColor,
         inactiveColorPrimary: unSelectedColor,

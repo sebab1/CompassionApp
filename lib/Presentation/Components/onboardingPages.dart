@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '/Presentation/Components/constants.dart';
@@ -145,23 +146,17 @@ List<PageViewModel> onboardingPages = [
         ),
       ],
     ),
-    image: Center(
+    image: const Center(
       child: Padding(
         padding: EdgeInsets.only(top: 100.0), // Adjust this value to move the image down
         child: SizedBox(
           width: 200, // Specify the desired width
           height: 200, // Specify the desired height
-          child: ColorFiltered(
-            colorFilter: const ColorFilter.mode(
-              Constants.kWhiteColor, // Add your desired color here
-              BlendMode.srcATop,
-            ),
-            child: SvgPicture.asset(
-              'assets/icons/ion_calendar-outline.svg',
-              width: 60,
-              height: 60,
-            ),
-          ),
+          child: Icon(
+              CupertinoIcons.calendar_today,
+            size: 200,
+            color: Constants.kWhiteColor,
+          )
         ),
       ),
     ),

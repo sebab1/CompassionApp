@@ -13,7 +13,8 @@ class Training extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String textDesc =
-        "I Center for Compassion forsøger vi at udbrede kendskabet til compassion gennem et bredt udvalg af aktiviteter, værktøjer, meditationer og øvelser der bidrager til din udvikling.";
+        "Dyk ned i diverse afslappende meditationer ogøvelser, der kan hjælpe til at styrke din evne "
+        "til at udvise compassion, både over for dig selv og andre.";
 
     return Scaffold(
       appBar: AppBar(
@@ -52,7 +53,7 @@ class Training extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                padding: EdgeInsets.fromLTRB(20, 25, 20, 10),
+                padding: EdgeInsets.fromLTRB(20, 25, 20, 20),
                 child: Text(
                   textDesc,
                   style: TextStyle(
@@ -65,7 +66,7 @@ class Training extends StatelessWidget {
                 title: "Meditationer",
                 titleSize: 24,
                 subtitle:
-                    "Meditation kan styrke compassion ved at skærpe opmærksomheden på ens egne følelser og andres lidelse, hvilket kan føre til øget empati og medfølelse.",
+                    "Meditation øger empati og medfølelse ved at sætte fokus på følelser hos både en selv og andre.",
                 iconPath: 'solar_meditation-round-outline.svg',
                 onTap: () {
                   Navigator.push(
