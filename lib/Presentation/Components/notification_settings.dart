@@ -13,6 +13,8 @@ class NotificationSettings extends StatefulWidget {
 }
 
 class _NotificationSettingsState extends State<NotificationSettings> {
+
+
   bool switchOn = false;
   late NotificationApi notificationApi;
 
@@ -31,7 +33,21 @@ class _NotificationSettingsState extends State<NotificationSettings> {
     // TODO: implement initState
     notificationApi = widget.notificationApi;
   }
+  showSnackBar(context) {
+    SnackBar snackBar = SnackBar(
+      content: const Text('Din daglig påmindelse er gemt',
+          style: TextStyle(fontSize: 20)),
+      backgroundColor: Constants.sduRedColor,
+      dismissDirection: DismissDirection.up,
+      behavior: SnackBarBehavior.floating,
+      margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height - 150,
+          left: 10,
+          right: 10),
+    );
 
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
   @override
   Widget build(BuildContext context) {
     const textStyle = TextStyle(fontSize: 26.0, height: 1.5);
@@ -47,6 +63,8 @@ class _NotificationSettingsState extends State<NotificationSettings> {
     Widget itemBuilder(BuildContext context, int index) {
       return Text("$index".padLeft(2, '0'), style: textStyle);
     }
+
+
 
     return Column(
       children: [
@@ -69,9 +87,10 @@ class _NotificationSettingsState extends State<NotificationSettings> {
                 Switch(
                     activeColor: Constants.sduGoldColor,
                     value: switchOn,
-                    onChanged: (bool value) {
+                    onChanged: (bool value) async {
                       if(!value){
-                        notificationApi.cancelAllNotification();
+                        print('cancel notification');
+                        await notificationApi.cancelAllNotification();
                       }
                       setState(() {
                         switchOn = value;
@@ -109,7 +128,10 @@ class _NotificationSettingsState extends State<NotificationSettings> {
                 style: ButtonStyle(),
                 onPressed: (
                 ) async {
-                  await notificationApi.recurringNotification(title: 'Compassion App', body: 'Måske trænger du til tid til afstresning med en at skrive i din dagbog eller meditation.', payload: '123.ab', hour: hoursWheel.selected, minutes: minutesWheel.selected);;
+
+                  await notificationApi.recurringNotification(title: 'Compassion App', body: 'Måske trænger du til tid til afstresning med en at skrive i din dagbog eller meditation.', payload: '123.ab', hour: hoursWheel.selected, minutes: minutesWheel.selected).
+                  then((value) => showSnackBar(context));
+
                 },
                 child: Text('Gem'),
               )
