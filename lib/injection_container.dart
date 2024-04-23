@@ -16,9 +16,13 @@ final sl = GetIt.instance;
 
 final String db_name = 'sqlite-db';
 
+final expected_db_version = 2;
+
 Future<void> init() async {
   final Database database = await _initDatabase();
   sl.registerLazySingleton<Database>(() => database);
+
+  await editDatabase(database);
 
   var sql = SqlDatabase(sl());
 
@@ -36,7 +40,8 @@ Future<void> init() async {
 
   sl.registerLazySingleton<NotificationApi>(() => NotificationApi());
 
-  sl.registerLazySingleton<NotificationSettings>(() => NotificationSettings(notificationApi: sl()));
+  sl.registerLazySingleton<NotificationSettings>(
+      () => NotificationSettings(notificationApi: sl()));
 }
 
 Future<Database> _initDatabase() async {
@@ -58,4 +63,27 @@ Future<Database> _initDatabase() async {
     },
     version: 1,
   );
+}
+
+Future editDatabase(Database db) async {
+  int version = await db.getVersion();
+  print('db version: $version');
+  var future;
+  if (version < expected_db_version) {
+    var update = db
+        .execute(
+            'ALTER TABLE intentionJournal ADD COLUMN checked INTEGER NOT NULL DEFAULT 0; ')
+        .then((value) => db.setVersion(2));
+    print('updating db');
+    future = update;
+  }
+  return future;
+}
+
+void _onUpgrade(Database db, int oldVersion, int newVersion) {
+  if (oldVersion < newVersion) {
+    // you can execute drop table and create table
+    db.execute(
+        'ALTER TABLE intentionJournal ADD COLUMN checked INTEGER NOT NULL DEFAULT 0;');
+  }
 }
