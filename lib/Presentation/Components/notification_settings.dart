@@ -19,14 +19,18 @@ class _NotificationSettingsState extends State<NotificationSettings> {
   bool switchOn = false;
   late NotificationApi notificationApi;
 
+  late int? hours;
+  late int? minutes;
+  late bool isEdited = false;
+
   final now = TimeOfDay.now();
   late final hoursWheel = WheelPickerController(
     itemCount: 24,
-    initialIndex: setWheelPickerState('hours') ?? now.hour % 12,
+    initialIndex: hours ?? now.hour % 12,
   );
   late final minutesWheel = WheelPickerController(
     itemCount: 60,
-    initialIndex: setWheelPickerState('minutes') ?? now.minute,
+    initialIndex: minutes ?? now.minute,
   );
 
   Future updateWheelPickerState(int hours, int minutes) {
@@ -38,6 +42,8 @@ class _NotificationSettingsState extends State<NotificationSettings> {
 
   Future init() async {
     sharedPreferences = await SharedPreferences.getInstance();
+    hours = setWheelPickerState('hours');
+    minutes = setWheelPickerState('minutes');
   }
 
   bool? switchState() {
@@ -50,6 +56,10 @@ class _NotificationSettingsState extends State<NotificationSettings> {
 
   Future updateSwitchState(bool value) {
     return sharedPreferences.setBool('switchState', value);
+  }
+
+  bool updateIsEdit(int indexHours, int indexMinutes) {
+    return hours != indexHours || minutes != indexMinutes;
   }
 
   @override
@@ -71,12 +81,12 @@ class _NotificationSettingsState extends State<NotificationSettings> {
   showSnackBar(context) {
     SnackBar snackBar = SnackBar(
       content: const Text('Din daglig påmindelse er gemt',
-          style: TextStyle(fontSize: 20)),
-      backgroundColor: Constants.sduRedColor,
+          style: TextStyle(fontSize: 20, color: Constants.kBlackColor)),
+      backgroundColor: Constants.kWhiteColor,
       dismissDirection: DismissDirection.up,
       behavior: SnackBarBehavior.floating,
       margin: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height - 150,
+          bottom: MediaQuery.of(context).size.height / 1.3,
           left: 10,
           right: 10),
     );
@@ -125,7 +135,6 @@ class _NotificationSettingsState extends State<NotificationSettings> {
                     value: switchOn,
                     onChanged: (bool value) async {
                       if (!value) {
-                        print('cancel notification');
                         await notificationApi.cancelAllNotification();
                       }
                       updateSwitchState(value);
@@ -145,6 +154,11 @@ class _NotificationSettingsState extends State<NotificationSettings> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   WheelPicker(
+                    onIndexChanged: (value) {
+                      setState(() {
+                        isEdited = hours != value;
+                      });
+                    },
                     builder: itemBuilder,
                     controller: hoursWheel,
                     looping: false,
@@ -153,6 +167,11 @@ class _NotificationSettingsState extends State<NotificationSettings> {
                   ),
                   const Text(":", style: textStyle),
                   WheelPicker(
+                    onIndexChanged: (value) {
+                      setState(() {
+                        isEdited = minutes != value;
+                      });
+                    },
                     builder: itemBuilder,
                     controller: minutesWheel,
                     style: wheelStyle,
@@ -162,22 +181,37 @@ class _NotificationSettingsState extends State<NotificationSettings> {
                 ],
               ),
               ElevatedButton(
-                style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll<Color>(
-                        Constants.sduGoldColor)),
-                onPressed: () async {
-                  int hours = hoursWheel.selected;
-                  int minutes = minutesWheel.selected;
-                  await notificationApi
-                      .recurringNotification(
-                          title: 'Daglig påmindelse',
-                          body:
-                              'Trænger du til at afstresse med meditation eller at skrive et dagbogsnotat?',
-                          payload: '123.ab',
-                          hour: hours,
-                          minutes: minutes)
-                      .then((value) => updateWheelPickerState(hours, minutes).then((value) => showSnackBar(context)));
-                },
+                style: ButtonStyle(
+                    backgroundColor: isEdited
+                        ? MaterialStatePropertyAll<Color>(
+                            Constants.sduGoldColor)
+                        : MaterialStatePropertyAll<Color>(
+                            Constants.kGreyColor)),
+                onPressed: isEdited
+                    ? () async {
+                        int selectedHours = hoursWheel.selected;
+                        int selectedMinutes = minutesWheel.selected;
+                        await notificationApi
+                            .recurringNotification(
+                                title: 'Daglig påmindelse',
+                                body:
+                                    'Trænger du til at afstresse med meditation eller at skrive et dagbogsnotat?',
+                                payload: '123.ab',
+                                hour: selectedHours,
+                                minutes: selectedMinutes)
+                            .then((value) => updateWheelPickerState(
+                                    selectedHours, selectedMinutes)
+                                .then((value) => {
+                                      hours = selectedHours,
+                                      minutes = selectedMinutes,
+                                      showSnackBar(context)
+                                    }));
+                        setState(() {
+                          isEdited =
+                              updateIsEdit(selectedHours, selectedMinutes);
+                        });
+                      }
+                    : null,
                 child: Text(
                   'Gem',
                   style: TextStyle(color: Constants.kBlackColor),
