@@ -92,7 +92,7 @@ Future<void> _dbUpdatesVersion_1(Database db) async {
 Future<void> _dbUpdatesVersion_2(Database db) async {
   print('adding new column');
   await db.execute(
-      'ALTER TABLE intentionJournal ADD COLUMN checked INTEGER NOT NULL DEFAULT 0;');
+      'ALTER TABLE intentionJournal ADD COLUMN checked TEXT NOT NULL DEFAULT [0,0,0];');
 }
 
 Future<void> deleteDatabase(String path) =>

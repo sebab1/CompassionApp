@@ -23,7 +23,7 @@ class JournalNew extends StatefulWidget {
 class _JournalNewState extends State<JournalNew> {
   Map<String, List<JournalEvent>>? selectedEvents;
 
-  List<bool> intentionCb = [false, false, false];
+  late List<bool> intentionCb;
   late IJournalController jc;
 
   DateTime today = DateTime.now();
@@ -247,12 +247,14 @@ class _JournalNewState extends State<JournalNew> {
   }
 
   Widget intentionLayout() {
-    List<String> intentions = _getEventsForDay(_selectedDay)
-        .first
-        .intentions!
+    JournalEvent event = _getEventsForDay(_selectedDay).first;
+    List<String> intentions = event.intentions!
         .split(';#')
         .where((element) => element != '')
         .toList();
+
+    List<bool> checked = event.intentionsChecked;
+    intentionCb = checked;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -268,6 +270,7 @@ class _JournalNewState extends State<JournalNew> {
                   setState(() {
                     intentionCb[index] = value!;
                   });
+                  jc.saveChecked(intentionCb, event.entry_ID!);
                 },
                 value: intentionCb[index],
                 visualDensity: const VisualDensity(vertical: -2.0),
@@ -569,15 +572,14 @@ class InfoDialog extends StatelessWidget {
       content: SingleChildScrollView(
         child: Text(
             'Dagbogsnotat er et redskab du kan bruge til refleksion og selvudvikling. '
-                'Du kan skrive dine umiddelbare tanker og følelser ned, eller bare hvad '
-                'du har oplevet i dag, på godt og ondt. '
-                '\n'
-                'Ved at tilføje nye intentioner kan du også sætte dig personlige mål for dagen.'
-                '\n'
-                '\n'
-                'Hverken dagbogsnotaterne eller dine personlige intentioner deles og gemmes '
-                'andre steder, så det er kun dig der kan se indholdet her.'
-        ),
+            'Du kan skrive dine umiddelbare tanker og følelser ned, eller bare hvad '
+            'du har oplevet i dag, på godt og ondt. '
+            '\n'
+            'Ved at tilføje nye intentioner kan du også sætte dig personlige mål for dagen.'
+            '\n'
+            '\n'
+            'Hverken dagbogsnotaterne eller dine personlige intentioner deles og gemmes '
+            'andre steder, så det er kun dig der kan se indholdet her.'),
       ),
       actions: <Widget>[
         TextButton(

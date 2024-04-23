@@ -20,12 +20,20 @@ class JournalController implements IJournalController {
       return dateFormat;
     }, value: (element) {
       List<JournalEvent> list = [];
+      List<bool> checked = element['checked']
+          .toString()
+          .split(',')
+          .map((e) => e == '1' ? true : false)
+          .toList();
       list.add(JournalEvent(
-          element['intention_desc'],
-          element['activity_desc'],
-          element['activity_id'],
-          element['intention_id'],
-          element['entry_id']));
+        element['intention_desc'],
+        element['activity_desc'],
+        element['activity_id'],
+        element['intention_id'],
+        element['entry_id'],
+        checked,
+      ));
+      print('jc: $checked');
       return list;
     });
 
@@ -49,5 +57,13 @@ class JournalController implements IJournalController {
   @override
   Future<void> saveIntentions(int entry_id, String intentions) async {
     return await database.addIntention(entry_id, intentions);
+  }
+
+  @override
+  Future<void> saveChecked(List<bool> checked, int entry_id) async {
+    String boolToString =
+        checked.map((element) => element ? '1' : '0').join(',');
+    print('jc save data: $boolToString');
+    return await database.saveChecked(boolToString, entry_id);
   }
 }

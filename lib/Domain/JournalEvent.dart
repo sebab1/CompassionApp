@@ -4,9 +4,10 @@ class JournalEvent {
   int? intention_ID;
   String? intentions;
   String? journal;
+  List<bool> intentionsChecked;
 
   JournalEvent(this.intentions, this.journal, this.journal_ID,
-      this.intention_ID, this.entry_ID);
+      this.intention_ID, this.entry_ID, this.intentionsChecked);
 
   @override
   String toString() {

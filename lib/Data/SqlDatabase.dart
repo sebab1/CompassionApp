@@ -7,29 +7,28 @@ class SqlDatabase implements ISqlDatabase {
   Database db;
 
   SqlDatabase(this.db);
-  
 
   @override
   Future<List<Map<String, Object?>>> readJournalEvents() async {
+    String stoneAgeQuery = 'SELECT entries.entry_id, activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc, intentionJournal.checked ' +
+        ' FROM entries ' +
+        'LEFT JOIN activityJournal ON activityJournal.entry_id = entries.entry_id ' +
+        'LEFT JOIN intentionJournal ON intentionJournal.entry_id = entries.entry_id ' +
+        'UNION ' +
+        'SELECT entries.entry_id, activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc, intentionJournal.checked ' +
+        'FROM activityJournal ' +
+        'LEFT JOIN entries ON activityJournal.entry_id = entries.entry_id ' +
+        'LEFT JOIN intentionJournal ON intentionJournal.entry_id = entries.entry_id ' +
+        'WHERE entries.entry_id IS NULL ' +
+        'UNION ' +
+        'SELECT entries.entry_id, activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc, intentionJournal.checked ' +
+        'FROM intentionJournal ' +
+        'LEFT JOIN entries ON intentionJournal.entry_id = entries.entry_id ' +
+        'LEFT JOIN activityJournal ON activityJournal.entry_id = entries.entry_id ' +
+        'WHERE entries.entry_id IS NULL';
 
-    String stoneAgeQuery = 'SELECT entries.entry_id, activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc ' +
-                   ' FROM entries ' +
-                    'LEFT JOIN activityJournal ON activityJournal.entry_id = entries.entry_id ' +
-                    'LEFT JOIN intentionJournal ON intentionJournal.entry_id = entries.entry_id ' +
-                    'UNION ' +
-                    'SELECT entries.entry_id, activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc ' +
-                    'FROM activityJournal ' +
-                    'LEFT JOIN entries ON activityJournal.entry_id = entries.entry_id ' +
-                    'LEFT JOIN intentionJournal ON intentionJournal.entry_id = entries.entry_id ' +
-                    'WHERE entries.entry_id IS NULL ' +
-                    'UNION ' +
-                    'SELECT entries.entry_id, activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc ' +
-                    'FROM intentionJournal ' +
-                    'LEFT JOIN entries ON intentionJournal.entry_id = entries.entry_id ' +
-                    'LEFT JOIN activityJournal ON activityJournal.entry_id = entries.entry_id ' +
-                    'WHERE entries.entry_id IS NULL';
-
-  String newQuery = 'SELECT entries.entry_id, activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc FROM "entries" FULL JOIN activityJournal ON activityJournal.entry_id = entries.entry_id FULL JOIN intentionJournal ON intentionJournal.entry_id = entries.entry_id';
+    String newQuery =
+        'SELECT entries.entry_id, activity_id, intention_id, entries.date, activityJournal.activity_desc, intentionJournal.intention_desc FROM "entries" FULL JOIN activityJournal ON activityJournal.entry_id = entries.entry_id FULL JOIN intentionJournal ON intentionJournal.entry_id = entries.entry_id';
 
     final queryResult = await db.rawQuery(stoneAgeQuery);
 
@@ -54,15 +53,16 @@ class SqlDatabase implements ISqlDatabase {
     // String insert1 =
     //     'INSERT INTO activityJournal(entry_id, activity_desc) VALUES(?,?) ON CONFLICT(activityJournal.entry_id) DO UPDATE SET activity_desc = excluded.activity_desc';
 
-    String insert = 'INSERT OR IGNORE INTO activityJournal (entry_id, activity_desc) VALUES (?, ?)';
-    String update = 'UPDATE activityJournal SET activity_desc = ? WHERE entry_id = ?';
+    String insert =
+        'INSERT OR IGNORE INTO activityJournal (entry_id, activity_desc) VALUES (?, ?)';
+    String update =
+        'UPDATE activityJournal SET activity_desc = ? WHERE entry_id = ?';
     final execute = await db.rawInsert(insert, [entryID, content]);
-    if(execute == 0){
-       final executeUpdate = await db.rawInsert(update, [content, entryID]);
+    if (execute == 0) {
+      final executeUpdate = await db.rawInsert(update, [content, entryID]);
       print('Update: $executeUpdate');
     }
     print('Insert: $execute');
-
   }
 
   Future<int> addEntry(DateTime time) async {
@@ -78,13 +78,22 @@ class SqlDatabase implements ISqlDatabase {
     // String prompt =
     //     'INSERT INTO intentionJournal(entry_id, intention_desc) VALUES(?,?) ON CONFLICT(intentionJournal.entry_id) DO UPDATE SET intention_desc = excluded.intention_desc';
 
-    String insert = 'INSERT OR IGNORE INTO intentionJournal (entry_id, intention_desc) VALUES (?, ?)';
-    String update = 'UPDATE intentionJournal SET intention_desc = ? WHERE entry_id = ?';
+    String insert =
+        'INSERT OR IGNORE INTO intentionJournal (entry_id, intention_desc) VALUES (?, ?)';
+    String update =
+        'UPDATE intentionJournal SET intention_desc = ? WHERE entry_id = ?';
     final execute = await db.rawInsert(insert, [entryID, content]);
-    if(execute == 0) {
-          final executeUpdate = await db.rawInsert(update, [content, entryID]);
-          print('Update: $executeUpdate');
+    if (execute == 0) {
+      final executeUpdate = await db.rawInsert(update, [content, entryID]);
+      print('Update: $executeUpdate');
     }
     print('Insert: $execute');
+  }
+
+  @override
+  Future<void> saveChecked(String checked, int entryID) async {
+    String updateChecked =
+        'UPDATE intentionJournal SET checked = ? WHERE entry_id = ?';
+    await db.rawUpdate(updateChecked, [checked, entryID]);
   }
 }

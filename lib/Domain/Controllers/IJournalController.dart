@@ -5,6 +5,8 @@ abstract class IJournalController {
 
   Future<int> saveEntry(DateTime time);
 
+  Future<void> saveChecked(List<bool> checked, int entry_id);
+
   Future<void> saveActivity(int entry_id, String activity);
 
   Future<void> saveIntentions(int entry_id, String intentions);
