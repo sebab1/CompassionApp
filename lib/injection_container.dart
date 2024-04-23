@@ -54,7 +54,7 @@ Future<Database> _initDatabase() async {
   }, onCreate: (Database db, int newVersion) async {
     //
     //Start from version 1 to current version and create DB
-    for (int version = 1; version < newVersion; version++) {
+    for (int version = 0; version < newVersion; version++) {
       await _performDBUpgrade(db, version + 1);
     }
   });
