@@ -2,6 +2,7 @@ import 'package:compassion_app/Data/SqlDatabase.dart';
 import 'package:compassion_app/Domain/Controllers/IJournalController.dart';
 import 'package:compassion_app/Domain/Controllers/JournalController.dart';
 import 'package:compassion_app/Domain/JournalEvent.dart';
+import 'package:compassion_app/Presentation/Components/infoDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -125,7 +126,15 @@ class _JournalNewState extends State<JournalNew> {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return InfoDialog(); // Use the InfoDialog here
+                  return InfoDialog('Dagbogsnotat er et redskab du kan bruge til refleksion og selvudvikling. '
+            'Du kan skrive dine umiddelbare tanker og følelser ned, eller bare hvad '
+            'du har oplevet i dag, på godt og ondt. '
+            '\n'
+            'Ved at tilføje nye intentioner kan du også sætte dig personlige mål for dagen.'
+            '\n'
+            '\n'
+            'Hverken dagbogsnotaterne eller dine personlige intentioner deles og gemmes '
+            'andre steder, så det er kun dig der kan se indholdet her.', 'Om Dagbogsnotat'); // Use the InfoDialog here
                 },
               );
             },
@@ -564,34 +573,4 @@ class _JournalNewState extends State<JournalNew> {
   }
 }
 
-class InfoDialog extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text('Om Dagbogsnotat'),
-      content: SingleChildScrollView(
-        child: Text(
-            'Dagbogsnotat er et redskab du kan bruge til refleksion og selvudvikling. '
-            'Du kan skrive dine umiddelbare tanker og følelser ned, eller bare hvad '
-            'du har oplevet i dag, på godt og ondt. '
-            '\n'
-            'Ved at tilføje nye intentioner kan du også sætte dig personlige mål for dagen.'
-            '\n'
-            '\n'
-            'Hverken dagbogsnotaterne eller dine personlige intentioner deles og gemmes '
-            'andre steder, så det er kun dig der kan se indholdet her.'),
-      ),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: const Text(
-            'OK',
-            style: TextStyle(color: Constants.kBlackColor),
-          ),
-        ),
-      ],
-    );
-  }
-}
+
