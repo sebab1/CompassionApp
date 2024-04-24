@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Constants {
   static const kBlueColor = Color(0xFF038BC5);
   static const kGreenColor = Colors.green;
-  static const kRedColor = Colors.redAccent;
+  static const kRedColor = Color.fromRGBO(255, 82, 82, 1);
   static const kBlackColor = Colors.black;
   static const kWhiteColor = Colors.white;
   static const kGreyColor = Color(0xFFA9A9A9);
@@ -15,7 +15,7 @@ class Constants {
   static const kDarkBlueColor = Color(0xff151f43);
   static const kDarkGreyColor = Colors.black54;
 
-  static const sduRedColor = Color(0xffd15a56);
+  static const sduRedColor = Color.fromRGBO(209, 90, 86, 1);
   static const sduWhiteColor = Color(0xffF9F8F8);
   static const sduGoldColor = Color(0xffc6b186);
   static const sduGreyColor = Color(0xffEDEBEB);

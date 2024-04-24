@@ -40,12 +40,8 @@ List<CardData> cardsIntermediate = [
       null,
       'cil_audio.svg'),
   // 5.
-  CardData(
-      "Efter arbejde",
-      "En øvelse der retter sig til dig, efter arbejde",
-      "assets/sounds/Oevelse_5_Efterarbejde.mp3",
-      null,
-      'cil_audio.svg'),
+  CardData("Efter arbejde", "En øvelse der retter sig til dig, efter arbejde",
+      "assets/sounds/Oevelse_5_Efterarbejde.mp3", null, 'cil_audio.svg'),
 ];
 
 List<CardData> cardsExperienced = [
@@ -138,6 +134,17 @@ class Exercises extends StatelessWidget {
                           customIcon: card.customIcon!,
                           onTap: () {
                             debugPrint("Card tabbed");
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) => Audio(
+                            //             title: card.title,
+                            //             desc: card.desc,
+                            //             audio: card.audioPath,
+                            //             category: 'Øvelser',
+                            //           )
+                            //   ),
+                            // );
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -146,8 +153,7 @@ class Exercises extends StatelessWidget {
                                         desc: card.desc,
                                         audio: card.audioPath,
                                         category: 'Øvelser',
-                                      )
-                              ),
+                                      )),
                             );
                           },
                           titleSize: 17,
@@ -188,12 +194,11 @@ class Exercises extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Audio(
-                                    title: card.title,
-                                    desc: card.desc,
-                                    audio: card.audioPath,
-                                    category: 'Øvelser',
-                                  )
-                              ),
+                                        title: card.title,
+                                        desc: card.desc,
+                                        audio: card.audioPath,
+                                        category: 'Øvelser',
+                                      )),
                             );
                           },
                           titleSize: 17,
@@ -234,12 +239,11 @@ class Exercises extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Audio(
-                                    title: card.title,
-                                    desc: card.desc,
-                                    audio: card.audioPath,
-                                    category: 'Øvelser',
-                                  )
-                              ),
+                                        title: card.title,
+                                        desc: card.desc,
+                                        audio: card.audioPath,
+                                        category: 'Øvelser',
+                                      )),
                             );
                           },
                           titleSize: 17,

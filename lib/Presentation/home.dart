@@ -1,4 +1,5 @@
 import 'package:compassion_app/Domain/notification_api.dart';
+import 'package:compassion_app/Presentation/Components/CupertinoBreath.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -85,14 +86,14 @@ class Home extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   borderCard(
-                    title: "Om compassion",
+                    title: "Hurtig vejrtrækningsøvelse",
                     iconPath: 'icon-park_oval-love.svg',
                     underline: false,
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AboutCompassionMenu()),
+                            builder: (context) => CupertinoBreathe()),
                       );
                     },
                     trailingIconData: CupertinoIcons.chevron_forward,
