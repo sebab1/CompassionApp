@@ -76,7 +76,7 @@ class Knowledge extends StatelessWidget {
                 title: "Om compassion",
                 titleSize: 20,
                 subtitle:
-                    "Bliv klogere på de mange facetter af compassion og hvordan det kan gavne dig og folk omkring dig.",
+                    "Bliv klogere på de mange facetter af compassion og hvordan det kan gavne dig.",
                 iconPath: 'icon-park_oval-love.svg',
                 onTap: () {
                   debugPrint("Tabbed: Om compassion");

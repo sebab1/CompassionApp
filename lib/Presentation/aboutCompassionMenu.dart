@@ -35,7 +35,7 @@ class AboutCompassionMenu extends StatelessWidget {
           Container(
             padding: const EdgeInsets.fromLTRB(25, 0, 25, 10),
             child: Text(
-              'Her kan du læse mere om compassion og dets betydning i vores liv. Udforsk forskellige ressourcer, der kan hjælpe dig med at forstå og praktisere compassion og empati i din dagligdag.',
+              'Her kan du læse mere om compassion og dets betydning i vores liv. Udforsk forskellige ressourcer, der kan hjælpe dig med at forstå compassion og empati, samt hvordan man praktiserer det i sin dagligdag.',
               style: TextStyle(
                 fontSize: 15,
               ),
@@ -46,7 +46,7 @@ class AboutCompassionMenu extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 4),
               children: <Widget>[
                 BasicCard(
-                  title: 'Oversygeplejerske stjal 5 minutter hver dag til meditation',
+                  title: 'Oversygeplejerske stjal 5 minutter hver dag til meditation.',
                   onTap: () {
                     debugPrint("Tabbed: Om compassion");
                     Navigator.push(
@@ -54,27 +54,27 @@ class AboutCompassionMenu extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => DsaArticle()));
                   },
-                  titleSize: 14,
+                  titleSize: 16,
                 ),
                 SizedBox(height: 8), // Add vertical margin between menu items
                 BasicCard(
-                  title: 'Hvad er compassion?',
-                  iconData: Icons.library_books_outlined,
+                  title: 'Hvad er compassion og hvorfor er det vigtigt?',
+                  //iconData: Icons.library_books_outlined,
                   iconSize: 30,
                   onTap: () {
                     // Handle onTap event
                   },
-                  titleSize: 18,
+                  titleSize: 16,
                 ),
                 SizedBox(height: 8), // Add vertical margin between menu items
                 BasicCard(
-                  title: 'Vigtigheden af self-compassion',
-                  iconData: Icons.library_books_outlined,
+                  title: 'Self-compassion: Evnen til at vise sig selv empati.',
+                  //iconData: Icons.library_books_outlined,
                   iconSize: 30,
                   onTap: () {
                     // Handle onTap event
                   },
-                  titleSize: 18,
+                  titleSize: 16,
                 ),
                 SizedBox(height: 8), // Add vertical margin between menu items
                 // Add more littleCard widgets as needed

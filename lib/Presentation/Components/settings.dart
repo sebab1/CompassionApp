@@ -100,7 +100,7 @@ class Settings extends StatelessWidget {
                 },
                 titleSize: 18,
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 15),
                sl<NotificationSettings>(),
             ],
           ),

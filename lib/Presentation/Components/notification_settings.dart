@@ -80,7 +80,7 @@ class _NotificationSettingsState extends State<NotificationSettings> {
 
   showSnackBar(context) {
     SnackBar snackBar = SnackBar(
-      content: const Text('Din daglig påmindelse er gemt',
+      content: const Text('Din daglige påmindelse er gemt',
           style: TextStyle(fontSize: 20, color: Constants.kBlackColor)),
       backgroundColor: Constants.kWhiteColor,
       dismissDirection: DismissDirection.up,

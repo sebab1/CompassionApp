@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +9,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:path/path.dart' as p;
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
-import 'package:just_waveform/just_waveform.dart';
 import './constants.dart';
 
 class Audio extends StatefulWidget {
@@ -31,7 +29,7 @@ class Audio extends StatefulWidget {
 
 class _AudioState extends State<Audio> {
   late AudioPlayer player;
-  final progressStream = BehaviorSubject<WaveformProgress>();
+  //final progressStream = BehaviorSubject<WaveformProgress>();
 
 
   Stream<PositionData> get _positionDataStream =>

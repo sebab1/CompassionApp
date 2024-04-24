@@ -13,7 +13,7 @@ class Training extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String textDesc =
-        "Dyk ned i diverse afslappende meditationer ogøvelser, der kan hjælpe til at styrke din evne "
+        "Dyk ned i diverse afslappende meditationer og øvelser, der kan hjælpe til at styrke din evne "
         "til at udvise compassion, både over for dig selv og andre.";
 
     return Scaffold(
@@ -66,7 +66,7 @@ class Training extends StatelessWidget {
                 title: "Meditationer",
                 titleSize: 24,
                 subtitle:
-                    "Meditation øger empati og medfølelse ved at sætte fokus på følelser hos både en selv og andre.",
+                    "Find guidede meditationer der passer lige netop til dig og hvad du gerne vil opnå.",
                 iconPath: 'solar_meditation-round-outline.svg',
                 onTap: () {
                   Navigator.push(
@@ -79,7 +79,7 @@ class Training extends StatelessWidget {
                 title: "Øvelser",
                 titleSize: 24,
                 subtitle:
-                    "Styrk dit kendskab til compassion gennem en række øvelser du selv kan udføre.",
+                    "Styrk dit kendskab til compassion med en række øvelser du selv kan udføre.",
                 iconPath: 'exercise_brain.svg',
                 onTap: () {
                   Navigator.push(
