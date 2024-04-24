@@ -33,12 +33,11 @@ class Settings extends StatelessWidget {
     return makeDissmissible(
       context,
       child: DraggableScrollableSheet(
-        initialChildSize: 0.8,
-        maxChildSize: 0.8,
-        minChildSize: 0.5,
+        initialChildSize: 0.85,
+        maxChildSize: 0.85,
         expand: true,
         snap: true,
-        snapSizes: [0.51],
+        snapSizes: [0.85],
         builder: (_, controller) => Container(
           decoration: const BoxDecoration(
               color: Colors.white,
