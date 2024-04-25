@@ -37,7 +37,7 @@ class Settings extends StatelessWidget {
         maxChildSize: 0.85,
         minChildSize: 0.60,
         expand: true,
-        snap: true,
+        //snap: true,
         snapSizes: const [0.85],
         builder: (_, controller) => Container(
           decoration: const BoxDecoration(
