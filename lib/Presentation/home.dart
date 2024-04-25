@@ -87,7 +87,7 @@ class Home extends StatelessWidget {
                 children: [
                   borderCard(
                     title: "Hurtig\nvejrtrækningsøvelse",
-                    iconPath: 'icon-park_oval-love.svg',
+                    iconPath: 'breathing_icon.svg',
                     underline: false,
                     titleSize: 14,
                     onTap: () {
