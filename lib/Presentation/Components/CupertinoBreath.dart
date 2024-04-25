@@ -14,7 +14,7 @@ class _CupertinoBreatheState extends State<CupertinoBreathe>
   late TweenSequence<double> tweenSequence;
   late Animation<double> animation;
   late AnimationStatus animationStatus;
-  String text = 'Visuelt åndedrætsøvelse';
+  String text = 'Visuel åndedrætsøvelse';
 
   bool isAnimating = false;
 
@@ -131,7 +131,7 @@ class _CupertinoBreatheState extends State<CupertinoBreathe>
                 _controller.removeListener(() { });
                 _controller.reset();
                 isAnimating = false;
-                text = 'Visuelt åndedrætsøvelse';
+                text = 'Visuel åndedrætsøvelse';
               }
               setState(() {
                 isAnimating;

@@ -35,9 +35,10 @@ class Settings extends StatelessWidget {
       child: DraggableScrollableSheet(
         initialChildSize: 0.85,
         maxChildSize: 0.85,
+        minChildSize: 0.60,
         expand: true,
         snap: true,
-        snapSizes: [0.85],
+        snapSizes: const [0.85],
         builder: (_, controller) => Container(
           decoration: const BoxDecoration(
               color: Colors.white,
