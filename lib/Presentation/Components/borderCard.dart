@@ -6,6 +6,7 @@ import './constants.dart';
 class borderCard extends StatelessWidget {
 
   final String title;
+  final double? titleSize;
   //final IconData iconData;
   final VoidCallback onTap;
   final String iconPath;
@@ -16,6 +17,7 @@ class borderCard extends StatelessWidget {
       {super.key,
       required this.underline,
       required this.title,
+      this.titleSize,
       //required this.iconData,
       required this.iconPath,
       required this.onTap,
@@ -62,7 +64,7 @@ class borderCard extends StatelessWidget {
                       child: Text(
                         title,
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: titleSize,
                           fontWeight: FontWeight.bold,
                           decoration:
                               underline ? TextDecoration.underline : null,

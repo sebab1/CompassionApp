@@ -51,7 +51,7 @@ class AboutApp extends StatelessWidget {
                     'ting den tilbyder.'
                     '\n'
                     '\n'
-                    'Vi håber inderligt at nogle af værktøjerne og ressourcerne fundet i denne app,'
+                    'Vi håber inderligt at nogle af værktøjerne og ressourcerne fundet i denne app, '
                     'kan hjælpe netop dig til at finde mere ro og velvære i gennem udøvelse af '
                     'compassion og self-compassion.'
                     '\n'

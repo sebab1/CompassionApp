@@ -222,9 +222,9 @@ class Exercises extends StatelessWidget {
               ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: cardsIntermediate.length,
+                  itemCount: cardsExperienced.length,
                   itemBuilder: (context, index) {
-                    CardData card = cardsIntermediate[index];
+                    CardData card = cardsExperienced[index];
                     return Container(
                       margin: EdgeInsets.fromLTRB(0, 4, 0, 4),
                       child: Align(

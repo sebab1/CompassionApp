@@ -84,9 +84,10 @@ class Home extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   borderCard(
-                    title: "Hurtig vejrtrækningsøvelse",
-                    iconPath: 'icon-park_oval-love.svg',
+                    title: "Hurtig\nvejrtrækningsøvelse",
+                    iconPath: 'breathing_icon.svg',
                     underline: false,
+                    titleSize: 14,
                     onTap: () {
                       Navigator.push(
                         context,
