@@ -13,7 +13,6 @@ class _CupertinoBreatheState extends State<CupertinoBreathe>
   late AnimationController _controller;
   late TweenSequence<double> tweenSequence;
   late Animation<double> animation;
-  late AnimationStatus animationStatus;
   String text = 'Visuelt åndedrætsøvelse';
 
   bool isAnimating = false;
@@ -35,15 +34,15 @@ class _CupertinoBreatheState extends State<CupertinoBreathe>
       TweenSequenceItem(
           tween: Tween<double>(begin: 0.2, end: 0.975)
               .chain(CurveTween(curve: Curves.easeOut)),
-          weight: 21.1), // 4 sekunder
+          weight: 21.1), // 4 seconds
       TweenSequenceItem(
           tween: Tween<double>(begin: 0.975, end: 1.0)
               .chain(CurveTween(curve: Curves.easeInOutBack)),
-          weight: 36.8), // 7 sekunder
+          weight: 36.8), // 7 seconds
       TweenSequenceItem(
           tween: Tween<double>(begin: 1.0, end: 0.2)
               .chain(CurveTween(curve: Curves.linear)),
-          weight: 42.1) // 8 sekunder
+          weight: 42.1) // 8 seconds
     ]);
 
     animation = _controller.drive(tweenSequence)..addListener( () => getText());

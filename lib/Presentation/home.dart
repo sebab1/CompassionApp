@@ -1,9 +1,7 @@
-import 'package:compassion_app/Domain/notification_api.dart';
 import 'package:compassion_app/Presentation/Components/CupertinoBreath.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'Components/borderCard.dart';
 import '/Presentation/Components/constants.dart';
 import 'Components/settings.dart';

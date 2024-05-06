@@ -1,4 +1,4 @@
-import 'package:compassion_app/Domain/notification_api.dart';
+import 'package:compassion_app/Domain/NotificationController.dart';
 import 'package:compassion_app/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +18,6 @@ Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
-  await sl<NotificationApi>().initialize();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);

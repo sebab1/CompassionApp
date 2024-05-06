@@ -1,4 +1,5 @@
-import 'package:compassion_app/Domain/notification_api.dart';
+import 'package:compassion_app/Domain/Controllers/INotificationController.dart';
+import 'package:compassion_app/Domain/NotificationController.dart';
 import 'package:compassion_app/Presentation/Components/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wheel_picker/wheel_picker.dart';
 
 class NotificationSettings extends StatefulWidget {
-  final NotificationApi notificationApi;
-  const NotificationSettings({super.key, required this.notificationApi});
+  final INotificationController notificationController;
+  const NotificationSettings({super.key, required this.notificationController});
 
   @override
   State<NotificationSettings> createState() => _NotificationSettingsState();
@@ -17,7 +18,7 @@ class _NotificationSettingsState extends State<NotificationSettings> {
   late SharedPreferences sharedPreferences;
 
   bool switchOn = false;
-  late NotificationApi notificationApi;
+  late INotificationController nc;
 
   late int? hours;
   late int? minutes;
@@ -68,7 +69,8 @@ class _NotificationSettingsState extends State<NotificationSettings> {
           switchOn = switchState() ?? false;
         }));
 
-    notificationApi = widget.notificationApi;
+    nc = widget.notificationController;
+    nc.initialize();
   }
 
   @override
@@ -135,7 +137,7 @@ class _NotificationSettingsState extends State<NotificationSettings> {
                     value: switchOn,
                     onChanged: (bool value) async {
                       if (!value) {
-                        await notificationApi.cancelAllNotification();
+                        await nc.cancelAllNotification();
                       }
                       updateSwitchState(value);
                       setState(() {
@@ -191,7 +193,7 @@ class _NotificationSettingsState extends State<NotificationSettings> {
                     ? () async {
                         int selectedHours = hoursWheel.selected;
                         int selectedMinutes = minutesWheel.selected;
-                        await notificationApi
+                        await nc
                             .recurringNotification(
                                 title: 'Daglig påmindelse',
                                 body:

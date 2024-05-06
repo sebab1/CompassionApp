@@ -24,14 +24,10 @@ Future<Database> initDatabase() async {
 }
 
 Future<void> _performDBUpgrade(Database db, int upgradeToVersion) async {
-  print(upgradeToVersion);
   switch (upgradeToVersion) {
-    //Upgrade to V1 (initial creation)
     case 1:
       await _dbUpdatesVersion_1(db);
       break;
-
-    //Upgrades for V2
     case 2:
       await _dbUpdatesVersion_2(db);
       break;
