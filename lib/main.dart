@@ -3,6 +3,7 @@ import 'package:compassion_app/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:sqflite/sqflite.dart';
 import './Presentation/Components/Constants.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'Presentation/Components/onboarding.dart';
@@ -15,7 +16,7 @@ Future<void> main() async {
     androidNotificationChannelName: 'Audio playback',
     androidNotificationOngoing: true
   );
-
+  
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   SystemChrome.setPreferredOrientations([

@@ -1,3 +1,5 @@
+import 'package:mockito/mockito.dart';
+
 class JournalEvent {
   int? entry_ID;
   int? journal_ID;
@@ -11,6 +13,6 @@ class JournalEvent {
 
   @override
   String toString() {
-    return 'intentions: $intentions, intention_id: $intention_ID, journal: $journal, journal_ID: $journal_ID';
+    return 'intentions: $intentions, intention_id: $intention_ID, journal: $journal, journal_ID: $journal_ID, checked: $intentionsChecked';
   }
 }

@@ -43,9 +43,9 @@ class SqlDatabase implements ISqlDatabase {
     return queryResult;
   }
 
-  Future<void> deleteDatabase(String path) async {
+  Future<void> deleteDatabase() async {
     print('deleting db');
-    databaseFactory.deleteDatabase(path);
+    await databaseFactory.deleteDatabase(await getDatabasesPath());
   }
 
   @override
@@ -63,6 +63,7 @@ class SqlDatabase implements ISqlDatabase {
       print('Update: $executeUpdate');
     }
     print('Insert: $execute');
+
   }
 
   Future<int> addEntry(DateTime time) async {

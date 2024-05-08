@@ -20,27 +20,32 @@ class JournalController implements IJournalController {
       return dateFormat;
     }, value: (element) {
       List<JournalEvent> list = [];
-      List<bool> checked = element['checked']
-          .toString()
+
+      List<bool> checked = element['checked'] == null ? [] : element['checked']
+          .toString() 
           .split(',')
           .map((e) => e == '1' ? true : false)
           .toList();
-      list.add(JournalEvent(
+
+      JournalEvent event = JournalEvent(
         element['intention_desc'],
         element['activity_desc'],
         element['activity_id'],
         element['intention_id'],
         element['entry_id'],
-        checked,
-      ));
-      print('jc: $checked');
+        checked);
+      list.add(event);
+      print('object: $event');
+
       return list;
     });
 
     // map.forEach((key, value) {
     //   print(value.toString());
     // });
+    print('map: $map');
 
+    
     return map;
   }
 

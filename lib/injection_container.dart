@@ -18,11 +18,13 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   final Database database = await db.initDatabase();
+
   sl.registerLazySingleton<Database>(() => database);
 
   var sql = SqlDatabase(sl());
 
-  //await sql.deleteDatabase(await getDatabasesPath());
+  //await sql.deleteDatabase();
+
   sl.registerLazySingleton<IScraperController>(() => ScraperController());
 
   sl.registerLazySingleton<KollegaCafe>(() => KollegaCafe(sc: sl()));
