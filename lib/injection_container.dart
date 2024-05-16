@@ -1,3 +1,4 @@
+import 'package:chaleno/chaleno.dart';
 import 'package:compassion_app/Data/ISqlDatabase.dart';
 import 'package:compassion_app/Data/SqlDatabase.dart';
 import 'package:compassion_app/Domain/Controllers/IJournalController.dart';
@@ -25,7 +26,7 @@ Future<void> init() async {
 
   //await sql.deleteDatabase();
 
-  sl.registerLazySingleton<IScraperController>(() => ScraperController());
+  sl.registerLazySingleton<IScraperController>(() => ScraperController(Chaleno()));
 
   sl.registerLazySingleton<KollegaCafe>(() => KollegaCafe(sc: sl()));
 
